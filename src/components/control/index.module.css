@@ -1,0 +1,13 @@
+.control {
+  display: flex;
+  gap: var(--space);
+  padding: var(--space);
+}
+
+.control[data-orientation="row"] {
+  flex-direction: row;
+}
+
+.control[data-orientation="column"] {
+  flex-direction: column;
+}

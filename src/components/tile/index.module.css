@@ -1,0 +1,11 @@
+.tile {
+  width: var(--tile-size);
+  height: var(--tile-size);
+  border: var(--tile-border);
+  background: var(--tile-empty);
+  border-radius: var(--radius);
+}
+
+.tile[data-value="1"] {
+  background: var(--tile-filled);
+}
