@@ -18,14 +18,7 @@ const OPERATOR_LABEL: Record<Operator, string> = {
 
 const DIRECTION_WORD: Record<Orientation, Record<Direction, string>> = {
   row: { back: "left", forward: "right" },
-  column: { back: "down", forward: "up" },
-};
-
-// Visual (and DOM/tab) order of the two buttons, so keyboard order matches
-// what the eye sees: rows read left→right, columns read top→bottom.
-const BUTTON_ORDER: Record<Orientation, Direction[]> = {
-  row: ["back", "forward"],
-  column: ["forward", "back"],
+  column: { back: "up", forward: "down" },
 };
 
 interface ControlProps {
@@ -45,15 +38,18 @@ function Control({ operator, onMove }: ControlProps) {
       role="group"
       aria-label={`${OPERATOR_LABEL[operator]} controls`}
     >
-      {BUTTON_ORDER[orientation].map((direction) => (
-        <Button
-          key={direction}
-          orientation={orientation}
-          direction={direction}
-          label={label(direction)}
-          onClick={() => onMove(operator, direction)}
-        />
-      ))}
+      <Button
+        orientation={orientation}
+        direction="back"
+        label={label("back")}
+        onClick={() => onMove(operator, "back")}
+      />
+      <Button
+        orientation={orientation}
+        direction="forward"
+        label={label("forward")}
+        onClick={() => onMove(operator, "forward")}
+      />
     </div>
   );
 }

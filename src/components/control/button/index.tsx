@@ -1,11 +1,9 @@
 import styles from "./index.module.css";
 import type { Direction, Orientation } from "../../../game/types";
 
-// Geometric arrows (not emoji) so they respect `color` — rows point
-// left/right, columns up/down.
 const ARROW: Record<Orientation, Record<Direction, string>> = {
   row: { back: "◀", forward: "▶" },
-  column: { back: "▼", forward: "▲" },
+  column: { back: "▲", forward: "▼" },
 };
 
 interface ButtonProps {

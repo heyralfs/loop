@@ -58,17 +58,6 @@ export function move(
   } else if (operator === "C12") {
     if (direction === "forward") {
       // first column
-      next[0] = matrix[4];
-      next[4] = matrix[8];
-      next[8] = matrix[12];
-      next[12] = matrix[0];
-      // second column
-      next[1] = matrix[5];
-      next[5] = matrix[9];
-      next[9] = matrix[13];
-      next[13] = matrix[1];
-    } else {
-      // first column
       next[0] = matrix[12];
       next[12] = matrix[8];
       next[8] = matrix[4];
@@ -78,20 +67,20 @@ export function move(
       next[9] = matrix[5];
       next[5] = matrix[1];
       next[1] = matrix[13];
+    } else {
+      // first column
+      next[0] = matrix[4];
+      next[4] = matrix[8];
+      next[8] = matrix[12];
+      next[12] = matrix[0];
+      // second column
+      next[1] = matrix[5];
+      next[5] = matrix[9];
+      next[9] = matrix[13];
+      next[13] = matrix[1];
     }
   } else if (operator === "C34") {
     if (direction === "forward") {
-      // third column
-      next[2] = matrix[6];
-      next[6] = matrix[10];
-      next[10] = matrix[14];
-      next[14] = matrix[2];
-      // fourth column
-      next[3] = matrix[7];
-      next[7] = matrix[11];
-      next[11] = matrix[15];
-      next[15] = matrix[3];
-    } else {
       // third column
       next[2] = matrix[14];
       next[14] = matrix[10];
@@ -102,6 +91,17 @@ export function move(
       next[15] = matrix[11];
       next[11] = matrix[7];
       next[7] = matrix[3];
+    } else {
+      // third column
+      next[2] = matrix[6];
+      next[6] = matrix[10];
+      next[10] = matrix[14];
+      next[14] = matrix[2];
+      // fourth column
+      next[3] = matrix[7];
+      next[7] = matrix[11];
+      next[11] = matrix[15];
+      next[15] = matrix[3];
     }
   } else {
     throw new Error(`Unknown operator: ${operator}`);
