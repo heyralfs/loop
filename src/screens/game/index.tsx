@@ -7,12 +7,16 @@ import { move } from "../../game/operators";
 import MoveCounter from "../../components/move-counter";
 import TargetBoard from "../../components/target-board";
 import { TARGET } from "../../game/target";
+import { scramble } from "../../game/scramble";
+import { createRandom } from "../../game/random";
+import { todaySeed } from "../../game/seed";
 
-// Placeholder board until game state is wired up (flat, row-major).
-const PLACEHOLDER: Matrix = [0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1];
+const SEED = todaySeed();
 
 function GameScreen() {
-  const [matrix, setMatrix] = useState<Matrix>(PLACEHOLDER);
+  const [matrix, setMatrix] = useState<Matrix>(() =>
+    scramble(TARGET, createRandom(SEED)),
+  );
 
   const [moves, setMoves] = useState<number>(0);
 

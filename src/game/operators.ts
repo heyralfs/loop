@@ -1,5 +1,9 @@
 import type { Direction, Matrix, Operator } from "./types";
 
+// The full move vocabulary — every operator and every direction.
+export const OPERATORS: Operator[] = ["R12", "R34", "C12", "C34"];
+export const DIRECTIONS: Direction[] = ["forward", "back"];
+
 // Each operator's FORWARD shift as a [destinations, sources] pair: for every i,
 // the cell at destinations[i] takes the value currently at sources[i]. "back" is
 // the inverse — the very same pair applied with the two arrays swapped.

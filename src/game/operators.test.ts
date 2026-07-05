@@ -1,9 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { move } from "./operators";
+import { move, OPERATORS, DIRECTIONS } from "./operators";
 import type { Matrix, Operator, Direction } from "./types";
-
-const OPERATORS: Operator[] = ["R12", "R34", "C12", "C34"];
-const DIRECTIONS: Direction[] = ["back", "forward"];
 
 // Identity input: each slot holds its own index, so move()'s output literally
 // spells out the permutation it applies. Not a valid binary board (values > 1),
