@@ -1,0 +1,9 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: var(--space);
+  width: fit-content;
+  margin-inline-start: auto;
+  font-family: var(--mono);
+  color: var(--accent);
+}

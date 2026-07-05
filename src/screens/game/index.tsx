@@ -4,6 +4,7 @@ import Control from "../../components/control";
 import type { Direction, Matrix, Operator } from "../../game/types";
 import { useState } from "react";
 import { move } from "../../game/operators";
+import MoveCounter from "../../components/move-counter";
 
 // Placeholder board until game state is wired up (flat, row-major).
 const PLACEHOLDER: Matrix = [0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1];
@@ -11,22 +12,28 @@ const PLACEHOLDER: Matrix = [0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1];
 function GameScreen() {
   const [matrix, setMatrix] = useState<Matrix>(PLACEHOLDER);
 
+  const [moves, setMoves] = useState<number>(0);
+
   const handleMove = (operator: Operator, direction: Direction) => {
     setMatrix((prev) => move(prev, operator, direction));
+    setMoves((prev) => prev + 1);
   };
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.rowControls}>
-        <Control operator="R12" onMove={handleMove} />
-        <Control operator="R34" onMove={handleMove} />
-      </div>
-      <div className={styles.board}>
-        <Board matrix={matrix} />
-      </div>
-      <div className={styles.colControls}>
-        <Control operator="C12" onMove={handleMove} />
-        <Control operator="C34" onMove={handleMove} />
+      <MoveCounter moves={moves} />
+      <div className={styles.game}>
+        <div className={styles.rowControls}>
+          <Control operator="R12" onMove={handleMove} />
+          <Control operator="R34" onMove={handleMove} />
+        </div>
+        <div className={styles.board}>
+          <Board matrix={matrix} />
+        </div>
+        <div className={styles.colControls}>
+          <Control operator="C12" onMove={handleMove} />
+          <Control operator="C34" onMove={handleMove} />
+        </div>
       </div>
     </div>
   );
