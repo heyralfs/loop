@@ -10,10 +10,12 @@ import { createTarget } from "../../game/target";
 import { scramble } from "../../game/scramble";
 import { createRandom } from "../../game/random";
 import { todaySeed } from "../../game/seed";
+import { findShortestPath } from "../../game/path";
 
 const random = createRandom(todaySeed());
 const target = createTarget(random);
 const initial = scramble(target, random);
+const par = findShortestPath(initial, target)?.length ?? 0;
 
 function GameScreen() {
   const [matrix, setMatrix] = useState<Matrix>(initial);
@@ -28,7 +30,7 @@ function GameScreen() {
     <main className={styles.wrapper}>
       <h1 className="sr-only">Loop</h1>
       <TargetBoard matrix={target} />
-      <MoveCounter moves={moves} />
+      <MoveCounter moves={moves} par={par} />
       <div className={styles.game}>
         <div className={styles.rowControls}>
           <Control operator="R12" onMove={handleMove} />
