@@ -6,18 +6,17 @@ import { useState } from "react";
 import { move } from "../../game/operators";
 import MoveCounter from "../../components/move-counter";
 import TargetBoard from "../../components/target-board";
-import { TARGET } from "../../game/target";
+import { createTarget } from "../../game/target";
 import { scramble } from "../../game/scramble";
 import { createRandom } from "../../game/random";
 import { todaySeed } from "../../game/seed";
 
-const SEED = todaySeed();
+const random = createRandom(todaySeed());
+const target = createTarget(random);
+const initial = scramble(target, random);
 
 function GameScreen() {
-  const [matrix, setMatrix] = useState<Matrix>(() =>
-    scramble(TARGET, createRandom(SEED)),
-  );
-
+  const [matrix, setMatrix] = useState<Matrix>(initial);
   const [moves, setMoves] = useState<number>(0);
 
   const handleMove = (operator: Operator, direction: Direction) => {
@@ -28,7 +27,7 @@ function GameScreen() {
   return (
     <main className={styles.wrapper}>
       <h1 className="sr-only">Loop</h1>
-      <TargetBoard matrix={TARGET} />
+      <TargetBoard matrix={target} />
       <MoveCounter moves={moves} />
       <div className={styles.game}>
         <div className={styles.rowControls}>
