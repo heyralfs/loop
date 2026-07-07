@@ -1,8 +1,10 @@
-import { equals } from "./equals";
 import { move, OPERATORS, DIRECTIONS } from "./operators";
+import { findShortestPath } from "./path";
 import type { Direction, Matrix, Operator } from "./types";
 
 const SCRAMBLE_STEPS = 15;
+
+const MIN_DISTANCE = 4;
 
 export function scramble(initial: Matrix, random: () => number): Matrix {
   let matrix = initial;
@@ -27,8 +29,9 @@ export function scramble(initial: Matrix, random: () => number): Matrix {
     matrix = move(matrix, operator, direction);
   }
 
-  if (equals(matrix, initial)) {
-    // If the scrambled matrix is the same as the initial matrix, scramble again
+  const distance = findShortestPath(matrix, initial)?.length ?? 0;
+  if (distance < MIN_DISTANCE) {
+    // Too easy (or back at the solved state): draw again from the same stream.
     return scramble(initial, random);
   }
 
