@@ -7,4 +7,6 @@
   padding: var(--space);
   border-radius: var(--radius);
   width: fit-content;
+  overflow: hidden;
+  position: relative;
 }

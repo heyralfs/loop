@@ -7,7 +7,7 @@ export const DIRECTIONS: Direction[] = ["forward", "back"];
 // Each operator's FORWARD shift as a [destinations, sources] pair: for every i,
 // the cell at destinations[i] takes the value currently at sources[i]. "back" is
 // the inverse — the very same pair applied with the two arrays swapped.
-const SHIFTS: Record<Operator, [number[], number[]]> = {
+export const SHIFTS: Record<Operator, [number[], number[]]> = {
   R12: [
     [0, 1, 2, 3, 4, 5, 6, 7],
     [3, 0, 1, 2, 7, 4, 5, 6],

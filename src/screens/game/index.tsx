@@ -1,8 +1,8 @@
 import styles from "./index.module.css";
-import Board from "../../components/board";
+import Board, { type BoardHandle } from "../../components/board";
 import Control from "../../components/control";
 import type { Direction, Matrix, Operator } from "../../game/types";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { move } from "../../game/operators";
 import MoveCounter from "../../components/move-counter";
 import TargetBoard from "../../components/target-board";
@@ -18,10 +18,19 @@ const initial = scramble(target, random);
 const par = findShortestPath(initial, target)?.length ?? 0;
 
 function GameScreen() {
+  const boardRef = useRef<BoardHandle>(null);
+  const animatingRef = useRef(false);
+
   const [matrix, setMatrix] = useState<Matrix>(initial);
   const [moves, setMoves] = useState<number>(0);
 
-  const handleMove = (operator: Operator, direction: Direction) => {
+  const handleMove = async (operator: Operator, direction: Direction) => {
+    if (animatingRef.current) return;
+
+    animatingRef.current = true;
+    await boardRef.current?.animateMove(operator, direction);
+    animatingRef.current = false;
+
     setMatrix((prev) => move(prev, operator, direction));
     setMoves((prev) => prev + 1);
   };
@@ -37,7 +46,7 @@ function GameScreen() {
           <Control operator="R34" onMove={handleMove} />
         </div>
         <div className={styles.board}>
-          <Board matrix={matrix} label="Your board" />
+          <Board ref={boardRef} matrix={matrix} label="Your board" />
         </div>
         <div className={styles.colControls}>
           <Control operator="C12" onMove={handleMove} />

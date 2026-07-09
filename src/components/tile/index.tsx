@@ -1,12 +1,14 @@
+import type { Ref } from "react";
 import styles from "./index.module.css";
 import type { Cell } from "../../game/types";
 
 interface Props {
   value: Cell;
+  ref?: Ref<HTMLDivElement>;
 }
 
-function Tile({ value }: Props) {
-  return <div className={styles.tile} data-value={value} />;
-}
+const Tile = ({ value, ref }: Props) => {
+  return <div className={styles.tile} data-value={value} ref={ref} />;
+};
 
 export default Tile;
