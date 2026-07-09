@@ -28,11 +28,11 @@ function GameScreen() {
     if (animatingRef.current) return;
 
     animatingRef.current = true;
-    await boardRef.current?.animateMove(operator, direction);
+    await boardRef.current?.animateMove(operator, direction, () => {
+      setMatrix((prev) => move(prev, operator, direction));
+      setMoves((prev) => prev + 1);
+    });
     animatingRef.current = false;
-
-    setMatrix((prev) => move(prev, operator, direction));
-    setMoves((prev) => prev + 1);
   };
 
   return (

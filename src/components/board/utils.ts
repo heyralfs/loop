@@ -66,6 +66,7 @@ export function getCloneKeyframes(
 export const ANIMATION_OPTIONS: KeyframeAnimationOptions = {
   duration: 500,
   easing: "ease-in-out",
+  fill: "forwards",
 };
 
 export function getStepSize(tile: HTMLDivElement): number {

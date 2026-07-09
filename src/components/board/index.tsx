@@ -1,4 +1,5 @@
 import { useImperativeHandle, useRef, type Ref } from "react";
+import { flushSync } from "react-dom";
 import Tile from "../tile";
 import styles from "./index.module.css";
 import type { Direction, Matrix, Operator } from "../../game/types";
@@ -13,7 +14,11 @@ import {
 } from "./utils";
 
 type BoardHandle = {
-  animateMove: (operator: Operator, direction: Direction) => Promise<void>;
+  animateMove: (
+    operator: Operator,
+    direction: Direction,
+    commit: () => void,
+  ) => Promise<void>;
 };
 interface Props {
   matrix: Matrix;
@@ -27,8 +32,13 @@ function Board({ matrix, label, ref }: Props) {
   useImperativeHandle(
     ref,
     () => ({
-      animateMove: async (operator: Operator, direction: Direction) => {
+      animateMove: async (
+        operator: Operator,
+        direction: Direction,
+        commit: () => void,
+      ) => {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          commit();
           return;
         }
 
@@ -81,9 +91,12 @@ function Board({ matrix, label, ref }: Props) {
 
         await Promise.all(animations.map((animation) => animation.finished));
 
-        clones.forEach((clone) => {
-          clone.remove();
-        });
+        // Commit the new state and drop the held transforms in one synchronous
+        // task, so the browser paints straight from the animation's end position
+        // to the committed board. Fixes flash of the pre-move state in between.
+        flushSync(commit);
+        animations.forEach((animation) => animation.cancel());
+        clones.forEach((clone) => clone.remove());
       },
     }),
     [],
