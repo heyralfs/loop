@@ -24,12 +24,17 @@ const DIRECTION_WORD: Record<Orientation, Record<Direction, string>> = {
 interface ControlProps {
   operator: Operator;
   onMove: (operator: Operator, direction: Direction) => void;
+  activeMove?: { operator: Operator; direction: Direction } | null;
 }
 
-function Control({ operator, onMove }: ControlProps) {
+function Control({ operator, onMove, activeMove }: ControlProps) {
   const orientation = DATA_OPERATOR[operator];
+
   const label = (direction: Direction) =>
     `Shift ${OPERATOR_LABEL[operator]} ${DIRECTION_WORD[orientation][direction]}`;
+
+  const isPressed = (direction: Direction) =>
+    activeMove?.operator === operator && activeMove.direction === direction;
 
   return (
     <div
@@ -43,12 +48,14 @@ function Control({ operator, onMove }: ControlProps) {
         direction="back"
         label={label("back")}
         onClick={() => onMove(operator, "back")}
+        pressed={isPressed("back")}
       />
       <Button
         orientation={orientation}
         direction="forward"
         label={label("forward")}
         onClick={() => onMove(operator, "forward")}
+        pressed={isPressed("forward")}
       />
     </div>
   );

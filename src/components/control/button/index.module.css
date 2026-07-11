@@ -29,13 +29,15 @@
   height: calc(var(--tile-size) / 2);
 }
 
-.button:hover {
+.button:hover,
+.button[data-pressed="true"] {
   background: var(--accent);
   color: var(--on-accent);
   box-shadow: var(--shadow);
 }
 
-.button:active {
+.button:active,
+.button[data-pressed="true"] {
   transform: translateY(1px);
   box-shadow: none;
 }
@@ -49,7 +51,8 @@
   .button {
     transition: none;
   }
-  .button:active {
+  .button:active,
+  .button[data-pressed="true"] {
     transform: none;
   }
 }

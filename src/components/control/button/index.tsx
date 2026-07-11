@@ -11,14 +11,22 @@ interface ButtonProps {
   direction: Direction;
   label: string;
   onClick: () => void;
+  pressed?: boolean;
 }
 
-function Button({ orientation, direction, label, onClick }: ButtonProps) {
+function Button({
+  orientation,
+  direction,
+  label,
+  onClick,
+  pressed,
+}: ButtonProps) {
   return (
     <button
       type="button"
       className={styles.button}
       data-orientation={orientation}
+      data-pressed={pressed}
       aria-label={label}
       onClick={onClick}
     >

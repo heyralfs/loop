@@ -25,6 +25,12 @@ function GameScreen() {
   const [matrix, setMatrix] = useState<Matrix>(initial);
   const [moves, setMoves] = useState<number>(0);
 
+  // Used to highlight the buttons during the "i give up" animation
+  const [activeMove, setActiveMove] = useState<{
+    operator: Operator;
+    direction: Direction;
+  } | null>(null);
+
   const handleMove = async (operator: Operator, direction: Direction) => {
     if (animatingRef.current) return;
 
@@ -52,11 +58,13 @@ function GameScreen() {
     let current = matrix;
     for (const { operator, direction } of path) {
       const next = move(current, operator, direction);
+      setActiveMove({ operator, direction });
       await boardRef.current?.animateMove(operator, direction, () => {
         setMatrix(next);
       });
       current = next;
     }
+    setActiveMove(null);
     animatingRef.current = false;
   };
 
@@ -78,15 +86,15 @@ function GameScreen() {
       <MoveCounter moves={moves} par={par} />
       <div className={styles.game}>
         <div className={styles.rowControls}>
-          <Control operator="R12" onMove={handleMove} />
-          <Control operator="R34" onMove={handleMove} />
+          <Control operator="R12" onMove={handleMove} activeMove={activeMove} />
+          <Control operator="R34" onMove={handleMove} activeMove={activeMove} />
         </div>
         <div className={styles.board}>
           <Board ref={boardRef} matrix={matrix} label="Your board" />
         </div>
         <div className={styles.colControls}>
-          <Control operator="C12" onMove={handleMove} />
-          <Control operator="C34" onMove={handleMove} />
+          <Control operator="C12" onMove={handleMove} activeMove={activeMove} />
+          <Control operator="C34" onMove={handleMove} activeMove={activeMove} />
         </div>
       </div>
       <div>
