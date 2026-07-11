@@ -11,6 +11,7 @@ import { scramble } from "../../game/scramble";
 import { createRandom } from "../../game/random";
 import { todaySeed } from "../../game/seed";
 import { findShortestPath } from "../../game/path";
+import { equals } from "../../game/equals";
 
 const random = createRandom(todaySeed());
 const target = createTarget(random);
@@ -27,12 +28,47 @@ function GameScreen() {
   const handleMove = async (operator: Operator, direction: Direction) => {
     if (animatingRef.current) return;
 
+    const next = move(matrix, operator, direction);
+
     animatingRef.current = true;
     await boardRef.current?.animateMove(operator, direction, () => {
-      setMatrix((prev) => move(prev, operator, direction));
+      setMatrix(next);
       setMoves((prev) => prev + 1);
     });
     animatingRef.current = false;
+
+    if (equals(next, target)) {
+      // Handle the case when the player has solved the puzzle
+    }
+  };
+
+  const handleGiveUp = async () => {
+    if (animatingRef.current) return;
+
+    const path = findShortestPath(matrix, target);
+    if (!path) return;
+
+    animatingRef.current = true;
+    let current = matrix;
+    for (const { operator, direction } of path) {
+      const next = move(current, operator, direction);
+      await boardRef.current?.animateMove(operator, direction, () => {
+        setMatrix(next);
+      });
+      current = next;
+    }
+    animatingRef.current = false;
+  };
+
+  const handleReset = async () => {
+    if (animatingRef.current) return;
+
+    animatingRef.current = true;
+    await boardRef.current?.animateFlip(() => {
+      setMatrix(initial);
+    });
+    animatingRef.current = false;
+    setMoves(0);
   };
 
   return (
@@ -52,6 +88,10 @@ function GameScreen() {
           <Control operator="C12" onMove={handleMove} />
           <Control operator="C34" onMove={handleMove} />
         </div>
+      </div>
+      <div>
+        <button onClick={handleReset}>Reset</button>
+        <button onClick={handleGiveUp}>I give up</button>
       </div>
     </main>
   );

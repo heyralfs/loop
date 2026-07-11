@@ -69,6 +69,17 @@ export const ANIMATION_OPTIONS: KeyframeAnimationOptions = {
   fill: "forwards",
 };
 
+export function getFlipAnimationOptions(
+  index: number,
+): KeyframeAnimationOptions {
+  return {
+    duration: 250,
+    easing: "ease-in-out",
+    fill: "forwards",
+    delay: index * 50,
+  };
+}
+
 export function getStepSize(tile: HTMLDivElement): number {
   const cs = getComputedStyle(tile);
   const tileSize = parseFloat(cs.getPropertyValue("--tile-size"));
