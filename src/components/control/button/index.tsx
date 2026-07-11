@@ -1,3 +1,4 @@
+import Button from "../../button";
 import styles from "./index.module.css";
 import type { Direction, Orientation } from "../../../game/types";
 
@@ -14,7 +15,7 @@ interface ButtonProps {
   pressed?: boolean;
 }
 
-function Button({
+function ControlButton({
   orientation,
   direction,
   label,
@@ -22,17 +23,16 @@ function Button({
   pressed,
 }: ButtonProps) {
   return (
-    <button
-      type="button"
+    <Button
       className={styles.button}
       data-orientation={orientation}
-      data-pressed={pressed}
       aria-label={label}
       onClick={onClick}
+      pressed={pressed}
     >
       <span aria-hidden="true">{ARROW[orientation][direction]}</span>
-    </button>
+    </Button>
   );
 }
 
-export default Button;
+export default ControlButton;

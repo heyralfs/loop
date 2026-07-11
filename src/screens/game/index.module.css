@@ -6,6 +6,13 @@
   gap: var(--space);
 }
 
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: var(--mono);
+  color: var(--accent);
+}
+
 .game {
   display: grid;
   grid-template-columns: auto auto;
@@ -29,4 +36,19 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space);
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.actionButton {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
 }

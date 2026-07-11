@@ -1,8 +1,8 @@
+import { useRef, useState } from "react";
 import styles from "./index.module.css";
 import Board, { type BoardHandle } from "../../components/board";
 import Control from "../../components/control";
 import type { Direction, Matrix, Operator } from "../../game/types";
-import { useRef, useState } from "react";
 import { move } from "../../game/operators";
 import MoveCounter from "../../components/move-counter";
 import TargetBoard from "../../components/target-board";
@@ -12,8 +12,14 @@ import { createRandom } from "../../game/random";
 import { todaySeed } from "../../game/seed";
 import { findShortestPath } from "../../game/path";
 import { equals } from "../../game/equals";
+import { daysBetween } from "../../game/days-between";
+import Button from "../../components/button";
 
-const random = createRandom(todaySeed());
+const seed = todaySeed();
+const DAY_ONE = "2026-07-11";
+const puzzleNumber = daysBetween(DAY_ONE, seed) + 1;
+
+const random = createRandom(seed);
 const target = createTarget(random);
 const initial = scramble(target, random);
 const par = findShortestPath(initial, target)?.length ?? 0;
@@ -81,7 +87,7 @@ function GameScreen() {
 
   return (
     <main className={styles.wrapper}>
-      <h1 className="sr-only">Loop</h1>
+      <h1 className={styles.title}>Loop #{puzzleNumber}</h1>
       <TargetBoard matrix={target} />
       <MoveCounter moves={moves} par={par} />
       <div className={styles.game}>
@@ -97,9 +103,13 @@ function GameScreen() {
           <Control operator="C34" onMove={handleMove} activeMove={activeMove} />
         </div>
       </div>
-      <div>
-        <button onClick={handleReset}>Reset</button>
-        <button onClick={handleGiveUp}>I give up</button>
+      <div className={styles.actions}>
+        <Button className={styles.actionButton} onClick={handleReset}>
+          Reset
+        </Button>
+        <Button className={styles.actionButton} onClick={handleGiveUp}>
+          I give up
+        </Button>
       </div>
     </main>
   );
