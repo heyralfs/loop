@@ -19,14 +19,14 @@
     box-shadow 120ms ease;
 }
 
-.button:hover,
+.button:not(:disabled):hover,
 .button[data-pressed="true"] {
   background: var(--accent);
   color: var(--on-accent);
   box-shadow: var(--shadow);
 }
 
-.button:active,
+.button:not(:disabled):active,
 .button[data-pressed="true"] {
   transform: translateY(1px);
   box-shadow: none;
@@ -35,6 +35,11 @@
 .button:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 @media (prefers-reduced-motion: reduce) {

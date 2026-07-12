@@ -13,6 +13,7 @@ interface ButtonProps {
   label: string;
   onClick: () => void;
   pressed?: boolean;
+  disabled?: boolean;
 }
 
 function ControlButton({
@@ -21,6 +22,7 @@ function ControlButton({
   label,
   onClick,
   pressed,
+  disabled,
 }: ButtonProps) {
   return (
     <Button
@@ -29,6 +31,7 @@ function ControlButton({
       aria-label={label}
       onClick={onClick}
       pressed={pressed}
+      disabled={disabled}
     >
       <span aria-hidden="true">{ARROW[orientation][direction]}</span>
     </Button>

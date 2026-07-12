@@ -8,9 +8,19 @@
 
 .title {
   font-size: 2rem;
+  line-height: 100%;
   font-weight: bold;
   font-family: var(--mono);
   color: var(--accent);
+  margin-bottom: var(--space);
+}
+
+.text {
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--accent);
+  font-family: var(--mono);
 }
 
 .game {
