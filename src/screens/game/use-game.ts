@@ -6,14 +6,28 @@ import { findShortestPath } from "../../game/path";
 import { equals } from "../../game/equals";
 import { readProgress, writeProgress } from "../../game/progress";
 import { seed, target, initial } from "./puzzle";
+import {
+  readStats,
+  recordWin,
+  writeStats,
+  activeStreak,
+  type Stats,
+} from "../../game/stats";
 
 // Read once at load — resume only if the saved progress is for today's puzzle.
 const progress = readProgress();
 const saved = progress?.seed === seed ? progress : null;
 
+const stats = readStats();
+const active = activeStreak(stats, seed);
+
 export function useGame() {
   const boardRef = useRef<BoardHandle>(null);
   const animatingRef = useRef(false);
+
+  const [currentStats, setCurrentStats] = useState<Stats>(
+    active ? stats : { ...stats, currentStreak: 0 },
+  );
 
   const [matrix, setMatrix] = useState<Matrix>(saved?.matrix ?? initial);
   const [moves, setMoves] = useState<number>(saved?.moves ?? 0);
@@ -64,7 +78,9 @@ export function useGame() {
     animatingRef.current = false;
 
     if (solved) {
-      // handle solved
+      const winStats = recordWin(currentStats, seed);
+      writeStats(winStats);
+      setCurrentStats(winStats);
     }
   };
 
@@ -101,6 +117,7 @@ export function useGame() {
   };
 
   return {
+    currentStats,
     boardRef,
     matrix,
     moves,

@@ -15,6 +15,7 @@ function GameScreen() {
     gaveUp,
     bestMoves,
     activeMove,
+    currentStats,
     handleMove,
     handleGiveUp,
     handleReset,
@@ -23,6 +24,12 @@ function GameScreen() {
   return (
     <main className={styles.wrapper}>
       <h1 className={styles.title}>Loop #{puzzleNumber}</h1>
+      {currentStats.bestStreak > 0 && (
+        <p className={styles.text}>
+          Current streak: {currentStats.currentStreak} / Best streak:{" "}
+          {currentStats.bestStreak}
+        </p>
+      )}
       {bestMoves !== null && (
         <p className={styles.text}>Your best today: {bestMoves}</p>
       )}
