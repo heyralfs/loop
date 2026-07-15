@@ -23,19 +23,17 @@ function GameScreen() {
 
   return (
     <main className={styles.wrapper}>
-      <h1 className={styles.title}>Loop #{puzzleNumber}</h1>
+      <h1>Loop #{puzzleNumber}</h1>
       {currentStats.bestStreak > 0 && (
-        <p className={styles.text}>
+        <p>
           Current streak: {currentStats.currentStreak} / Best streak:{" "}
           {currentStats.bestStreak}
         </p>
       )}
-      {bestMoves !== null && (
-        <p className={styles.text}>Your best today: {bestMoves}</p>
-      )}
+      {bestMoves !== null && <p>Your best today: {bestMoves}</p>}
       <TargetBoard matrix={target} />
       {gaveUp ? (
-        <p className={styles.text}>
+        <p>
           You've given up for today.
           <br />
           Come back tomorrow for a new puzzle.
