@@ -87,7 +87,7 @@ function GameScreen() {
         <Button
           className={styles.actionButton}
           onClick={handleGiveUp}
-          disabled={gaveUp}
+          disabled={gaveUp || bestMoves !== null}
         >
           I give up
         </Button>
