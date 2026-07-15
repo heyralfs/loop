@@ -1,5 +1,6 @@
 .button {
   font-size: 1.1rem;
+  padding: 0; /* fixed-size arrow button — no text padding */
 }
 
 .button[data-orientation="row"] {

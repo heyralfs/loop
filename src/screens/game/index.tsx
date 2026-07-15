@@ -6,6 +6,7 @@ import TargetBoard from "../../components/target-board";
 import Button from "../../components/button";
 import { puzzleNumber, target, par } from "./puzzle";
 import { useGame } from "./use-game";
+import ResultPanel from "../../components/result-panel";
 
 function GameScreen() {
   const {
@@ -16,6 +17,7 @@ function GameScreen() {
     bestMoves,
     activeMove,
     currentStats,
+    solved,
     handleMove,
     handleGiveUp,
     handleReset,
@@ -24,14 +26,28 @@ function GameScreen() {
   return (
     <main className={styles.wrapper}>
       <h1>Loop #{puzzleNumber}</h1>
+
+      {!gaveUp && solved && (
+        <ResultPanel
+          bestMoves={bestMoves ?? moves}
+          moves={moves}
+          par={par}
+          streak={currentStats.currentStreak}
+          onTryAgain={handleReset}
+        />
+      )}
+
       {currentStats.bestStreak > 0 && (
         <p>
           Current streak: {currentStats.currentStreak} / Best streak:{" "}
           {currentStats.bestStreak}
         </p>
       )}
+
       {bestMoves !== null && <p>Your best today: {bestMoves}</p>}
+
       <TargetBoard matrix={target} />
+
       {gaveUp ? (
         <p>
           You've given up for today.
@@ -41,6 +57,7 @@ function GameScreen() {
       ) : (
         <MoveCounter moves={moves} par={par} />
       )}
+
       <div className={styles.game}>
         <div className={styles.rowControls}>
           <Control
@@ -74,6 +91,7 @@ function GameScreen() {
           />
         </div>
       </div>
+
       <div className={styles.actions}>
         <Button
           className={styles.actionButton}

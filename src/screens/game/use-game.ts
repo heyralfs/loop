@@ -36,6 +36,8 @@ export function useGame() {
     saved?.bestMoves ?? null,
   );
 
+  const solved = equals(matrix, target);
+
   // Highlights a button during the "I give up" replay.
   const [activeMove, setActiveMove] = useState<{
     operator: Operator;
@@ -124,6 +126,7 @@ export function useGame() {
     gaveUp,
     bestMoves,
     activeMove,
+    solved,
     handleMove,
     handleGiveUp,
     handleReset,
