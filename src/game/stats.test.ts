@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { recordWin, activeStreak, isValidStats, type Stats } from "./stats";
+import { recordWin, hasActiveStreak, isValidStats, type Stats } from "./stats";
 
 const mockStats = (over: Partial<Stats> = {}): Stats => ({
   version: 1,
@@ -48,26 +48,26 @@ describe("recordWin", () => {
   });
 });
 
-describe("activeStreak", () => {
+describe("hasActiveStreak", () => {
   it("is false when there has never been a win", () => {
-    expect(activeStreak(mockStats(), "2026-07-11")).toBe(false);
+    expect(hasActiveStreak(mockStats(), "2026-07-11")).toBe(false);
   });
 
   it("is true when the last win was today", () => {
     expect(
-      activeStreak(mockStats({ lastWinSeed: "2026-07-11" }), "2026-07-11"),
+      hasActiveStreak(mockStats({ lastWinSeed: "2026-07-11" }), "2026-07-11"),
     ).toBe(true);
   });
 
   it("is true when the last win was yesterday (alive, at risk)", () => {
     expect(
-      activeStreak(mockStats({ lastWinSeed: "2026-07-10" }), "2026-07-11"),
+      hasActiveStreak(mockStats({ lastWinSeed: "2026-07-10" }), "2026-07-11"),
     ).toBe(true);
   });
 
   it("is false when the last win was two or more days ago", () => {
     expect(
-      activeStreak(mockStats({ lastWinSeed: "2026-07-09" }), "2026-07-11"),
+      hasActiveStreak(mockStats({ lastWinSeed: "2026-07-09" }), "2026-07-11"),
     ).toBe(false);
   });
 });

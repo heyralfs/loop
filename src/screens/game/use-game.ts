@@ -10,7 +10,7 @@ import {
   readStats,
   recordWin,
   writeStats,
-  activeStreak,
+  hasActiveStreak,
   type Stats,
 } from "../../game/stats";
 
@@ -19,7 +19,7 @@ const progress = readProgress();
 const saved = progress?.seed === seed ? progress : null;
 
 const stats = readStats();
-const active = activeStreak(stats, seed);
+const active = hasActiveStreak(stats, seed);
 
 export function useGame() {
   const boardRef = useRef<BoardHandle>(null);

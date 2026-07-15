@@ -65,7 +65,7 @@ export function recordWin(stats: Stats, winSeed: string): Stats {
   };
 }
 
-export function activeStreak(stats: Stats, todaySeed: string): boolean {
+export function hasActiveStreak(stats: Stats, todaySeed: string): boolean {
   if (stats.lastWinSeed === null) {
     return false;
   }
