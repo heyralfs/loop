@@ -5,36 +5,42 @@
 }
 
 :root {
-  --text: #6b6375;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --on-accent: #fff;
+  /* light */
+  --surface: #f6f2e9;
+  --ink: #16211f;
+  --ink-soft: #5f6d68;
+  --line: #d8d1c1;
+  --accent: #0e9e8c;
+  --accent-ink: #0a7264;
+  --on-accent: #f6f2e9;
+  --optimal: #c8891a;
+  --tile-empty: #ddd6c7;
+
   --shadow:
     rgba(0, 0, 0, 0.08) 0 4px 10px -4px, rgba(0, 0, 0, 0.06) 0 2px 4px -2px;
 
   --sans: system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
+  --font-display: var(--mono);
+  --font-body: var(--sans);
 
-  --space: 4px;
+  --space-sm: 4px;
+  --space-md: 8px;
+  --space-lg: 16px;
   --radius: 8px;
 
   /* ── Game: Loop ── */
-  --tile-size: 56px;
-  --tile-empty: #f4f3ec;
+  --tile-size: 48px;
   --tile-filled: var(--accent);
-  --tile-border: 1px solid var(--border);
 
   --board-size: 4;
-  --board-bg: var(--accent-bg);
+  --board-bg: color-mix(in srgb, var(--accent) 8%, transparent);
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
+  color: var(--ink);
+  background: var(--surface);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -47,17 +53,18 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: #9ca3af;
-    --bg: #16171d;
-    --border: #2e303a;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
+    /* dark */
+    --surface: #16201d;
+    --ink: #ece7db;
+    --ink-soft: #8b9a94;
+    --line: #263230;
+    --accent: #24c9b2;
+    --accent-ink: #2ad3bb;
+    --on-accent: #0e1413;
+    --optimal: #e7b13c;
+    --tile-empty: #202d29;
     --shadow:
       rgba(0, 0, 0, 0.28) 0 4px 10px -4px, rgba(0, 0, 0, 0.18) 0 2px 4px -2px;
-
-    /* Game — dark */
-    --tile-empty: #2e303a;
   }
 }
 
@@ -71,16 +78,17 @@
 }
 
 body {
+  background: var(--surface);
   margin: 0;
 }
 
 h1 {
   font-family: var(--mono);
-  font-size: 2rem;
+  color: var(--ink);
+  font-size: 1.125rem;
   line-height: 1;
   font-weight: bold;
-  color: var(--accent);
-  margin: 0 0 var(--space);
+  margin: 0;
 }
 
 p {

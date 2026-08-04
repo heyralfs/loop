@@ -3,13 +3,11 @@
   align-items: center;
   justify-content: center;
 
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: none;
+  border: 1px solid transparent;
   border-radius: var(--radius);
 
   font-family: var(--mono);
-  font-size: 1rem;
+  font-size: 0.875rem;
   line-height: 1;
   padding: 0.5rem 1rem;
   cursor: pointer;
@@ -21,9 +19,26 @@
     box-shadow 120ms ease;
 }
 
+.button.tonal {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.button.filled {
+  color: var(--on-accent);
+  background: var(--accent);
+}
+
+.button.outlined {
+  color: var(--accent);
+  border: 1px solid var(--line);
+  background: transparent;
+}
+
 .button:not(:disabled):hover,
 .button[data-pressed="true"] {
   background: var(--accent);
+  border: 1px solid var(--accent);
   color: var(--on-accent);
   box-shadow: var(--shadow);
 }

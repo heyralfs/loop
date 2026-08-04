@@ -32,6 +32,7 @@ function ControlButton({
       onClick={onClick}
       pressed={pressed}
       disabled={disabled}
+      variant="TONAL"
     >
       <span aria-hidden="true">{ARROW[orientation][direction]}</span>
     </Button>

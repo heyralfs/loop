@@ -9,6 +9,7 @@ interface Props {
 function TargetBoard({ matrix }: Props) {
   return (
     <div className={styles.target}>
+      <span className={styles.label}>Target</span>
       <Board matrix={matrix} label="Target" />
     </div>
   );

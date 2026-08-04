@@ -8,11 +8,13 @@ interface Props {
 function MoveCounter({ moves, par }: Props) {
   return (
     <div className={styles.wrapper}>
-      <div>
-        <span>{`Par: ${par}`}</span>
-      </div>
       <div aria-live="polite" aria-atomic="true">
-        <span>{`Moves: ${moves}`}</span>
+        <span className={styles.label}>Moves</span>
+        <span className={styles.value}>{moves}</span>
+      </div>
+      <div>
+        <span className={styles.label}>Par</span>
+        <span className={styles.value}>{par}</span>
       </div>
     </div>
   );

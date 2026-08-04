@@ -5,7 +5,7 @@ import { todaySeed } from "../../game/seed";
 import { findShortestPath } from "../../game/path";
 import { daysBetween } from "../../game/days-between";
 
-const DAY_ONE = "2026-07-11";
+const DAY_ONE = "2026-07-03";
 
 export const seed = todaySeed();
 export const puzzleNumber = daysBetween(DAY_ONE, seed) + 1;

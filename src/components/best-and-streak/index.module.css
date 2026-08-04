@@ -1,0 +1,12 @@
+.streak {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.streak strong {
+  color: var(--accent-ink);
+}

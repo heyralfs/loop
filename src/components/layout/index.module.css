@@ -1,0 +1,14 @@
+.wrapper {
+  width: 100%;
+  max-width: 360px;
+  padding: var(--space-md) var(--space-lg);
+  margin: 0 auto;
+  border: 1px solid red;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+}

@@ -1,7 +1,7 @@
 .control {
   display: flex;
-  gap: var(--space);
-  padding: var(--space);
+  gap: var(--space-sm);
+  padding: var(--space-sm);
 }
 
 .control[data-orientation="row"] {

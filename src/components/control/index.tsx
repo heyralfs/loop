@@ -25,10 +25,9 @@ interface ControlProps {
   operator: Operator;
   onMove: (operator: Operator, direction: Direction) => void;
   activeMove?: { operator: Operator; direction: Direction } | null;
-  disabled?: boolean;
 }
 
-function Control({ operator, onMove, activeMove, disabled }: ControlProps) {
+function Control({ operator, onMove, activeMove }: ControlProps) {
   const orientation = DATA_OPERATOR[operator];
 
   const label = (direction: Direction) =>
@@ -50,7 +49,6 @@ function Control({ operator, onMove, activeMove, disabled }: ControlProps) {
         label={label("back")}
         onClick={() => onMove(operator, "back")}
         pressed={isPressed("back")}
-        disabled={disabled}
       />
       <Button
         orientation={orientation}
@@ -58,7 +56,6 @@ function Control({ operator, onMove, activeMove, disabled }: ControlProps) {
         label={label("forward")}
         onClick={() => onMove(operator, "forward")}
         pressed={isPressed("forward")}
-        disabled={disabled}
       />
     </div>
   );

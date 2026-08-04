@@ -1,9 +1,17 @@
 .wrapper {
-  width: 100%;
-  display: grid;
-  grid-template-columns: auto auto;
-  justify-content: space-between;
-  gap: var(--space);
-  font-family: var(--mono);
-  color: var(--accent);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+}
+
+.label {
+  color: var(--ink-soft);
+  margin-inline-end: var(--space-sm);
+}
+
+.value {
+  color: var(--ink);
+  font-weight: 700;
 }

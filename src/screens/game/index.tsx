@@ -1,11 +1,9 @@
 import styles from "./index.module.css";
-import Board from "../../components/board";
-import Control from "../../components/control";
-import MoveCounter from "../../components/move-counter";
 import TargetBoard from "../../components/target-board";
-import Button from "../../components/button";
 import { puzzleNumber, target, par } from "./puzzle";
 import { useGame } from "./use-game";
+import Layout from "../../components/layout";
+import PlayArea from "../../components/play-area";
 import ResultPanel from "../../components/result-panel";
 
 function GameScreen() {
@@ -24,91 +22,41 @@ function GameScreen() {
   } = useGame();
 
   return (
-    <main className={styles.wrapper}>
-      <h1>Loop #{puzzleNumber}</h1>
+    <Layout
+      puzzleNumber={puzzleNumber}
+      status={gaveUp ? "GAVE_UP" : solved ? "SOLVED" : "PLAYING"}
+    >
+      <div className={styles.wrapper}>
+        <TargetBoard matrix={target} />
 
-      {!gaveUp && solved && (
-        <ResultPanel
-          bestMoves={bestMoves ?? moves}
-          moves={moves}
-          par={par}
-          streak={currentStats.currentStreak}
-          onTryAgain={handleReset}
-        />
-      )}
-
-      {currentStats.bestStreak > 0 && (
-        <p>
-          Current streak: {currentStats.currentStreak} / Best streak:{" "}
-          {currentStats.bestStreak}
-        </p>
-      )}
-
-      {bestMoves !== null && <p>Your best today: {bestMoves}</p>}
-
-      <TargetBoard matrix={target} />
-
-      {gaveUp ? (
-        <p>
-          You've given up for today.
-          <br />
-          Come back tomorrow for a new puzzle.
-        </p>
-      ) : (
-        <MoveCounter moves={moves} par={par} />
-      )}
-
-      <div className={styles.game}>
-        <div className={styles.rowControls}>
-          <Control
-            operator="R12"
-            onMove={handleMove}
+        {!gaveUp && !solved && (
+          <PlayArea
             activeMove={activeMove}
-            disabled={gaveUp}
+            boardRef={boardRef}
+            matrix={matrix}
+            moves={moves}
+            par={par}
+            currentStreak={currentStats.currentStreak}
+            bestMoves={bestMoves}
+            handleMove={handleMove}
+            handleReset={handleReset}
+            handleGiveUp={handleGiveUp}
           />
-          <Control
-            operator="R34"
-            onMove={handleMove}
-            activeMove={activeMove}
-            disabled={gaveUp}
+        )}
+
+        {(gaveUp || solved) && (
+          <ResultPanel
+            matrix={matrix}
+            bestMoves={bestMoves}
+            moves={moves}
+            onTryAgain={handleReset}
+            par={par}
+            streak={currentStats.currentStreak}
+            gaveUp={gaveUp}
           />
-        </div>
-        <div className={styles.board}>
-          <Board ref={boardRef} matrix={matrix} label="Your board" />
-        </div>
-        <div className={styles.colControls}>
-          <Control
-            operator="C12"
-            onMove={handleMove}
-            activeMove={activeMove}
-            disabled={gaveUp}
-          />
-          <Control
-            operator="C34"
-            onMove={handleMove}
-            activeMove={activeMove}
-            disabled={gaveUp}
-          />
-        </div>
+        )}
       </div>
-
-      <div className={styles.actions}>
-        <Button
-          className={styles.actionButton}
-          onClick={handleReset}
-          disabled={gaveUp}
-        >
-          Reset
-        </Button>
-        <Button
-          className={styles.actionButton}
-          onClick={handleGiveUp}
-          disabled={gaveUp || bestMoves !== null}
-        >
-          I give up
-        </Button>
-      </div>
-    </main>
+    </Layout>
   );
 }
 

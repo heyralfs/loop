@@ -1,6 +1,14 @@
 /* Scope smaller sizing tokens; they cascade into the Board's tiles. */
 .target {
-  --tile-size: 32px;
+  --tile-size: 16px;
   --space: 2px;
-  --radius: 4px;
+  --radius: 2px;
+}
+
+.label {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.625rem;
+  color: var(--ink-soft);
 }
