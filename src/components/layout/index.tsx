@@ -8,11 +8,28 @@ interface Props {
   status: Status;
 }
 
-function Layout({ children, puzzleNumber, status }: Props) {
+function Layout({
+  children,
+  // puzzleNumber,
+  status,
+}: Props) {
   return (
     <div className={styles.wrapper}>
       <header className={styles.header}>
-        <h1>Loop #{puzzleNumber}</h1>
+        {/* <h1>Loop #{puzzleNumber}</h1> */}
+        <h1>
+          Loop{" "}
+          <span
+            style={{
+              fontSize: "0.8em",
+              fontWeight: "normal",
+              fontStyle: "italic",
+              color: "var(--ink-soft)",
+            }}
+          >
+            beta
+          </span>
+        </h1>
         <StatusChip status={status} />
       </header>
       <main>{children}</main>
