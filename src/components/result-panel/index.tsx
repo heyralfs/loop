@@ -101,7 +101,9 @@ function SolvedResultPanel({
         <p className={styles.headline}>{`Solved in ${moves}`}</p>
         <p className={styles.subhead}>{`Par is ${par}. Can you match it?`}</p>
         <BestAndStreak best={bestMoves} streak={streak} />
-        <Button onClick={onTryAgain}>Try again</Button>
+        <Button className={styles.button} onClick={onTryAgain}>
+          Try again
+        </Button>
       </div>
     </div>
   );

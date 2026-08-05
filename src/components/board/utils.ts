@@ -83,6 +83,6 @@ export function getFlipAnimationOptions(
 export function getStepSize(tile: HTMLDivElement): number {
   const cs = getComputedStyle(tile);
   const tileSize = parseFloat(cs.getPropertyValue("--tile-size"));
-  const gap = parseFloat(cs.getPropertyValue("--space"));
+  const gap = parseFloat(cs.getPropertyValue("--space-sm"));
   return tileSize + gap;
 }

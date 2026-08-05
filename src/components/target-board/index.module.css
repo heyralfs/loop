@@ -1,7 +1,7 @@
 /* Scope smaller sizing tokens; they cascade into the Board's tiles. */
 .target {
   --tile-size: 16px;
-  --space: 2px;
+  --space-sm: 2px;
   --radius: 2px;
 }
 
