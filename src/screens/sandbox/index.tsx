@@ -9,6 +9,7 @@ import Button from "../../components/button";
 import Control from "../../components/control";
 import ResultPanel from "../../components/result-panel";
 import styles from "./index.module.css";
+import Countdown from "../../components/countdown";
 
 // prettier-ignore
 const SOLVED: Matrix = [
@@ -129,6 +130,10 @@ function Sandbox() {
               />
             </div>
           </div>
+        </Item>
+
+        <Item title="Countdown">
+          <Countdown onCountdownEnd={noop} />
         </Item>
       </div>
     </div>

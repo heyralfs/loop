@@ -5,6 +5,7 @@ import { useGame } from "./use-game";
 import Layout from "../../components/layout";
 import PlayArea from "../../components/play-area";
 import ResultPanel from "../../components/result-panel";
+import Countdown from "../../components/countdown";
 
 function GameScreen() {
   const {
@@ -45,15 +46,18 @@ function GameScreen() {
         )}
 
         {(gaveUp || solved) && (
-          <ResultPanel
-            matrix={matrix}
-            bestMoves={bestMoves}
-            moves={moves}
-            onTryAgain={handleReset}
-            par={par}
-            streak={currentStats.currentStreak}
-            gaveUp={gaveUp}
-          />
+          <>
+            <ResultPanel
+              matrix={matrix}
+              bestMoves={bestMoves}
+              moves={moves}
+              onTryAgain={handleReset}
+              par={par}
+              streak={currentStats.currentStreak}
+              gaveUp={gaveUp}
+            />
+            <Countdown onCountdownEnd={() => location.reload()} />
+          </>
         )}
       </div>
     </Layout>
