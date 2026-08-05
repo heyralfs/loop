@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- background -->
+  <rect width="1200" height="630" fill="#f6f2e9"/>
+  <rect width="1200" height="10" fill="#0e9e8c"/>
+
+  <!-- wordmark -->
+  <text x="92" y="250" font-family="ui-monospace, SFMono-Regular, Consolas, monospace"
+        font-size="150" font-weight="700" fill="#16211f">Loop</text>
+  <rect x="96" y="280" width="238" height="10" rx="5" fill="#0e9e8c"/>
+
+  <!-- taglines -->
+  <text x="96" y="362" font-family="system-ui, 'Segoe UI', Roboto, sans-serif"
+        font-size="38" fill="#5f6d68">A daily 4&#215;4 puzzle.</text>
+  <text x="96" y="414" font-family="system-ui, 'Segoe UI', Roboto, sans-serif"
+        font-size="30" fill="#5f6d68">Match the target board in the fewest moves.</text>
+
+  <!-- url -->
+  <text x="96" y="522" font-family="ui-monospace, SFMono-Regular, Consolas, monospace"
+        font-size="28" fill="#0a7264">heyralfs.github.io/loop</text>
+
+  <!-- board 4x4 -->
+  <g>
+    <!-- row 0 -->
+    <rect x="708" y="114" width="90" height="90" rx="12" fill="#0e9e8c"/>
+    <rect x="812" y="114" width="90" height="90" rx="12" fill="#ddd6c7"/>
+    <rect x="916" y="114" width="90" height="90" rx="12" fill="#0e9e8c"/>
+    <rect x="1020" y="114" width="90" height="90" rx="12" fill="#ddd6c7"/>
+    <!-- row 1 -->
+    <rect x="708" y="218" width="90" height="90" rx="12" fill="#ddd6c7"/>
+    <rect x="812" y="218" width="90" height="90" rx="12" fill="#0e9e8c"/>
+    <rect x="916" y="218" width="90" height="90" rx="12" fill="#ddd6c7"/>
+    <rect x="1020" y="218" width="90" height="90" rx="12" fill="#0e9e8c"/>
+    <!-- row 2 -->
+    <rect x="708" y="322" width="90" height="90" rx="12" fill="#0e9e8c"/>
+    <rect x="812" y="322" width="90" height="90" rx="12" fill="#ddd6c7"/>
+    <rect x="916" y="322" width="90" height="90" rx="12" fill="#c8891a"/>
+    <rect x="1020" y="322" width="90" height="90" rx="12" fill="#ddd6c7"/>
+    <!-- row 3 -->
+    <rect x="708" y="426" width="90" height="90" rx="12" fill="#ddd6c7"/>
+    <rect x="812" y="426" width="90" height="90" rx="12" fill="#0e9e8c"/>
+    <rect x="916" y="426" width="90" height="90" rx="12" fill="#ddd6c7"/>
+    <rect x="1020" y="426" width="90" height="90" rx="12" fill="#0e9e8c"/>
+  </g>
+</svg>
