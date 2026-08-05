@@ -6,7 +6,7 @@ A daily 4×4 puzzle. Shift pairs of rows and columns to turn the scrambled board
 into the target — in as few moves as possible. One new puzzle for everyone, every
 day. No accounts, no backend.
 
-**▶ Play: https://heyralfs.github.io/loop/**
+**▶ Play: [https://heyralfs.github.io/loop/](https://heyralfs.github.io/loop?ref=github)**
 
 ## How to play
 
