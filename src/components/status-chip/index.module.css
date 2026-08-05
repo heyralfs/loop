@@ -3,8 +3,8 @@
   font-size: 0.625rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  line-height: 1.5;
-  padding: var(--space-sm) var(--space-md);
+  line-height: 1;
+  padding: var(--space-md);
   border-radius: 999px;
   border: 1px solid transparent;
   white-space: nowrap;
