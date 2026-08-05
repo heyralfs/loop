@@ -5,7 +5,7 @@ import { move } from "../../game/operators";
 import { findShortestPath } from "../../game/path";
 import { equals } from "../../game/equals";
 import { readProgress, writeProgress } from "../../game/progress";
-import { seed, target, initial } from "./puzzle";
+import { seed, target, initial, par } from "./puzzle";
 import {
   readStats,
   recordWin,
@@ -20,6 +20,10 @@ const saved = progress?.seed === seed ? progress : null;
 
 const stats = readStats();
 const active = hasActiveStreak(stats, seed);
+
+// Activation: fire the "first-move" event at most once per page load,
+// so a Reset (which sends moves back to 0) doesn't re-count it.
+let firstMoveSent = false;
 
 export function useGame() {
   const boardRef = useRef<BoardHandle>(null);
@@ -68,6 +72,15 @@ export function useGame() {
       ? Math.min(bestMoves ?? Infinity, nextMoves)
       : bestMoves;
 
+    if (nextMoves === 1 && !firstMoveSent) {
+      firstMoveSent = true;
+      window.goatcounter?.count({
+        path: "first-move",
+        title: "Started playing",
+        event: true,
+      });
+    }
+
     animatingRef.current = true;
     await boardRef.current?.animateMove(operator, direction, () => {
       commit({
@@ -83,6 +96,11 @@ export function useGame() {
       const winStats = recordWin(currentStats, seed);
       writeStats(winStats);
       setCurrentStats(winStats);
+      window.goatcounter?.count({
+        path: nextMoves === par ? "solved-optimal" : "solved",
+        title: "Puzzle solved",
+        event: true,
+      });
     }
   };
 
@@ -106,6 +124,11 @@ export function useGame() {
     animatingRef.current = false;
 
     commit({ matrix: target, moves, gaveUp: true, bestMoves });
+    window.goatcounter?.count({
+      path: "gave-up",
+      title: "Gave up",
+      event: true,
+    });
   };
 
   const handleReset = async () => {
