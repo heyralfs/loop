@@ -1,75 +1,49 @@
-# React + TypeScript + Vite
+# Loop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Loop — a daily 4×4 tile puzzle](public/og-image.png)
 
-Currently, two official plugins are available:
+A daily 4×4 puzzle. Shift pairs of rows and columns to turn the scrambled board
+into the target — in as few moves as possible. One new puzzle for everyone, every
+day. No accounts, no backend.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**▶ Play: https://heyralfs.github.io/loop/**
 
-## React Compiler
+## How to play
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Each control shifts two rows or two columns at once, cyclically (a tile pushed
+  off one edge wraps back in on the other).
+- Match your board to the **target** shown at the top.
+- **Par** is the optimal solution — the fewest moves the puzzle can be solved in.
+  Match it for an "Optimal" finish, or give up to watch the solution play out.
+- Come back tomorrow for a fresh one.
 
-## Expanding the ESLint configuration
+## How it works
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The puzzle is deterministic from the calendar date: the date seeds a PRNG that
+generates the target and scrambles it, so everyone gets the same board each day —
+no server required. **Par** is computed with a breadth-first search for the
+shortest path back to the target. Progress and streaks are kept in `localStorage`.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tech
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+React 19 · TypeScript · Vite · CSS Modules + design tokens · Web Animations API ·
+Vitest. Deployed to GitHub Pages via GitHub Actions.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Development
 
+Requires Node `>=20.19 <21` or `>=22.12`.
+
+```bash
+npm install
+npm run dev      # start the dev server
+npm test         # run the game-logic tests
+npm run build    # type-check + production build
+npm run lint     # lint
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+There's also a component sandbox at `?sandbox` in dev, for viewing every UI state
+with mock data.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## License
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+[MIT](LICENSE) © 2026 Ralf Oliveira
