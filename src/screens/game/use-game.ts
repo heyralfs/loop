@@ -135,9 +135,18 @@ export function useGame() {
     if (gaveUp || animatingRef.current) return;
 
     animatingRef.current = true;
-    await boardRef.current?.animateFlip(() => {
+
+    const reset = () =>
       commit({ matrix: initial, moves: 0, gaveUp: false, bestMoves });
-    });
+
+    // On the result screen the ref-bearing board is unmounted, so there's
+    // nothing to flip — just reset. Mid-play, animate the flip as before.
+    if (boardRef.current) {
+      await boardRef.current.animateFlip(reset);
+    } else {
+      reset();
+    }
+
     animatingRef.current = false;
   };
 
