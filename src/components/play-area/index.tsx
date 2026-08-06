@@ -15,6 +15,7 @@ interface Props {
     direction: Direction;
   } | null;
   moves: number;
+  remainingResets: number;
   par: number;
   currentStreak: number;
   bestMoves: number | null;
@@ -28,6 +29,7 @@ function PlayArea({
   matrix,
   activeMove,
   moves,
+  remainingResets,
   par,
   currentStreak,
   bestMoves,
@@ -60,8 +62,9 @@ function PlayArea({
           className={styles.actionButton}
           onClick={handleReset}
           variant="OUTLINED"
+          disabled={remainingResets <= 0}
         >
-          Reset
+          Reset ({remainingResets})
         </Button>
         <Button
           className={styles.actionButton}

@@ -21,6 +21,8 @@ const saved = progress?.seed === seed ? progress : null;
 const stats = readStats();
 const active = hasActiveStreak(stats, seed);
 
+const MAXIMUM_RESETS = 5;
+
 // Activation: fire the "first-move" event at most once per page load,
 // so a Reset (which sends moves back to 0) doesn't re-count it.
 let firstMoveSent = false;
@@ -35,6 +37,7 @@ export function useGame() {
 
   const [matrix, setMatrix] = useState<Matrix>(saved?.matrix ?? initial);
   const [moves, setMoves] = useState<number>(saved?.moves ?? 0);
+  const [resets, setResets] = useState<number>(saved?.resets ?? 0);
   const [gaveUp, setGaveUp] = useState<boolean>(saved?.gaveUp ?? false);
   const [bestMoves, setBestMoves] = useState<number | null>(
     saved?.bestMoves ?? null,
@@ -54,12 +57,14 @@ export function useGame() {
     moves: number;
     gaveUp: boolean;
     bestMoves: number | null;
+    resets: number;
   }) => {
     setMatrix(update.matrix);
     setMoves(update.moves);
     setGaveUp(update.gaveUp);
     setBestMoves(update.bestMoves);
-    writeProgress({ version: 1, seed, ...update });
+    setResets(update.resets);
+    writeProgress({ version: 2, seed, ...update });
   };
 
   const handleMove = async (operator: Operator, direction: Direction) => {
@@ -88,6 +93,7 @@ export function useGame() {
         moves: nextMoves,
         gaveUp: false,
         bestMoves: nextBest,
+        resets: solved ? 0 : resets,
       });
     });
     animatingRef.current = false;
@@ -123,7 +129,7 @@ export function useGame() {
     setActiveMove(null);
     animatingRef.current = false;
 
-    commit({ matrix: target, moves, gaveUp: true, bestMoves });
+    commit({ matrix: target, moves, gaveUp: true, bestMoves, resets });
     window.goatcounter?.count({
       path: "gave-up",
       title: "Gave up",
@@ -132,12 +138,18 @@ export function useGame() {
   };
 
   const handleReset = async () => {
-    if (gaveUp || animatingRef.current) return;
+    if (gaveUp || animatingRef.current || resets >= MAXIMUM_RESETS) return;
 
     animatingRef.current = true;
 
     const reset = () =>
-      commit({ matrix: initial, moves: 0, gaveUp: false, bestMoves });
+      commit({
+        matrix: initial,
+        moves: 0,
+        gaveUp: false,
+        bestMoves,
+        resets: resets + 1,
+      });
 
     // On the result screen the ref-bearing board is unmounted, so there's
     // nothing to flip — just reset. Mid-play, animate the flip as before.
@@ -155,6 +167,7 @@ export function useGame() {
     boardRef,
     matrix,
     moves,
+    remainingResets: MAXIMUM_RESETS - resets,
     gaveUp,
     bestMoves,
     activeMove,

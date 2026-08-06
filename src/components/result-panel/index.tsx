@@ -11,6 +11,7 @@ interface Props {
   bestMoves: number | null;
   streak: number;
   onTryAgain: () => void;
+  remainingResets: number;
   gaveUp?: boolean;
 }
 
@@ -21,6 +22,7 @@ function ResultPanel({
   bestMoves,
   streak,
   onTryAgain,
+  remainingResets,
   gaveUp,
 }: Props) {
   if (gaveUp) {
@@ -41,6 +43,7 @@ function ResultPanel({
       bestMoves={bestMoves}
       streak={streak}
       onTryAgain={onTryAgain}
+      remainingResets={remainingResets}
     />
   );
 }
@@ -91,6 +94,7 @@ function SolvedResultPanel({
   bestMoves,
   streak,
   onTryAgain,
+  remainingResets,
 }: Omit<Props, "gaveUp">) {
   return (
     <div className={styles.wrapper}>
@@ -101,8 +105,12 @@ function SolvedResultPanel({
         <p className={styles.headline}>{`Solved in ${moves}`}</p>
         <p className={styles.subhead}>{`Par is ${par}. Can you match it?`}</p>
         <BestAndStreak best={bestMoves} streak={streak} />
-        <Button className={styles.button} onClick={onTryAgain}>
-          Try again
+        <Button
+          className={styles.button}
+          onClick={onTryAgain}
+          disabled={remainingResets <= 0}
+        >
+          {remainingResets > 0 ? `Try again (${remainingResets})` : "No resets left"}
         </Button>
       </div>
     </div>

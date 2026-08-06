@@ -2,12 +2,13 @@ import { describe, it, expect } from "vitest";
 import { isValidProgress } from "./progress";
 
 const valid = {
-  version: 1,
+  version: 2,
   seed: "2026-07-11",
   moves: 3,
   matrix: new Array(16).fill(0),
   gaveUp: false,
   bestMoves: null,
+  resets: 0,
 };
 
 describe("isValidProgress", () => {
@@ -27,7 +28,7 @@ describe("isValidProgress", () => {
   });
 
   it("rejects an unknown version", () => {
-    expect(isValidProgress({ ...valid, version: 2 })).toBe(false);
+    expect(isValidProgress({ ...valid, version: 1 })).toBe(false);
     expect(isValidProgress({ ...valid, version: undefined })).toBe(false);
   });
 
@@ -36,6 +37,7 @@ describe("isValidProgress", () => {
     expect(isValidProgress({ ...valid, moves: "3" })).toBe(false);
     expect(isValidProgress({ ...valid, gaveUp: "yes" })).toBe(false);
     expect(isValidProgress({ ...valid, bestMoves: "7" })).toBe(false);
+    expect(isValidProgress({ ...valid, resets: "0" })).toBe(false);
   });
 
   it("rejects a malformed matrix", () => {

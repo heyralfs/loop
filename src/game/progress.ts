@@ -3,7 +3,7 @@ import type { Matrix } from "./types";
 
 const KEY = "loop:progress";
 
-const VERSION = 1; // bump this when the Progress interface changes
+const VERSION = 2; // bump this when the Progress interface changes
 
 export interface Progress {
   version: typeof VERSION;
@@ -12,6 +12,7 @@ export interface Progress {
   matrix: Matrix;
   gaveUp: boolean;
   bestMoves: number | null; // fewest moves solved today; null = not solved yet
+  resets: number; // number of times the puzzle has been reset
 }
 
 export function isValidProgress(obj: unknown): obj is Progress {
@@ -27,6 +28,7 @@ export function isValidProgress(obj: unknown): obj is Progress {
     typeof progress.moves === "number" &&
     typeof progress.gaveUp === "boolean" &&
     (progress.bestMoves === null || typeof progress.bestMoves === "number") &&
+    typeof progress.resets === "number" &&
     Array.isArray(progress.matrix) &&
     progress.matrix.length === 16 &&
     progress.matrix.every((cell) => cell === 0 || cell === 1)

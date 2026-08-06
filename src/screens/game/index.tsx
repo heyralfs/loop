@@ -12,6 +12,7 @@ function GameScreen() {
     boardRef,
     matrix,
     moves,
+    remainingResets,
     gaveUp,
     bestMoves,
     activeMove,
@@ -36,6 +37,7 @@ function GameScreen() {
             boardRef={boardRef}
             matrix={matrix}
             moves={moves}
+            remainingResets={remainingResets}
             par={par}
             currentStreak={currentStats.currentStreak}
             bestMoves={bestMoves}
@@ -52,6 +54,7 @@ function GameScreen() {
               bestMoves={bestMoves}
               moves={moves}
               onTryAgain={handleReset}
+              remainingResets={remainingResets}
               par={par}
               streak={currentStats.currentStreak}
               gaveUp={gaveUp}

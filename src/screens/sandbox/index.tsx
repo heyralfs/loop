@@ -106,6 +106,7 @@ function Sandbox() {
                 bestMoves={6}
                 streak={4}
                 onTryAgain={noop}
+                remainingResets={5}
               />
             </div>
             <div>
@@ -116,6 +117,7 @@ function Sandbox() {
                 bestMoves={6}
                 streak={2}
                 onTryAgain={noop}
+                remainingResets={3}
               />
             </div>
             <div>
@@ -126,6 +128,7 @@ function Sandbox() {
                 bestMoves={null}
                 streak={0}
                 onTryAgain={noop}
+                remainingResets={5}
                 gaveUp
               />
             </div>
