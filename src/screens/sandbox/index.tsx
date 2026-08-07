@@ -10,6 +10,9 @@ import Control from "../../components/control";
 import ResultPanel from "../../components/result-panel";
 import styles from "./index.module.css";
 import Countdown from "../../components/countdown";
+import IconButton from "../../components/icon-button";
+import MuteToggle from "../../components/mute-toggle";
+import ThemeToggle from "../../components/theme-toggle";
 
 // prettier-ignore
 const SOLVED: Matrix = [
@@ -82,6 +85,22 @@ function Sandbox() {
             <Button variant="FILLED" disabled>
               Disabled
             </Button>
+          </div>
+        </Item>
+
+        <Item title="Icon button">
+          <div className={styles.row}>
+            <IconButton label="Example icon button" onClick={noop}>
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </IconButton>
+          </div>
+        </Item>
+
+        <Item title="Header toggles (live)">
+          <div className={styles.row}>
+            <MuteToggle />
+            <ThemeToggle />
           </div>
         </Item>
 
