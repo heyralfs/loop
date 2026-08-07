@@ -5,19 +5,22 @@
 }
 
 :root {
-  /* light */
-  --surface: #f6f2e9;
-  --ink: #16211f;
-  --ink-soft: #5f6d68;
-  --line: #d8d1c1;
-  --accent: #0e9e8c;
-  --accent-ink: #0a7264;
-  --on-accent: #f6f2e9;
-  --optimal: #c8891a;
-  --tile-empty: #ddd6c7;
+  /* Each token holds its light and dark value; color-scheme picks. */
+  color-scheme: light dark;
+
+  --surface: light-dark(#f6f2e9, #16201d);
+  --ink: light-dark(#16211f, #ece7db);
+  --ink-soft: light-dark(#5f6d68, #8b9a94);
+  --line: light-dark(#d8d1c1, #263230);
+  --accent: light-dark(#0e9e8c, #24c9b2);
+  --accent-ink: light-dark(#0a7264, #2ad3bb);
+  --on-accent: light-dark(#f6f2e9, #0e1413);
+  --optimal: light-dark(#c8891a, #e7b13c);
+  --tile-empty: light-dark(#ddd6c7, #202d29);
 
   --shadow:
-    rgba(0, 0, 0, 0.08) 0 4px 10px -4px, rgba(0, 0, 0, 0.06) 0 2px 4px -2px;
+    light-dark(rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.28)) 0 4px 10px -4px,
+    light-dark(rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.18)) 0 2px 4px -2px;
 
   --sans: system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
@@ -38,7 +41,6 @@
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
-  color-scheme: light dark;
   color: var(--ink);
   background: var(--surface);
   font-synthesis: none;
@@ -51,21 +53,12 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* dark */
-    --surface: #16201d;
-    --ink: #ece7db;
-    --ink-soft: #8b9a94;
-    --line: #263230;
-    --accent: #24c9b2;
-    --accent-ink: #2ad3bb;
-    --on-accent: #0e1413;
-    --optimal: #e7b13c;
-    --tile-empty: #202d29;
-    --shadow:
-      rgba(0, 0, 0, 0.28) 0 4px 10px -4px, rgba(0, 0, 0, 0.18) 0 2px 4px -2px;
-  }
+/* Explicit override: flip color-scheme and every light-dark() token follows. */
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 #root {
