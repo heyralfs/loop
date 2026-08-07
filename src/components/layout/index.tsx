@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import styles from "./index.module.css";
 import StatusChip, { type Status } from "../status-chip";
+import MuteToggle from "../mute-toggle";
 
 interface Props {
   children: ReactNode;
@@ -16,7 +17,10 @@ function Layout({ children, puzzleNumber, status }: Props) {
           Loop #{puzzleNumber} <span className={styles.beta}>beta</span>
         </h1>
 
-        <StatusChip status={status} />
+        <div className={styles.actions}>
+          <StatusChip status={status} />
+          <MuteToggle />
+        </div>
       </header>
       <main>{children}</main>
     </div>

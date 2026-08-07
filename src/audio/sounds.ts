@@ -1,11 +1,23 @@
 import clickSound from "../assets/sounds/click.mp3";
 import slideSound from "../assets/sounds/slide.mp3";
 import flipSound from "../assets/sounds/flip.mp3";
+import { readJSON, writeJSON } from "../game/storage";
 
 const ctx = new AudioContext(); // one engine
 const master = ctx.createGain();
 master.connect(ctx.destination);
-const muted = false;
+
+const MUTE_KEY = "loop:muted";
+let muted = readJSON(MUTE_KEY) === true;
+
+export function isMuted(): boolean {
+  return muted;
+}
+
+export function persistMuted(next: boolean): void {
+  muted = next;
+  writeJSON(MUTE_KEY, next);
+}
 
 type SoundName = "click" | "slide" | "flip";
 
@@ -19,6 +31,7 @@ async function load(name: SoundName, url: string) {
   const data = await fetch(url).then((r) => r.arrayBuffer());
   buffers[name] = await ctx.decodeAudioData(data);
 }
+
 Promise.all([
   load("click", clickSound),
   load("slide", slideSound),
