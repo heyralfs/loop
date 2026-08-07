@@ -9,6 +9,7 @@ import {
   getCloneKeyframes,
   getFlipAnimationOptions,
 } from "./utils";
+import { play } from "../../audio/sounds";
 
 export async function animateMove(
   tileRefs: Map<number, HTMLDivElement | null>,
@@ -38,6 +39,8 @@ export async function animateMove(
       ),
     );
   }
+
+  play("slide");
 
   const wrapIndices = getWrapTileIndices(operator, direction);
 
@@ -93,6 +96,7 @@ export async function animateFlip(
     const tile = tileRefs.get(index);
     if (!tile) continue;
 
+    play("flip", index * 0.05);
     animations.push(
       tile.animate(
         [{ transform: "rotateY(0deg)" }, { transform: "rotateY(90deg)" }],
@@ -108,6 +112,7 @@ export async function animateFlip(
     const tile = tileRefs.get(index);
     if (!tile) continue;
 
+    play("flip", index * 0.05);
     animations.push(
       tile.animate(
         [{ transform: "rotateY(90deg)" }, { transform: "rotateY(0deg)" }],

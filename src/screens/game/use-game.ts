@@ -13,6 +13,7 @@ import {
   hasActiveStreak,
   type Stats,
 } from "../../game/stats";
+import { play } from "../../audio/sounds";
 
 // Read once at load — resume only if the saved progress is for today's puzzle.
 const progress = readProgress();
@@ -21,7 +22,7 @@ const saved = progress?.seed === seed ? progress : null;
 const stats = readStats();
 const active = hasActiveStreak(stats, seed);
 
-const MAXIMUM_RESETS = 5;
+const MAXIMUM_RESETS = import.meta.env.DEV ? Infinity : 5;
 
 // Activation: fire the "first-move" event at most once per page load,
 // so a Reset (which sends moves back to 0) doesn't re-count it.
@@ -121,6 +122,7 @@ export function useGame() {
     for (const { operator, direction } of path) {
       const next = move(current, operator, direction);
       setActiveMove({ operator, direction });
+      play("click");
       await boardRef.current?.animateMove(operator, direction, () => {
         setMatrix(next);
       });
