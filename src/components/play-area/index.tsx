@@ -5,7 +5,7 @@ import Control from "../control";
 import styles from "./index.module.css";
 import MoveCounter from "../move-counter";
 import Button from "../button";
-import Streak from "../best-and-streak";
+import BestAndStreak from "../best-and-streak";
 
 interface Props {
   boardRef: RefObject<BoardHandle | null>;
@@ -41,7 +41,9 @@ function PlayArea({
     <>
       <MoveCounter moves={moves} par={par} />
 
-      {currentStreak > 0 && <Streak streak={currentStreak} />}
+      {currentStreak > 0 && (
+        <BestAndStreak best={bestMoves} streak={currentStreak} />
+      )}
 
       <div className={styles.grid}>
         <div className={styles.board}>
