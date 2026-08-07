@@ -8,7 +8,7 @@ const master = ctx.createGain();
 master.connect(ctx.destination);
 
 const MUTE_KEY = "loop:muted";
-let muted = readJSON(MUTE_KEY) === true;
+let muted = readJSON(MUTE_KEY) !== false; // default: muted (only an explicit false unmutes)
 
 export function isMuted(): boolean {
   return muted;
