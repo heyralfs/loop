@@ -94,7 +94,7 @@ export function useGame() {
         moves: nextMoves,
         gaveUp: false,
         bestMoves: nextBest,
-        resets: solved ? 0 : resets,
+        resets,
       });
     });
     animatingRef.current = false;
