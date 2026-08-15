@@ -3,17 +3,25 @@ import type { Direction, Operator, Orientation } from "../../game/types";
 import Button from "./button";
 
 const DATA_OPERATOR: Record<Operator, Orientation> = {
-  R12: "row",
-  R34: "row",
-  C12: "column",
-  C34: "column",
+  R1: "row",
+  R2: "row",
+  R3: "row",
+  R4: "row",
+  C1: "column",
+  C2: "column",
+  C3: "column",
+  C4: "column",
 };
 
 const OPERATOR_LABEL: Record<Operator, string> = {
-  R12: "rows 1 and 2",
-  R34: "rows 3 and 4",
-  C12: "columns 1 and 2",
-  C34: "columns 3 and 4",
+  R1: "row 1",
+  R2: "row 2",
+  R3: "row 3",
+  R4: "row 4",
+  C1: "column 1",
+  C2: "column 2",
+  C3: "column 3",
+  C4: "column 4",
 };
 
 const DIRECTION_WORD: Record<Orientation, Record<Direction, string>> = {

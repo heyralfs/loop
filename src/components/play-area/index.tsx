@@ -37,6 +37,9 @@ function PlayArea({
   handleReset,
   handleGiveUp,
 }: Props) {
+  const rowOperators: Operator[] = ["R1", "R2", "R3", "R4"];
+  const colOperators: Operator[] = ["C1", "C2", "C3", "C4"];
+
   return (
     <>
       <MoveCounter moves={moves} par={par} />
@@ -50,12 +53,24 @@ function PlayArea({
           <Board ref={boardRef} matrix={matrix} label="Your board" />
         </div>
         <div className={styles.rowControls}>
-          <Control operator="R12" onMove={handleMove} activeMove={activeMove} />
-          <Control operator="R34" onMove={handleMove} activeMove={activeMove} />
+          {rowOperators.map((operator) => (
+            <Control
+              key={operator}
+              operator={operator}
+              onMove={handleMove}
+              activeMove={activeMove}
+            />
+          ))}
         </div>
         <div className={styles.colControls}>
-          <Control operator="C12" onMove={handleMove} activeMove={activeMove} />
-          <Control operator="C34" onMove={handleMove} activeMove={activeMove} />
+          {colOperators.map((operator) => (
+            <Control
+              key={operator}
+              operator={operator}
+              onMove={handleMove}
+              activeMove={activeMove}
+            />
+          ))}
         </div>
       </div>
 

@@ -65,7 +65,7 @@ export function useGame() {
     setGaveUp(update.gaveUp);
     setBestMoves(update.bestMoves);
     setResets(update.resets);
-    writeProgress({ version: 2, seed, ...update });
+    writeProgress({ seed, ...update });
   };
 
   const handleMove = async (operator: Operator, direction: Direction) => {

@@ -1,14 +1,14 @@
 .button {
-  font-size: 1.1rem;
   padding: 0; /* fixed-size arrow button — no text padding */
+  border-radius: calc(var(--radius) / 2);
 }
 
 .button[data-orientation="row"] {
-  height: calc(var(--tile-size) * 2);
+  height: var(--tile-size);
   width: calc(var(--tile-size) / 2);
 }
 
 .button[data-orientation="column"] {
-  width: calc(var(--tile-size) * 2);
+  width: var(--tile-size);
   height: calc(var(--tile-size) / 2);
 }

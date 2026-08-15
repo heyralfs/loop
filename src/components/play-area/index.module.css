@@ -12,15 +12,15 @@
 .rowControls {
   grid-area: 1 / 3 / 2 / 3;
   display: grid;
-  grid-template-rows: 1fr 1fr;
-  gap: var(--space-sm);
+  grid-template-rows: repeat(4, 1fr);
+  margin-block-start: var(--space-sm);
 }
 
 .colControls {
   grid-area: 2 / 2 / 3 / 3;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-sm);
+  grid-template-columns: repeat(4, 1fr);
+  margin-inline-start: var(--space-sm);
 }
 
 .actions {

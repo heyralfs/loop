@@ -21,7 +21,7 @@ describe("findShortestPath", () => {
   });
 
   it("finds the single move for a board one step from the target", () => {
-    const start = move(TARGET, "R12", "forward");
+    const start = move(TARGET, "R1", "forward");
     const path = findShortestPath(start, TARGET);
 
     expect(path).not.toBeNull();
@@ -33,9 +33,9 @@ describe("findShortestPath", () => {
 
   it("round-trips: replaying the found path reaches the target", () => {
     const scrambleMoves: Move[] = [
-      { operator: "C34", direction: "back" },
-      { operator: "R34", direction: "forward" },
-      { operator: "C12", direction: "forward" },
+      { operator: "C3", direction: "back" },
+      { operator: "R3", direction: "forward" },
+      { operator: "C1", direction: "forward" },
     ];
     const start = replay(TARGET, scrambleMoves);
     expect(start).not.toEqual(TARGET); // sanity: the scramble actually moved it

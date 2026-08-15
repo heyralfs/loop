@@ -106,11 +106,11 @@ function Sandbox() {
 
         <Item title="Control — idle & pressed">
           <div className={styles.row}>
-            <Control operator="R12" onMove={noop} />
+            <Control operator="R1" onMove={noop} />
             <Control
-              operator="C12"
+              operator="C1"
               onMove={noop}
-              activeMove={{ operator: "C12", direction: "forward" }}
+              activeMove={{ operator: "C1", direction: "forward" }}
             />
           </div>
         </Item>

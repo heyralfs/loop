@@ -1,7 +1,6 @@
 .control {
   display: flex;
   gap: var(--space-sm);
-  padding: var(--space-sm);
 }
 
 .control[data-orientation="row"] {
