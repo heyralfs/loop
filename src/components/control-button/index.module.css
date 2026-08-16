@@ -1,6 +1,6 @@
 .button {
   padding: 0; /* fixed-size arrow button — no text padding */
-  border-radius: calc(var(--radius) / 2);
+  border-radius: var(--radius-sm);
 }
 
 .button[data-orientation="row"] {

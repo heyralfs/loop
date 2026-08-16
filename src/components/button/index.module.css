@@ -4,7 +4,7 @@
   justify-content: center;
 
   border: 1px solid transparent;
-  border-radius: var(--radius);
+  border-radius: var(--radius-md);
 
   font-family: var(--mono);
   font-size: 0.875rem;

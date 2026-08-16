@@ -5,7 +5,7 @@
   grid-template-rows: repeat(var(--board-size), var(--tile-size));
   gap: var(--space-sm);
   padding: var(--space-sm);
-  border-radius: var(--radius);
+  border-radius: var(--radius-md);
   width: fit-content;
   overflow: hidden;
   position: relative;

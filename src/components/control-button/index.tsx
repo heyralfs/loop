@@ -1,13 +1,13 @@
-import Button from "../../button";
+import Button from "../button";
 import styles from "./index.module.css";
-import type { Direction, Orientation } from "../../../game/types";
+import type { Direction, Orientation } from "../../game/types";
 
 const ARROW: Record<Orientation, Record<Direction, string>> = {
   row: { back: "◀", forward: "▶" },
   column: { back: "▲", forward: "▼" },
 };
 
-interface ButtonProps {
+interface Props {
   orientation: Orientation;
   direction: Direction;
   label: string;
@@ -23,7 +23,7 @@ function ControlButton({
   onClick,
   pressed,
   disabled,
-}: ButtonProps) {
+}: Props) {
   return (
     <Button
       className={styles.button}

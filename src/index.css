@@ -30,7 +30,8 @@
   --space-sm: 4px;
   --space-md: 8px;
   --space-lg: 16px;
-  --radius: 8px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
 
   /* ── Game: Loop ── */
   --tile-size: 48px;
