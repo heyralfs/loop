@@ -19,7 +19,7 @@
 
 .item {
   border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border-radius: var(--radius-md);
   background: var(--surface);
   padding: 16px;
 }

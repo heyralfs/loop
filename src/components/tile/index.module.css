@@ -2,7 +2,7 @@
   width: var(--tile-size);
   height: var(--tile-size);
   background: var(--tile-empty);
-  border-radius: var(--radius);
+  border-radius: var(--radius-md);
 }
 
 .tile[data-value="1"] {

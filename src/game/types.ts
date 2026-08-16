@@ -4,10 +4,10 @@ export type Cell = 0 | 1;
 // The board, flattened row-major: index = 4 * row + col (length 16).
 export type Matrix = Cell[];
 
-// Operators act on a *pair* of rows or columns.
-// The digits name the pair: R12 = rows 1–2, R34 = rows 3–4,
-// C12 = cols 1–2, C34 = cols 3–4.
-export type Operator = "R12" | "R34" | "C12" | "C34";
+// Operators act on a row or column.
+// The digits name the row or column: R{n} = row {n}, C{n} = column {n}.
+// The numbers are 1-based, not 0-based.
+export type Operator = "R1" | "R2" | "R3" | "R4" | "C1" | "C2" | "C3" | "C4";
 
 // Whether an operator moves rows (left/right) or columns (up/down).
 export type Orientation = "row" | "column";

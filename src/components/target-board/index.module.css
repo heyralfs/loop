@@ -2,7 +2,7 @@
 .target {
   --tile-size: 16px;
   --space-sm: 2px;
-  --radius: 2px;
+  --radius-md: 2px;
 }
 
 .label {

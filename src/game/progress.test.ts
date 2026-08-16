@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { isValidProgress } from "./progress";
 
 const valid = {
-  version: 2,
+  version: 3,
   seed: "2026-07-11",
   moves: 3,
   matrix: new Array(16).fill(0),
@@ -28,7 +28,7 @@ describe("isValidProgress", () => {
   });
 
   it("rejects an unknown version", () => {
-    expect(isValidProgress({ ...valid, version: 1 })).toBe(false);
+    expect(isValidProgress({ ...valid, version: 2 })).toBe(false);
     expect(isValidProgress({ ...valid, version: undefined })).toBe(false);
   });
 

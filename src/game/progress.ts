@@ -3,7 +3,7 @@ import type { Matrix } from "./types";
 
 const KEY = "loop:progress";
 
-const VERSION = 2; // bump this when the Progress interface changes
+const VERSION = 3; // bump this when the Progress interface changes
 
 export interface Progress {
   version: typeof VERSION;
@@ -43,6 +43,6 @@ export function readProgress(): Progress | null {
   return null;
 }
 
-export function writeProgress(progress: Progress): void {
-  writeJSON(KEY, progress);
+export function writeProgress(progress: Omit<Progress, "version">): void {
+  writeJSON(KEY, { version: VERSION, ...progress });
 }

@@ -65,7 +65,7 @@ export function useGame() {
     setGaveUp(update.gaveUp);
     setBestMoves(update.bestMoves);
     setResets(update.resets);
-    writeProgress({ version: 2, seed, ...update });
+    writeProgress({ seed, ...update });
   };
 
   const handleMove = async (operator: Operator, direction: Direction) => {
@@ -100,7 +100,7 @@ export function useGame() {
     animatingRef.current = false;
 
     if (solved) {
-      const winStats = recordWin(currentStats, seed);
+      const winStats = recordWin(currentStats, seed, nextMoves - par);
       writeStats(winStats);
       setCurrentStats(winStats);
       window.goatcounter?.count({

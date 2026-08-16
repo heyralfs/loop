@@ -3,13 +3,19 @@ import { readJSON, writeJSON } from "./storage";
 
 const KEY = "loop:stats";
 
-const VERSION = 1; // bump this when the Stats interface changes
+const VERSION = 2;
+
+// Solves are bucketed by how far over par they landed. Four slots:
+// [optimal, +1, +2, +3 or more].
+const BUCKETS = 4;
 
 export interface Stats {
   version: typeof VERSION;
   currentStreak: number;
   bestStreak: number;
   lastWinSeed: string | null; // the day of the last win — drives continuity
+  lastWinBucket: number | null; // today's best bucket — lets a retry improve it
+  distribution: number[]; // length BUCKETS; index = moves over par (capped at 3)
 }
 
 const DEFAULT_STATS: Stats = {
@@ -17,7 +23,14 @@ const DEFAULT_STATS: Stats = {
   currentStreak: 0,
   bestStreak: 0,
   lastWinSeed: null,
+  lastWinBucket: null,
+  distribution: [0, 0, 0, 0],
 };
+
+// Which distribution slot a solve falls into: 0 = optimal … 3 = three-or-more over.
+export function overParBucket(over: number): number {
+  return Math.min(Math.max(over, 0), BUCKETS - 1);
+}
 
 export function isValidStats(obj: unknown): obj is Stats {
   if (typeof obj !== "object" || obj === null) {
@@ -30,7 +43,11 @@ export function isValidStats(obj: unknown): obj is Stats {
     stats.version === VERSION &&
     typeof stats.currentStreak === "number" &&
     typeof stats.bestStreak === "number" &&
-    (stats.lastWinSeed === null || typeof stats.lastWinSeed === "string")
+    (stats.lastWinSeed === null || typeof stats.lastWinSeed === "string") &&
+    (stats.lastWinBucket === null || typeof stats.lastWinBucket === "number") &&
+    Array.isArray(stats.distribution) &&
+    stats.distribution.length === BUCKETS &&
+    stats.distribution.every((count) => typeof count === "number")
   );
 }
 
@@ -46,10 +63,22 @@ export function writeStats(stats: Stats): void {
   writeJSON(KEY, stats);
 }
 
-export function recordWin(stats: Stats, winSeed: string): Stats {
+// `over` is how many moves above par this solve was (0 = optimal).
+export function recordWin(stats: Stats, winSeed: string, over: number): Stats {
+  const bucket = overParBucket(over);
+
   if (stats.lastWinSeed === winSeed) {
-    // already counted today (retries don't re-count)
-    return stats;
+    // Already counted today. A retry only matters if it beat the day's best —
+    // then move the tally from the old bucket to the better one.
+    if (stats.lastWinBucket === null || bucket >= stats.lastWinBucket) {
+      return stats;
+    }
+
+    const distribution = [...stats.distribution];
+    distribution[stats.lastWinBucket] -= 1;
+    distribution[bucket] += 1;
+
+    return { ...stats, distribution, lastWinBucket: bucket };
   }
 
   const continues =
@@ -57,11 +86,16 @@ export function recordWin(stats: Stats, winSeed: string): Stats {
 
   const currentStreak = continues ? stats.currentStreak + 1 : 1;
 
+  const distribution = [...stats.distribution];
+  distribution[bucket] += 1;
+
   return {
     ...stats,
     currentStreak,
     bestStreak: Math.max(stats.bestStreak, currentStreak),
     lastWinSeed: winSeed,
+    lastWinBucket: bucket,
+    distribution,
   };
 }
 

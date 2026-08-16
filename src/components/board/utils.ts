@@ -10,12 +10,16 @@ type Line = readonly [number, number, number, number];
 const row = (r: number): Line => [r * 4, r * 4 + 1, r * 4 + 2, r * 4 + 3];
 const col = (c: number): Line => [c, c + 4, c + 8, c + 12];
 
-// The two lines each operator shifts.
+// The line each operator shifts.
 const LINES: Record<Operator, Line[]> = {
-  R12: [row(0), row(1)],
-  R34: [row(2), row(3)],
-  C12: [col(0), col(1)],
-  C34: [col(2), col(3)],
+  R1: [row(0)],
+  R2: [row(1)],
+  R3: [row(2)],
+  R4: [row(3)],
+  C1: [col(0)],
+  C2: [col(1)],
+  C3: [col(2)],
+  C4: [col(3)],
 };
 
 // Per shifted line, the cell whose value leaves (exit) and the cell it reappears

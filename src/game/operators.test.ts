@@ -12,21 +12,37 @@ const IDENTITY = Array.from(
 ) as unknown as Matrix;
 
 const IDENTITY_SHIFTED: Record<Operator, Record<Direction, number[]>> = {
-  R12: {
-    back: [1, 2, 3, 0, 5, 6, 7, 4, 8, 9, 10, 11, 12, 13, 14, 15],
-    forward: [3, 0, 1, 2, 7, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15],
+  R1: {
+    forward: [3, 0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+    back: [1, 2, 3, 0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
   },
-  R34: {
-    back: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 8, 13, 14, 15, 12],
-    forward: [0, 1, 2, 3, 4, 5, 6, 7, 11, 8, 9, 10, 15, 12, 13, 14],
+  R2: {
+    forward: [0, 1, 2, 3, 7, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15],
+    back: [0, 1, 2, 3, 5, 6, 7, 4, 8, 9, 10, 11, 12, 13, 14, 15],
   },
-  C12: {
-    back: [4, 5, 2, 3, 8, 9, 6, 7, 12, 13, 10, 11, 0, 1, 14, 15],
-    forward: [12, 13, 2, 3, 0, 1, 6, 7, 4, 5, 10, 11, 8, 9, 14, 15],
+  R3: {
+    forward: [0, 1, 2, 3, 4, 5, 6, 7, 11, 8, 9, 10, 12, 13, 14, 15],
+    back: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 8, 12, 13, 14, 15],
   },
-  C34: {
-    back: [0, 1, 6, 7, 4, 5, 10, 11, 8, 9, 14, 15, 12, 13, 2, 3],
-    forward: [0, 1, 14, 15, 4, 5, 2, 3, 8, 9, 6, 7, 12, 13, 10, 11],
+  R4: {
+    forward: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 15, 12, 13, 14],
+    back: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 12],
+  },
+  C1: {
+    forward: [12, 1, 2, 3, 0, 5, 6, 7, 4, 9, 10, 11, 8, 13, 14, 15],
+    back: [4, 1, 2, 3, 8, 5, 6, 7, 12, 9, 10, 11, 0, 13, 14, 15],
+  },
+  C2: {
+    forward: [0, 13, 2, 3, 4, 1, 6, 7, 8, 5, 10, 11, 12, 9, 14, 15],
+    back: [0, 5, 2, 3, 4, 9, 6, 7, 8, 13, 10, 11, 12, 1, 14, 15],
+  },
+  C3: {
+    forward: [0, 1, 14, 3, 4, 5, 2, 7, 8, 9, 6, 11, 12, 13, 10, 15],
+    back: [0, 1, 6, 3, 4, 5, 10, 7, 8, 9, 14, 11, 12, 13, 2, 15],
+  },
+  C4: {
+    forward: [0, 1, 2, 15, 4, 5, 6, 3, 8, 9, 10, 7, 12, 13, 14, 11],
+    back: [0, 1, 2, 7, 4, 5, 6, 11, 8, 9, 10, 15, 12, 13, 14, 3],
   },
 };
 
@@ -87,21 +103,21 @@ describe("move — invariants", () => {
 
   it("does not mutate its input", () => {
     const before = [...START];
-    move(START, "R12", "forward");
+    move(START, "R1", "forward");
     expect(START).toStrictEqual(before);
   });
 
   it("moves in the direction the arrows point", () => {
     // rows: forward = right, back = left (±1 within the row)
-    expect(move(filledAt(0), "R12", "forward").indexOf(1)).toBe(1);
-    expect(move(filledAt(1), "R12", "back").indexOf(1)).toBe(0);
-    expect(move(filledAt(8), "R34", "forward").indexOf(1)).toBe(9);
-    expect(move(filledAt(9), "R34", "back").indexOf(1)).toBe(8);
+    expect(move(filledAt(0), "R1", "forward").indexOf(1)).toBe(1);
+    expect(move(filledAt(1), "R1", "back").indexOf(1)).toBe(0);
+    expect(move(filledAt(8), "R3", "forward").indexOf(1)).toBe(9);
+    expect(move(filledAt(9), "R3", "back").indexOf(1)).toBe(8);
 
     // columns: forward = down, back = up (±4 within the column)
-    expect(move(filledAt(0), "C12", "forward").indexOf(1)).toBe(4);
-    expect(move(filledAt(4), "C12", "back").indexOf(1)).toBe(0);
-    expect(move(filledAt(2), "C34", "forward").indexOf(1)).toBe(6);
-    expect(move(filledAt(6), "C34", "back").indexOf(1)).toBe(2);
+    expect(move(filledAt(0), "C1", "forward").indexOf(1)).toBe(4);
+    expect(move(filledAt(4), "C1", "back").indexOf(1)).toBe(0);
+    expect(move(filledAt(2), "C3", "forward").indexOf(1)).toBe(6);
+    expect(move(filledAt(6), "C3", "back").indexOf(1)).toBe(2);
   });
 });

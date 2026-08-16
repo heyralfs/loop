@@ -6,7 +6,7 @@ import MoveCounter from "../../components/move-counter";
 import BestAndStreak from "../../components/best-and-streak";
 import StatusChip from "../../components/status-chip";
 import Button from "../../components/button";
-import Control from "../../components/control";
+import ControlButton from "../../components/control-button";
 import ResultPanel from "../../components/result-panel";
 import styles from "./index.module.css";
 import Countdown from "../../components/countdown";
@@ -104,13 +104,32 @@ function Sandbox() {
           </div>
         </Item>
 
-        <Item title="Control — idle & pressed">
+        <Item title="Control button">
           <div className={styles.row}>
-            <Control operator="R12" onMove={noop} />
-            <Control
-              operator="C12"
-              onMove={noop}
-              activeMove={{ operator: "C12", direction: "forward" }}
+            <ControlButton
+              orientation="row"
+              direction="back"
+              label="Shift row left"
+              onClick={noop}
+            />
+            <ControlButton
+              orientation="row"
+              direction="forward"
+              label="Shift row right"
+              onClick={noop}
+            />
+            <ControlButton
+              orientation="column"
+              direction="back"
+              label="Shift column up"
+              onClick={noop}
+            />
+            <ControlButton
+              orientation="column"
+              direction="forward"
+              label="Shift column down"
+              onClick={noop}
+              pressed
             />
           </div>
         </Item>

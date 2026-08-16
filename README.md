@@ -2,7 +2,7 @@
 
 ![Loop — a daily 4×4 tile puzzle](public/og-image.png)
 
-A daily 4×4 puzzle. Shift pairs of rows and columns to turn the scrambled board
+A daily 4×4 puzzle. Shift individual rows and columns to turn the scrambled board
 into the target — in as few moves as possible. One new puzzle for everyone, every
 day. No accounts, no backend.
 
@@ -10,8 +10,8 @@ day. No accounts, no backend.
 
 ## How to play
 
-- Each control shifts two rows or two columns at once, cyclically (a tile pushed
-  off one edge wraps back in on the other).
+- Each control shifts a single row or column, cyclically (a tile pushed off one
+  edge wraps back in on the other).
 - Match your board to the **target** shown at the top.
 - **Par** is the optimal solution — the fewest moves the puzzle can be solved in.
   Match it for an "Optimal" finish, or give up to watch the solution play out.

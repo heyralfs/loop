@@ -1,28 +1,53 @@
 import type { Direction, Matrix, Operator } from "./types";
 
 // The full move vocabulary — every operator and every direction.
-export const OPERATORS: Operator[] = ["R12", "R34", "C12", "C34"];
+export const OPERATORS: Operator[] = [
+  "R1",
+  "R2",
+  "R3",
+  "R4",
+  "C1",
+  "C2",
+  "C3",
+  "C4",
+];
 export const DIRECTIONS: Direction[] = ["forward", "back"];
 
 // Each operator's FORWARD shift as a [destinations, sources] pair: for every i,
 // the cell at destinations[i] takes the value currently at sources[i]. "back" is
 // the inverse — the very same pair applied with the two arrays swapped.
 export const SHIFTS: Record<Operator, [number[], number[]]> = {
-  R12: [
-    [0, 1, 2, 3, 4, 5, 6, 7],
-    [3, 0, 1, 2, 7, 4, 5, 6],
+  R1: [
+    [0, 1, 2, 3],
+    [3, 0, 1, 2],
   ],
-  R34: [
-    [8, 9, 10, 11, 12, 13, 14, 15],
-    [11, 8, 9, 10, 15, 12, 13, 14],
+  R2: [
+    [4, 5, 6, 7],
+    [7, 4, 5, 6],
   ],
-  C12: [
-    [0, 1, 4, 5, 8, 9, 12, 13],
-    [12, 13, 0, 1, 4, 5, 8, 9],
+  R3: [
+    [8, 9, 10, 11],
+    [11, 8, 9, 10],
   ],
-  C34: [
-    [2, 3, 6, 7, 10, 11, 14, 15],
-    [14, 15, 2, 3, 6, 7, 10, 11],
+  R4: [
+    [12, 13, 14, 15],
+    [15, 12, 13, 14],
+  ],
+  C1: [
+    [0, 4, 8, 12],
+    [12, 0, 4, 8],
+  ],
+  C2: [
+    [1, 5, 9, 13],
+    [13, 1, 5, 9],
+  ],
+  C3: [
+    [2, 6, 10, 14],
+    [14, 2, 6, 10],
+  ],
+  C4: [
+    [3, 7, 11, 15],
+    [15, 3, 7, 11],
   ],
 };
 
