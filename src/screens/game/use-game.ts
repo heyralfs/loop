@@ -22,7 +22,7 @@ const saved = progress?.seed === seed ? progress : null;
 const stats = readStats();
 const active = hasActiveStreak(stats, seed);
 
-const MAXIMUM_RESETS = import.meta.env.DEV ? Infinity : 5;
+const MAXIMUM_RESETS = import.meta.env.DEV ? Infinity : 4;
 
 // Activation: fire the "first-move" event at most once per page load,
 // so a Reset (which sends moves back to 0) doesn't re-count it.
