@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./index.module.css";
 import { msUntilTomorrow } from "../../game/ms-until-tomorrow";
+import { translations as t } from "../../i18n";
 
 interface Props {
   onCountdownEnd: () => void;
@@ -33,7 +34,7 @@ function Countdown({ onCountdownEnd }: Props) {
   return (
     <div className={styles.countdown}>
       <span>
-        Next puzzle in{" "}
+        {t.nextPuzzleIn}{" "}
         <strong>{new Date(ms).toISOString().slice(11, 19)}</strong>
       </span>
     </div>

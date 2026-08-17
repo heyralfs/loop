@@ -1,4 +1,5 @@
 import styles from "./index.module.css";
+import { translations as t } from "../../i18n";
 
 interface Props {
   best?: number | null;
@@ -13,15 +14,9 @@ function BestAndStreak({ best, streak }: Props) {
   return (
     <span className={styles.streak}>
       {typeof best === "number" && best > 0 && (
-        <span>
-          Best today <strong>{best}</strong>
-        </span>
+        <span>{t.bestToday(best)}</span>
       )}
-      {streak > 0 && (
-        <span>
-          🔥 <strong>{streak}</strong>-day streak
-        </span>
-      )}
+      {streak > 0 && <span>{t.dayStreak(streak)}</span>}
     </span>
   );
 }

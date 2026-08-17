@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { getTheme, persistTheme } from "../../theme";
 import IconButton from "../icon-button";
+import { translations as t } from "../../i18n";
 
 function ThemeToggle() {
   const [theme, setTheme] = useState(() => getTheme());
@@ -14,7 +15,7 @@ function ThemeToggle() {
 
   return (
     <IconButton
-      label={dark ? "Switch to light theme" : "Switch to dark theme"}
+      label={dark ? t.switchToLightTheme : t.switchToDarkTheme}
       pressed={dark}
       onClick={toggle}
     >

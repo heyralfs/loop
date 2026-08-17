@@ -1,4 +1,5 @@
 import styles from "./index.module.css";
+import { translations as t } from "../../i18n";
 
 export type Status = "PLAYING" | "SOLVED" | "OPTIMAL" | "GAVE_UP";
 
@@ -9,7 +10,7 @@ interface Props {
 function StatusChip({ status }: Props) {
   return (
     <span className={styles.chip} data-status={status}>
-      {status.replace("_", " ")}
+      {t.status[status]}
     </span>
   );
 }

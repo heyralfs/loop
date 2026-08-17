@@ -11,16 +11,12 @@ import MoveCounter from "../move-counter";
 import Button from "../button";
 import BestAndStreak from "../best-and-streak";
 import ControlButton from "../control-button";
+import { translations as t } from "../../i18n";
 
 type ActiveMove = { operator: Operator; direction: Direction } | null;
 
 const ROW_OPERATORS: Operator[] = ["R1", "R2", "R3", "R4"];
 const COL_OPERATORS: Operator[] = ["C1", "C2", "C3", "C4"];
-
-const DIRECTION_WORD: Record<Orientation, Record<Direction, string>> = {
-  row: { back: "left", forward: "right" },
-  column: { back: "up", forward: "down" },
-};
 
 interface Props {
   boardRef: RefObject<BoardHandle | null>;
@@ -52,8 +48,6 @@ function ControlStrip({
   activeMove: ActiveMove;
   onMove: (operator: Operator, direction: Direction) => void;
 }) {
-  const word = DIRECTION_WORD[orientation][direction];
-
   return (
     <div className={className}>
       {operators.map((operator) => (
@@ -61,7 +55,11 @@ function ControlStrip({
           key={operator}
           orientation={orientation}
           direction={direction}
-          label={`Shift ${orientation} ${operator.slice(1)} ${word}`}
+          label={t.controlLabel(
+            orientation,
+            Number(operator.slice(1)),
+            direction,
+          )}
           onClick={() => onMove(operator, direction)}
           pressed={
             activeMove?.operator === operator &&
@@ -113,7 +111,7 @@ function PlayArea({
           activeMove={activeMove}
           onMove={handleMove}
         />
-        <Board ref={boardRef} matrix={matrix} label="Your board" />
+        <Board ref={boardRef} matrix={matrix} label={t.yourBoard} />
         <ControlStrip
           className={styles.rowControls}
           operators={ROW_OPERATORS}
@@ -141,7 +139,7 @@ function PlayArea({
           variant="OUTLINED"
           disabled={remainingResets <= 0}
         >
-          Reset ({remainingResets})
+          {t.reset(remainingResets)}
         </Button>
         <Button
           className={styles.actionButton}
@@ -149,7 +147,7 @@ function PlayArea({
           disabled={bestMoves !== null}
           variant="OUTLINED"
         >
-          I give up
+          {t.giveUp}
         </Button>
       </div>
     </>

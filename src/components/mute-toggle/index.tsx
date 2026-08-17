@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { isMuted, persistMuted, play } from "../../audio/sounds";
 import IconButton from "../icon-button";
+import { translations as t } from "../../i18n";
 
 function MuteToggle() {
   const [muted, setMuted] = useState(() => isMuted());
@@ -14,7 +15,7 @@ function MuteToggle() {
 
   return (
     <IconButton
-      label={muted ? "Unmute sound" : "Mute sound"}
+      label={muted ? t.unmuteSound : t.muteSound}
       pressed={muted}
       onClick={toggle}
     >

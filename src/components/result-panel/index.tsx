@@ -3,6 +3,7 @@ import Board from "../board";
 import Button from "../button";
 import BestAndStreak from "../best-and-streak";
 import styles from "./index.module.css";
+import { translations as t } from "../../i18n";
 
 interface Props {
   matrix: Matrix;
@@ -52,13 +53,13 @@ function GaveUpResultPanel({ matrix }: Pick<Props, "matrix">) {
   return (
     <div className={styles.wrapper}>
       <div>
-        <Board matrix={matrix} label="Your final board" />
+        <Board matrix={matrix} label={t.yourFinalBoard} />
       </div>
       <div className={styles.panel} role="status">
         <p className={[styles.headline, styles.gaveUp].join(" ")}>
-          You gave up on today's puzzle.
+          {t.gaveUpHeadline}
         </p>
-        <p className={styles.subhead}>Come back tomorrow for a new one. </p>
+        <p className={styles.subhead}>{t.gaveUpSubhead}</p>
       </div>
     </div>
   );
@@ -72,15 +73,13 @@ function OptimalResultPanel({
   return (
     <div className={styles.wrapper}>
       <div className={styles.optimalBoard}>
-        <Board matrix={matrix} label="Your final board" />
+        <Board matrix={matrix} label={t.yourFinalBoard} />
       </div>
       <div className={styles.panel} role="status">
         <p className={[styles.headline, styles.optimal].join(" ")}>
-          Optimal! 🏆
+          {t.optimalHeadline}
         </p>
-        <p className={styles.subhead}>
-          You matched par ({par}) — the fewest moves possible.
-        </p>
+        <p className={styles.subhead}>{t.optimalSubhead(par)}</p>
         <BestAndStreak streak={streak} />
       </div>
     </div>
@@ -99,18 +98,20 @@ function SolvedResultPanel({
   return (
     <div className={styles.wrapper}>
       <div>
-        <Board matrix={matrix} label="Your final board" />
+        <Board matrix={matrix} label={t.yourFinalBoard} />
       </div>
       <div className={styles.panel} role="status">
-        <p className={styles.headline}>{`Solved in ${moves}`}</p>
-        <p className={styles.subhead}>{`Par is ${par}. Can you match it?`}</p>
+        <p className={styles.headline}>{t.solvedHeadline(moves)}</p>
+        <p className={styles.subhead}>{t.solvedSubhead(par)}</p>
         <BestAndStreak best={bestMoves} streak={streak} />
         <Button
           className={styles.button}
           onClick={onTryAgain}
           disabled={remainingResets <= 0}
         >
-          {remainingResets > 0 ? `Try again (${remainingResets})` : "No resets left"}
+          {remainingResets > 0
+            ? t.tryAgain(remainingResets)
+            : t.noResetsLeft}
         </Button>
       </div>
     </div>
