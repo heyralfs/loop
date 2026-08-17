@@ -47,4 +47,8 @@ export const pt: typeof en = {
   unmuteSound: "Ativar som",
   switchToLightTheme: "Mudar para o tema claro",
   switchToDarkTheme: "Mudar para o tema escuro",
+
+  menu: "Menu",
+  sound: "Som",
+  theme: "Tema",
 };

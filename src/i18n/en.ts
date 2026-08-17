@@ -56,4 +56,9 @@ export const en = {
   unmuteSound: "Unmute sound",
   switchToLightTheme: "Switch to light theme",
   switchToDarkTheme: "Switch to dark theme",
+
+  // menu
+  menu: "Menu",
+  sound: "Sound",
+  theme: "Theme",
 };
