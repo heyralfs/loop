@@ -51,4 +51,5 @@ export const pt: typeof en = {
   menu: "Menu",
   sound: "Som",
   theme: "Tema",
+  language: "Idioma",
 };

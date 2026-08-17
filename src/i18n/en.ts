@@ -61,4 +61,5 @@ export const en = {
   menu: "Menu",
   sound: "Sound",
   theme: "Theme",
+  language: "Language",
 };

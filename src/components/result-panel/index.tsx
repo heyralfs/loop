@@ -3,7 +3,7 @@ import Board from "../board";
 import Button from "../button";
 import BestAndStreak from "../best-and-streak";
 import styles from "./index.module.css";
-import { translations as t } from "../../i18n";
+import { useTranslations } from "../../i18n";
 
 interface Props {
   matrix: Matrix;
@@ -50,6 +50,8 @@ function ResultPanel({
 }
 
 function GaveUpResultPanel({ matrix }: Pick<Props, "matrix">) {
+  const t = useTranslations();
+
   return (
     <div className={styles.wrapper}>
       <div>
@@ -70,6 +72,8 @@ function OptimalResultPanel({
   par,
   streak,
 }: Pick<Props, "matrix" | "par" | "streak">) {
+  const t = useTranslations();
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.optimalBoard}>
@@ -95,6 +99,8 @@ function SolvedResultPanel({
   onTryAgain,
   remainingResets,
 }: Omit<Props, "gaveUp">) {
+  const t = useTranslations();
+
   return (
     <div className={styles.wrapper}>
       <div>

@@ -11,7 +11,7 @@ import MoveCounter from "../move-counter";
 import Button from "../button";
 import BestAndStreak from "../best-and-streak";
 import ControlButton from "../control-button";
-import { translations as t } from "../../i18n";
+import { useTranslations } from "../../i18n";
 
 type ActiveMove = { operator: Operator; direction: Direction } | null;
 
@@ -48,6 +48,8 @@ function ControlStrip({
   activeMove: ActiveMove;
   onMove: (operator: Operator, direction: Direction) => void;
 }) {
+  const t = useTranslations();
+
   return (
     <div className={className}>
       {operators.map((operator) => (
@@ -84,6 +86,8 @@ function PlayArea({
   handleReset,
   handleGiveUp,
 }: Props) {
+  const t = useTranslations();
+
   return (
     <>
       <MoveCounter moves={moves} par={par} />

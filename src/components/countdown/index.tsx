@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./index.module.css";
 import { msUntilTomorrow } from "../../game/ms-until-tomorrow";
-import { translations as t } from "../../i18n";
+import { useTranslations } from "../../i18n";
 
 interface Props {
   onCountdownEnd: () => void;
 }
 
 function Countdown({ onCountdownEnd }: Props) {
+  const t = useTranslations();
   const [target] = useState(() => Date.now() + msUntilTomorrow());
   const [ms, setMs] = useState(() => target - Date.now());
 

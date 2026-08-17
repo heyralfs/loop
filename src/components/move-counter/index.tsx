@@ -1,5 +1,5 @@
 import styles from "./index.module.css";
-import { translations as t } from "../../i18n";
+import { useTranslations } from "../../i18n";
 
 interface Props {
   moves: number;
@@ -7,6 +7,8 @@ interface Props {
 }
 
 function MoveCounter({ moves, par }: Props) {
+  const t = useTranslations();
+
   return (
     <div className={styles.wrapper}>
       <div aria-live="polite" aria-atomic="true">

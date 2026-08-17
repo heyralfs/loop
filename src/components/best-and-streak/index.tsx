@@ -1,5 +1,5 @@
 import styles from "./index.module.css";
-import { translations as t } from "../../i18n";
+import { useTranslations } from "../../i18n";
 
 interface Props {
   best?: number | null;
@@ -7,6 +7,8 @@ interface Props {
 }
 
 function BestAndStreak({ best, streak }: Props) {
+  const t = useTranslations();
+
   if (streak <= 0 && !best) {
     return null;
   }

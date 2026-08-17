@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { getTheme, persistTheme } from "../../theme";
 import IconButton from "../icon-button";
-import { translations as t } from "../../i18n";
+import { useTranslations } from "../../i18n";
 
 function ThemeToggle() {
+  const t = useTranslations();
   const [theme, setTheme] = useState(() => getTheme());
   const dark = theme === "dark";
 

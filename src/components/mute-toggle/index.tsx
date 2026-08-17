@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { isMuted, persistMuted, play } from "../../audio/sounds";
 import IconButton from "../icon-button";
-import { translations as t } from "../../i18n";
+import { useTranslations } from "../../i18n";
 
 function MuteToggle() {
+  const t = useTranslations();
   const [muted, setMuted] = useState(() => isMuted());
 
   const toggle = () => {

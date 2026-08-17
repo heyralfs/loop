@@ -2,10 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import IconButton from "../icon-button";
 import MuteToggle from "../mute-toggle";
 import ThemeToggle from "../theme-toggle";
-import { translations as t } from "../../i18n";
+import LanguageSwitcher from "../language-switcher";
+import { useTranslations } from "../../i18n";
 import styles from "./index.module.css";
 
 function Menu() {
+  const t = useTranslations();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -52,7 +54,10 @@ function Menu() {
             <span>{t.theme}</span>
             <ThemeToggle />
           </div>
-          {/* language switcher goes here next */}
+          <div className={styles.row}>
+            <span>{t.language}</span>
+            <LanguageSwitcher />
+          </div>
         </div>
       )}
     </div>
