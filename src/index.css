@@ -40,6 +40,8 @@
   --board-size: 4;
   --board-bg: color-mix(in srgb, var(--accent) 8%, transparent);
 
+  --layout-max-width: 360px;
+
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
   color: var(--ink);

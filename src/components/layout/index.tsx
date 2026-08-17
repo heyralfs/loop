@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import styles from "./index.module.css";
 import StatusChip, { type Status } from "../status-chip";
 import Menu from "../menu";
+import InstallBanner from "../install-banner";
 
 interface Props {
   children: ReactNode;
@@ -11,19 +12,22 @@ interface Props {
 
 function Layout({ children, puzzleNumber, status }: Props) {
   return (
-    <div className={styles.wrapper}>
-      <header className={styles.header}>
-        <h1>
-          Loop #{puzzleNumber} <span className={styles.beta}>beta</span>
-        </h1>
+    <>
+      <InstallBanner />
+      <div className={styles.wrapper}>
+        <header className={styles.header}>
+          <h1>
+            Loop #{puzzleNumber} <span className={styles.beta}>beta</span>
+          </h1>
 
-        <div className={styles.actions}>
-          <StatusChip status={status} />
-          <Menu />
-        </div>
-      </header>
-      <main>{children}</main>
-    </div>
+          <div className={styles.actions}>
+            <StatusChip status={status} />
+            <Menu />
+          </div>
+        </header>
+        <main>{children}</main>
+      </div>
+    </>
   );
 }
 

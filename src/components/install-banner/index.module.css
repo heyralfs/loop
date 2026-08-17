@@ -1,0 +1,64 @@
+.bar {
+  width: 100%;
+  margin-bottom: var(--space-sm);
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line));
+}
+
+.banner {
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--layout-max-width);
+  padding: var(--space-sm) var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.text {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--ink);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  font-size: 0.7rem;
+  line-height: 1.2;
+}
+
+.install {
+  font-family: var(--font-display);
+  padding: var(--space-sm) var(--space-md);
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: var(--on-accent);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.install:hover {
+  background: var(--accent-ink);
+}
+
+.dismiss {
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.dismiss:hover {
+  color: var(--ink);
+}
+
+.install:focus-visible,
+.dismiss:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}

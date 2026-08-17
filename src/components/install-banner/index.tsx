@@ -1,0 +1,76 @@
+import { useState } from "react";
+import {
+  useCanInstall,
+  promptInstall,
+  snoozeInstall,
+  wasRecentlyDismissed,
+} from "../../pwa/install";
+import { useTranslations } from "../../i18n";
+import styles from "./index.module.css";
+
+function InstallBanner() {
+  const canInstall = useCanInstall();
+  const t = useTranslations();
+  const [hidden, setHidden] = useState(() => wasRecentlyDismissed());
+
+  if (!canInstall || hidden) {
+    return null;
+  }
+
+  const install = async () => {
+    const outcome = await promptInstall();
+
+    if (outcome === "accepted") {
+      window.goatcounter?.count({
+        path: "pwa-install-accepted",
+        title: "PWA installed",
+        event: true,
+      });
+    } else if (outcome === "dismissed") {
+      window.goatcounter?.count({
+        path: "pwa-install-declined",
+        title: "PWA install declined",
+        event: true,
+      });
+    }
+
+    if (outcome !== "unavailable") {
+      snoozeInstall();
+      setHidden(true);
+    }
+  };
+
+  const dismiss = () => {
+    snoozeInstall();
+    setHidden(true);
+  };
+
+  return (
+    <div
+      className={styles.bar}
+      role="region"
+      aria-labelledby="install-banner-heading"
+    >
+      <div className={styles.banner}>
+        <span id="install-banner-heading" className={styles.text}>
+          {t.installPrompt}
+        </span>
+        <div className={styles.actions}>
+          <button type="button" className={styles.install} onClick={install}>
+            {t.install}
+          </button>
+          <button
+            type="button"
+            className={styles.dismiss}
+            onClick={dismiss}
+            aria-label={t.dismiss}
+          >
+            ✕
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default InstallBanner;

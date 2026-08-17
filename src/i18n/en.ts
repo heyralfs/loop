@@ -62,4 +62,9 @@ export const en = {
   sound: "Sound",
   theme: "Theme",
   language: "Language",
+
+  // install banner
+  installPrompt: "Download and play offline",
+  install: "Install",
+  dismiss: "Dismiss",
 };

@@ -52,4 +52,8 @@ export const pt: typeof en = {
   sound: "Som",
   theme: "Tema",
   language: "Idioma",
+
+  installPrompt: "Baixe e jogue offline",
+  install: "Instalar",
+  dismiss: "Dispensar",
 };
