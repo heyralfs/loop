@@ -132,11 +132,20 @@ export function useGame() {
     animatingRef.current = false;
 
     commit({ matrix: target, moves, gaveUp: true, bestMoves, resets });
-    window.goatcounter?.count({
-      path: "gave-up",
-      title: "Gave up",
-      event: true,
-    });
+
+    if (bestMoves === null) {
+      window.goatcounter?.count({
+        path: "gave-up",
+        title: "Gave up",
+        event: true,
+      });
+    } else {
+      window.goatcounter?.count({
+        path: "gave-up-after-solve",
+        title: "Gave up after solving",
+        event: true,
+      });
+    }
   };
 
   const handleReset = async () => {

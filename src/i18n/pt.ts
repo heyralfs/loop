@@ -34,6 +34,7 @@ export const pt: typeof en = {
 
   reset: (remaining) => `Reiniciar (${remaining})`,
   giveUp: "Desisto",
+  doneForToday: "Encerrar por hoje",
   controlLabel: (orientation, line, direction) => {
     const noun = orientation === "row" ? "linha" : "coluna";
     const way = {

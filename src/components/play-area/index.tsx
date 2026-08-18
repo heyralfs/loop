@@ -148,10 +148,9 @@ function PlayArea({
         <Button
           className={styles.actionButton}
           onClick={handleGiveUp}
-          disabled={bestMoves !== null}
           variant="OUTLINED"
         >
-          {t.giveUp}
+          {bestMoves !== null ? t.doneForToday : t.giveUp}
         </Button>
       </div>
     </>

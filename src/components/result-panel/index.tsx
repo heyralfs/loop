@@ -30,7 +30,7 @@ function ResultPanel({
   remainingResets,
   gaveUp,
 }: Props) {
-  if (gaveUp) {
+  if (gaveUp && bestMoves === null) {
     return <GaveUpResultPanel matrix={matrix} distribution={distribution} />;
   }
 
@@ -57,6 +57,7 @@ function ResultPanel({
       distribution={distribution}
       onTryAgain={onTryAgain}
       remainingResets={remainingResets}
+      gaveUp={gaveUp}
     />
   );
 }
@@ -117,8 +118,14 @@ function SolvedResultPanel({
   distribution,
   onTryAgain,
   remainingResets,
-}: Omit<Props, "gaveUp">) {
+  gaveUp,
+}: Props) {
   const t = useTranslations();
+
+  // if player gave up, then "moves" doesn't reflect the actual number
+  // of moves to solve the puzzle, so we use bestMoves instead (if available)
+  // to show the player how well they did.
+  const winMoves = gaveUp ? (bestMoves ?? moves) : moves;
 
   return (
     <div className={styles.wrapper}>
@@ -126,20 +133,22 @@ function SolvedResultPanel({
         <TargetBoard matrix={matrix} />
       </div>
       <div className={styles.panel} role="status">
-        <p className={styles.headline}>{t.solvedHeadline(moves)}</p>
-        <p className={styles.subhead}>{t.solvedSubhead(par)}</p>
+        <p className={styles.headline}>{t.solvedHeadline(winMoves)}</p>
+        {!gaveUp && <p className={styles.subhead}>{t.solvedSubhead(par)}</p>}
         <BestAndStreak best={bestMoves} streak={streak} />
         <Stats
           distribution={distribution}
-          highlight={overParBucket(moves - par)}
+          highlight={overParBucket(winMoves - par)}
         />
-        <Button
-          className={styles.button}
-          onClick={onTryAgain}
-          disabled={remainingResets <= 0}
-        >
-          {remainingResets > 0 ? t.tryAgain(remainingResets) : t.noResetsLeft}
-        </Button>
+        {!gaveUp && (
+          <Button
+            className={styles.button}
+            onClick={onTryAgain}
+            disabled={remainingResets <= 0}
+          >
+            {remainingResets > 0 ? t.tryAgain(remainingResets) : t.noResetsLeft}
+          </Button>
+        )}
       </div>
     </div>
   );

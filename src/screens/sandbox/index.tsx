@@ -178,6 +178,19 @@ function Sandbox() {
                 gaveUp
               />
             </div>
+            <div>
+              <ResultPanel
+                matrix={SOLVED}
+                moves={20}
+                par={6}
+                bestMoves={8}
+                streak={3}
+                onTryAgain={noop}
+                remainingResets={0}
+                distribution={[8, 5, 3, 1]}
+                gaveUp
+              />
+            </div>
           </div>
         </Item>
 

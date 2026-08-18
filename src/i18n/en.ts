@@ -42,7 +42,12 @@ export const en = {
   // play area
   reset: (remaining: number) => `Reset (${remaining})`,
   giveUp: "I give up",
-  controlLabel: (orientation: Orientation, line: number, direction: Direction) => {
+  doneForToday: "Done for today",
+  controlLabel: (
+    orientation: Orientation,
+    line: number,
+    direction: Direction,
+  ) => {
     const noun = orientation === "row" ? "row" : "column";
     const way = {
       row: { back: "left", forward: "right" },
