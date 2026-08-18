@@ -56,4 +56,6 @@ export const pt: typeof en = {
   installPrompt: "Baixe e jogue offline",
   install: "Instalar",
   dismiss: "Dispensar",
+
+  winDistribution: "Distribuição de vitórias",
 };

@@ -8,6 +8,7 @@ import StatusChip from "../../components/status-chip";
 import Button from "../../components/button";
 import ControlButton from "../../components/control-button";
 import ResultPanel from "../../components/result-panel";
+import Stats from "../../components/stats";
 import styles from "./index.module.css";
 import Countdown from "../../components/countdown";
 import IconButton from "../../components/icon-button";
@@ -134,6 +135,10 @@ function Sandbox() {
           </div>
         </Item>
 
+        <Item title="Stats · distribution">
+          <Stats distribution={[8, 5, 3, 1]} highlight={1} />
+        </Item>
+
         <Item title="Result panel">
           <div className={styles.column}>
             <div>
@@ -145,6 +150,7 @@ function Sandbox() {
                 streak={4}
                 onTryAgain={noop}
                 remainingResets={5}
+                distribution={[8, 5, 3, 1]}
               />
             </div>
             <div>
@@ -156,6 +162,7 @@ function Sandbox() {
                 streak={2}
                 onTryAgain={noop}
                 remainingResets={3}
+                distribution={[8, 5, 3, 1]}
               />
             </div>
             <div>
@@ -167,6 +174,7 @@ function Sandbox() {
                 streak={0}
                 onTryAgain={noop}
                 remainingResets={5}
+                distribution={[8, 5, 3, 1]}
                 gaveUp
               />
             </div>

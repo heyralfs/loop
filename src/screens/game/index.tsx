@@ -29,22 +29,23 @@ function GameScreen() {
       status={gaveUp ? "GAVE_UP" : solved ? "SOLVED" : "PLAYING"}
     >
       <div className={styles.wrapper}>
-        <TargetBoard matrix={target} />
-
         {!gaveUp && !solved && (
-          <PlayArea
-            activeMove={activeMove}
-            boardRef={boardRef}
-            matrix={matrix}
-            moves={moves}
-            remainingResets={remainingResets}
-            par={par}
-            currentStreak={currentStats.currentStreak}
-            bestMoves={bestMoves}
-            handleMove={handleMove}
-            handleReset={handleReset}
-            handleGiveUp={handleGiveUp}
-          />
+          <>
+            <TargetBoard matrix={target} />
+            <PlayArea
+              activeMove={activeMove}
+              boardRef={boardRef}
+              matrix={matrix}
+              moves={moves}
+              remainingResets={remainingResets}
+              par={par}
+              currentStreak={currentStats.currentStreak}
+              bestMoves={bestMoves}
+              handleMove={handleMove}
+              handleReset={handleReset}
+              handleGiveUp={handleGiveUp}
+            />
+          </>
         )}
 
         {(gaveUp || solved) && (
@@ -57,6 +58,7 @@ function GameScreen() {
               remainingResets={remainingResets}
               par={par}
               streak={currentStats.currentStreak}
+              distribution={currentStats.distribution}
               gaveUp={gaveUp}
             />
             <Countdown onCountdownEnd={() => location.reload()} />

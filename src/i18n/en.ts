@@ -67,4 +67,7 @@ export const en = {
   installPrompt: "Download and play offline",
   install: "Install",
   dismiss: "Dismiss",
+
+  // stats
+  winDistribution: "Win distribution",
 };
