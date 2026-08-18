@@ -14,6 +14,7 @@ import {
   type Stats,
 } from "../../game/stats";
 import { play } from "../../audio/sounds";
+import { track } from "../../analytics";
 
 // Read once at load — resume only if the saved progress is for today's puzzle.
 const progress = readProgress();
@@ -80,11 +81,7 @@ export function useGame() {
 
     if (nextMoves === 1 && !firstMoveSent) {
       firstMoveSent = true;
-      window.goatcounter?.count({
-        path: "first-move",
-        title: "Started playing",
-        event: true,
-      });
+      track("first-move", "Started playing");
     }
 
     animatingRef.current = true;
@@ -103,11 +100,7 @@ export function useGame() {
       const winStats = recordWin(currentStats, seed, nextMoves - par);
       writeStats(winStats);
       setCurrentStats(winStats);
-      window.goatcounter?.count({
-        path: nextMoves === par ? "solved-optimal" : "solved",
-        title: "Puzzle solved",
-        event: true,
-      });
+      track(nextMoves === par ? "solved-optimal" : "solved", "Puzzle solved");
     }
   };
 
@@ -134,17 +127,9 @@ export function useGame() {
     commit({ matrix: target, moves, gaveUp: true, bestMoves, resets });
 
     if (bestMoves === null) {
-      window.goatcounter?.count({
-        path: "gave-up",
-        title: "Gave up",
-        event: true,
-      });
+      track("gave-up", "Gave up");
     } else {
-      window.goatcounter?.count({
-        path: "gave-up-after-solve",
-        title: "Gave up after solving",
-        event: true,
-      });
+      track("gave-up-after-solve", "Gave up after solving");
     }
   };
 

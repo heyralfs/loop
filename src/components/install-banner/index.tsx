@@ -6,6 +6,7 @@ import {
   wasRecentlyDismissed,
 } from "../../pwa/install";
 import { useTranslations } from "../../i18n";
+import { track } from "../../analytics";
 import styles from "./index.module.css";
 
 function InstallBanner() {
@@ -21,17 +22,9 @@ function InstallBanner() {
     const outcome = await promptInstall();
 
     if (outcome === "accepted") {
-      window.goatcounter?.count({
-        path: "pwa-install-accepted",
-        title: "PWA installed",
-        event: true,
-      });
+      track("pwa-install-accepted", "PWA installed");
     } else if (outcome === "dismissed") {
-      window.goatcounter?.count({
-        path: "pwa-install-declined",
-        title: "PWA install declined",
-        event: true,
-      });
+      track("pwa-install-declined", "PWA install declined");
     }
 
     if (outcome !== "unavailable") {
