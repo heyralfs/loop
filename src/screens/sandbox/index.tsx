@@ -4,7 +4,6 @@ import Board from "../../components/board";
 import TargetBoard from "../../components/target-board";
 import MoveCounter from "../../components/move-counter";
 import BestAndStreak from "../../components/best-and-streak";
-import StatusChip from "../../components/status-chip";
 import Button from "../../components/button";
 import ControlButton from "../../components/control-button";
 import ResultPanel from "../../components/result-panel";
@@ -79,15 +78,6 @@ function Sandbox() {
             <BestAndStreak best={6} streak={0} />
             <BestAndStreak best={5} streak={3} />
             <BestAndStreak streak={2} />
-          </div>
-        </Item>
-
-        <Item title="Status chips">
-          <div className={styles.row}>
-            <StatusChip status="PLAYING" />
-            <StatusChip status="SOLVED" />
-            <StatusChip status="OPTIMAL" />
-            <StatusChip status="GAVE_UP" />
           </div>
         </Item>
 

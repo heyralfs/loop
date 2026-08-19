@@ -1,5 +1,4 @@
 import type { Direction, Orientation } from "../game/types";
-import type { Status } from "../components/status-chip";
 
 // English is the source of truth: it defines the key set every locale must
 // provide (pt.ts is typed as `typeof en`, so a missing key won't compile).
@@ -17,13 +16,7 @@ export const en = {
   bestToday: (best: number) => `Best today ${best}`,
   dayStreak: (streak: number) => `🔥 ${streak}-day streak`,
 
-  // status chip
-  status: {
-    PLAYING: "Playing",
-    SOLVED: "Solved",
-    OPTIMAL: "Optimal",
-    GAVE_UP: "Gave up",
-  } satisfies Record<Status, string>,
+  optimal: "Optimal",
 
   // countdown
   nextPuzzleIn: "Next puzzle in",

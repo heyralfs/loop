@@ -45,7 +45,7 @@ function HowToPlay({ open, onClose }: Props) {
             <li className={styles.item} key={step.title}>
               <span className={styles.num}>{i + 1}</span>
               <p>
-                <b>{step.title}</b> {renderBody(step.body, t.status.OPTIMAL)}
+                <b>{step.title}</b> {renderBody(step.body, t.optimal)}
               </p>
             </li>
           ))}

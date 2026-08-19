@@ -13,12 +13,7 @@ export const pt: typeof en = {
   dayStreak: (streak) =>
     `🔥 ${streak} ${streak === 1 ? "dia seguido" : "dias seguidos"}`,
 
-  status: {
-    PLAYING: "Jogando",
-    SOLVED: "Resolvido",
-    OPTIMAL: "Perfeito",
-    GAVE_UP: "Desistiu",
-  },
+  optimal: "Perfeito",
 
   nextPuzzleIn: "Próximo desafio em",
 
