@@ -12,6 +12,13 @@ import {
   markGuideAsSeen,
 } from "../../components/how-to-play/seen";
 import HowToPlay from "../../components/how-to-play";
+import type { Status } from "../../components/status-chip";
+
+function getStatus(gaveUp: boolean, solved: boolean, moves: number): Status {
+  if (gaveUp) return "GAVE_UP";
+  if (solved) return moves === par ? "OPTIMAL" : "SOLVED";
+  return "PLAYING";
+}
 
 function GameScreen() {
   const [showGuide, setShowGuide] = useState(() => !hasSeenGuide());
@@ -39,7 +46,7 @@ function GameScreen() {
   return (
     <Layout
       puzzleNumber={puzzleNumber}
-      status={gaveUp ? "GAVE_UP" : solved ? "SOLVED" : "PLAYING"}
+      status={getStatus(gaveUp, solved, moves)}
       openGuide={() => setShowGuide(true)}
     >
       <HowToPlay open={showGuide} onClose={dismissGuide} />
