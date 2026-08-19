@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import type { Matrix } from "../../game/types";
 import Board from "../../components/board";
 import TargetBoard from "../../components/target-board";
@@ -14,6 +14,8 @@ import Countdown from "../../components/countdown";
 import IconButton from "../../components/icon-button";
 import MuteToggle from "../../components/mute-toggle";
 import ThemeToggle from "../../components/theme-toggle";
+import HowToPlay from "../../components/how-to-play";
+import LanguageSwitcher from "../../components/language-switcher";
 
 // prettier-ignore
 const SOLVED: Matrix = [
@@ -31,6 +33,17 @@ const SCRAMBLED: Matrix = [
 ];
 
 const noop = () => {};
+
+// The guide is a modal now, so it can't sit inline — a button pops it open.
+function HowToPlayDemo() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open how to play</Button>
+      <HowToPlay open={open} onClose={() => setOpen(false)} />
+    </>
+  );
+}
 
 function Item({ title, children }: { title: string; children: ReactNode }) {
   return (
@@ -139,6 +152,18 @@ function Sandbox() {
           <Stats distribution={[8, 5, 3, 1]} highlight={1} />
         </Item>
 
+        <Item title="Countdown">
+          <Countdown onCountdownEnd={noop} />
+        </Item>
+
+        <Item title="Language switcher (Live)">
+          <LanguageSwitcher />
+        </Item>
+
+        <Item title="How to play">
+          <HowToPlayDemo />
+        </Item>
+
         <Item title="Result panel">
           <div className={styles.column}>
             <div>
@@ -192,10 +217,6 @@ function Sandbox() {
               />
             </div>
           </div>
-        </Item>
-
-        <Item title="Countdown">
-          <Countdown onCountdownEnd={noop} />
         </Item>
       </div>
     </div>

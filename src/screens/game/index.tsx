@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "./index.module.css";
 import TargetBoard from "../../components/target-board";
 import { puzzleNumber, target, par } from "./puzzle";
@@ -6,8 +7,20 @@ import Layout from "../../components/layout";
 import PlayArea from "../../components/play-area";
 import ResultPanel from "../../components/result-panel";
 import Countdown from "../../components/countdown";
+import {
+  hasSeenGuide,
+  markGuideAsSeen,
+} from "../../components/how-to-play/seen";
+import HowToPlay from "../../components/how-to-play";
 
 function GameScreen() {
+  const [showGuide, setShowGuide] = useState(() => !hasSeenGuide());
+
+  const dismissGuide = () => {
+    markGuideAsSeen();
+    setShowGuide(false);
+  };
+
   const {
     boardRef,
     matrix,
@@ -27,7 +40,10 @@ function GameScreen() {
     <Layout
       puzzleNumber={puzzleNumber}
       status={gaveUp ? "GAVE_UP" : solved ? "SOLVED" : "PLAYING"}
+      openGuide={() => setShowGuide(true)}
     >
+      <HowToPlay open={showGuide} onClose={dismissGuide} />
+
       <div className={styles.wrapper}>
         {!gaveUp && !solved && (
           <>

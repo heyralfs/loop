@@ -59,4 +59,27 @@ export const pt: typeof en = {
   dismiss: "Dispensar",
 
   winDistribution: "Distribuição de vitórias",
+
+  howToPlay: {
+    heading: "Como jogar",
+    cta: "Entendi — jogar",
+    steps: [
+      {
+        title: "Iguale o alvo.",
+        body: "Reorganize seu tabuleiro até que ele corresponda ao alvo de hoje.",
+      },
+      {
+        title: "Desloque linhas e colunas.",
+        body: "As setas deslocam uma única linha (◀ ▶) ou coluna (▲ ▼). A peça que sai por uma borda reaparece no lado oposto.",
+      },
+      {
+        title: "Alcance o par.",
+        body: "O par é o menor número de jogadas possível. Iguale-o para um resultado {optimal}.",
+      },
+      {
+        title: "Mantenha sua sequência.",
+        body: "Resolva um desafio todo dia para manter sua sequência.",
+      },
+    ],
+  },
 };

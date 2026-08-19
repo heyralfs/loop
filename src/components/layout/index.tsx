@@ -8,9 +8,10 @@ interface Props {
   children: ReactNode;
   puzzleNumber: number;
   status: Status;
+  openGuide: () => void;
 }
 
-function Layout({ children, puzzleNumber, status }: Props) {
+function Layout({ children, puzzleNumber, status, openGuide }: Props) {
   return (
     <>
       <InstallBanner />
@@ -22,7 +23,7 @@ function Layout({ children, puzzleNumber, status }: Props) {
 
           <div className={styles.actions}>
             <StatusChip status={status} />
-            <Menu />
+            <Menu openGuide={openGuide} />
           </div>
         </header>
         <main>{children}</main>

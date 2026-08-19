@@ -75,4 +75,28 @@ export const en = {
 
   // stats
   winDistribution: "Win distribution",
+
+  // how to play
+  howToPlay: {
+    heading: "How to play",
+    cta: "Got it — play",
+    steps: [
+      {
+        title: "Match the target.",
+        body: "Rearrange your board until it matches today's target pattern.",
+      },
+      {
+        title: "Shift rows & columns.",
+        body: "The arrows slide a single row (◀ ▶) or column (▲ ▼). Whatever tile falls off one edge reappears on the opposite side.",
+      },
+      {
+        title: "Match par.",
+        body: "Par is the fewest moves possible. Match it for an {optimal} solve.",
+      },
+      {
+        title: "Keep your streak.",
+        body: "Solve a puzzle every day to keep your streak going.",
+      },
+    ],
+  },
 };
