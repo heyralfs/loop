@@ -9,6 +9,7 @@ import { seed, target, initial, par } from "./puzzle";
 import {
   readStats,
   recordWin,
+  recordPlayed,
   writeStats,
   hasActiveStreak,
   type Stats,
@@ -82,6 +83,10 @@ export function useGame() {
     if (nextMoves === 1 && !firstMoveSent) {
       firstMoveSent = true;
       track("first-move", "Started playing");
+      // Count this day as an attempt (once per day, guarded by lastPlayedSeed).
+      const played = recordPlayed(currentStats, seed);
+      writeStats(played);
+      setCurrentStats(played);
     }
 
     animatingRef.current = true;

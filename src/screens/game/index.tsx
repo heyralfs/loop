@@ -71,6 +71,7 @@ function GameScreen() {
               par={par}
               streak={currentStats.currentStreak}
               distribution={currentStats.distribution}
+              played={currentStats.played}
               gaveUp={gaveUp}
               puzzleNumber={puzzleNumber}
             />

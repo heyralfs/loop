@@ -14,6 +14,7 @@ interface Props {
   bestMoves: number | null;
   streak: number;
   distribution: number[];
+  played: number;
   onTryAgain: () => void;
   remainingResets: number;
   gaveUp?: boolean;
@@ -27,13 +28,20 @@ function ResultPanel({
   bestMoves,
   streak,
   distribution,
+  played,
   onTryAgain,
   remainingResets,
   gaveUp,
   puzzleNumber,
 }: Props) {
   if (gaveUp && bestMoves === null) {
-    return <GaveUpResultPanel matrix={matrix} distribution={distribution} />;
+    return (
+      <GaveUpResultPanel
+        matrix={matrix}
+        distribution={distribution}
+        played={played}
+      />
+    );
   }
 
   const atPar = moves === par; // par is the optimum, so moves >= par always.
@@ -45,6 +53,7 @@ function ResultPanel({
         par={par}
         streak={streak}
         distribution={distribution}
+        played={played}
         puzzleNumber={puzzleNumber}
       />
     );
@@ -58,6 +67,7 @@ function ResultPanel({
       bestMoves={bestMoves}
       streak={streak}
       distribution={distribution}
+      played={played}
       onTryAgain={onTryAgain}
       remainingResets={remainingResets}
       gaveUp={gaveUp}
@@ -69,7 +79,8 @@ function ResultPanel({
 function GaveUpResultPanel({
   matrix,
   distribution,
-}: Pick<Props, "matrix" | "distribution">) {
+  played,
+}: Pick<Props, "matrix" | "distribution" | "played">) {
   const t = useTranslations();
 
   return (
@@ -82,7 +93,7 @@ function GaveUpResultPanel({
           {t.gaveUpHeadline}
         </p>
         <p className={styles.subhead}>{t.gaveUpSubhead}</p>
-        <Stats distribution={distribution} />
+        <Stats distribution={distribution} played={played} />
       </div>
     </div>
   );
@@ -93,8 +104,12 @@ function OptimalResultPanel({
   par,
   streak,
   distribution,
+  played,
   puzzleNumber,
-}: Pick<Props, "matrix" | "par" | "streak" | "distribution" | "puzzleNumber">) {
+}: Pick<
+  Props,
+  "matrix" | "par" | "streak" | "distribution" | "played" | "puzzleNumber"
+>) {
   const t = useTranslations();
 
   return (
@@ -108,7 +123,7 @@ function OptimalResultPanel({
         </p>
         <p className={styles.subhead}>{t.optimalSubhead(par)}</p>
         <BestAndStreak streak={streak} />
-        <Stats distribution={distribution} />
+        <Stats distribution={distribution} played={played} />
         <ShareResult
           puzzleNumber={puzzleNumber}
           moves={par}
@@ -127,6 +142,7 @@ function SolvedResultPanel({
   bestMoves,
   streak,
   distribution,
+  played,
   onTryAgain,
   remainingResets,
   gaveUp = false,
@@ -152,7 +168,7 @@ function SolvedResultPanel({
         <p className={styles.headline}>{t.solvedHeadline(winMoves)}</p>
         {!gaveUp && <p className={styles.subhead}>{t.solvedSubhead(par)}</p>}
         <BestAndStreak best={bestMoves} streak={streak} />
-        <Stats distribution={distribution} />
+        <Stats distribution={distribution} played={played} />
         <div className={styles.actions}>
           {!gaveUp && (
             <Button

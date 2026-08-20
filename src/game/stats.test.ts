@@ -1,6 +1,8 @@
 import { describe, it, expect } from "vitest";
 import {
   recordWin,
+  recordPlayed,
+  migrateStats,
   hasActiveStreak,
   isValidStats,
   overParBucket,
@@ -8,12 +10,14 @@ import {
 } from "./stats";
 
 const mockStats = (over: Partial<Stats> = {}): Stats => ({
-  version: 2,
+  version: 3,
   currentStreak: 0,
   bestStreak: 0,
   lastWinSeed: null,
   lastWinBucket: null,
   distribution: [0, 0, 0, 0],
+  played: 0,
+  lastPlayedSeed: null,
   ...over,
 });
 
@@ -175,8 +179,8 @@ describe("isValidStats", () => {
   });
 
   it("rejects an unknown version", () => {
-    expect(isValidStats({ ...valid, version: 3 })).toBe(false);
-    expect(isValidStats({ ...valid, version: 1 })).toBe(false);
+    expect(isValidStats({ ...valid, version: 4 })).toBe(false);
+    expect(isValidStats({ ...valid, version: 2 })).toBe(false);
   });
 
   it("rejects wrong field types", () => {
@@ -190,5 +194,64 @@ describe("isValidStats", () => {
     expect(isValidStats({ ...valid, distribution: "nope" })).toBe(false);
     expect(isValidStats({ ...valid, distribution: [1, 2, 3] })).toBe(false); // wrong length
     expect(isValidStats({ ...valid, distribution: [1, 2, 3, "4"] })).toBe(false);
+  });
+
+  it("rejects wrong attempt-field types", () => {
+    expect(isValidStats({ ...valid, played: "1" })).toBe(false);
+    expect(isValidStats({ ...valid, lastPlayedSeed: 123 })).toBe(false);
+  });
+});
+
+describe("recordPlayed", () => {
+  it("counts the first play of a day and stamps the seed", () => {
+    expect(recordPlayed(mockStats(), "2026-07-11")).toEqual(
+      mockStats({ played: 1, lastPlayedSeed: "2026-07-11" }),
+    );
+  });
+
+  it("does not recount the same day (reload or reset)", () => {
+    const prev = mockStats({ played: 1, lastPlayedSeed: "2026-07-11" });
+    expect(recordPlayed(prev, "2026-07-11")).toBe(prev);
+  });
+
+  it("counts a new day on top of the previous total", () => {
+    const prev = mockStats({ played: 3, lastPlayedSeed: "2026-07-11" });
+    expect(recordPlayed(prev, "2026-07-12")).toEqual(
+      mockStats({ played: 4, lastPlayedSeed: "2026-07-12" }),
+    );
+  });
+});
+
+describe("migrateStats", () => {
+  it("returns current-version stats unchanged", () => {
+    const current = mockStats({ played: 5, lastPlayedSeed: "2026-07-11" });
+    expect(migrateStats(current)).toBe(current);
+  });
+
+  it("upgrades v2 by backfilling played from the win count, keeping history", () => {
+    const v2 = {
+      version: 2,
+      currentStreak: 3,
+      bestStreak: 7,
+      lastWinSeed: "2026-07-11",
+      lastWinBucket: 1,
+      distribution: [2, 1, 0, 0], // 3 recorded wins
+    };
+    expect(migrateStats(v2)).toEqual(
+      mockStats({
+        currentStreak: 3,
+        bestStreak: 7,
+        lastWinSeed: "2026-07-11",
+        lastWinBucket: 1,
+        distribution: [2, 1, 0, 0],
+        played: 3,
+        lastPlayedSeed: "2026-07-11",
+      }),
+    );
+  });
+
+  it("falls back to defaults for garbage", () => {
+    expect(migrateStats(null)).toEqual(mockStats());
+    expect(migrateStats({ version: 99 })).toEqual(mockStats());
   });
 });

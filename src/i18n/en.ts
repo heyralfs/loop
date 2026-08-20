@@ -69,6 +69,9 @@ export const en = {
   // stats
   winDistribution: "Win distribution",
   orMore: "or more",
+  played: "Played",
+  winRate: "Win rate",
+  dnf: "DNF",
 
   // how to play
   howToPlay: {

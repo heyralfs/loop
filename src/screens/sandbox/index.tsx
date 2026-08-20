@@ -140,7 +140,7 @@ function Sandbox() {
         </Item>
 
         <Item title="Stats · distribution">
-          <Stats distribution={[8, 5, 3, 1]} />
+          <Stats distribution={[8, 5, 3, 1]} played={20} />
         </Item>
 
         <Item title="Countdown">
@@ -176,6 +176,7 @@ function Sandbox() {
                 onTryAgain={noop}
                 remainingResets={5}
                 distribution={[8, 5, 3, 1]}
+                played={20}
                 puzzleNumber={1}
               />
             </div>
@@ -189,6 +190,7 @@ function Sandbox() {
                 onTryAgain={noop}
                 remainingResets={3}
                 distribution={[8, 5, 3, 1]}
+                played={20}
                 puzzleNumber={2}
               />
             </div>
@@ -202,6 +204,7 @@ function Sandbox() {
                 onTryAgain={noop}
                 remainingResets={5}
                 distribution={[8, 5, 3, 1]}
+                played={20}
                 puzzleNumber={3}
                 gaveUp
               />
@@ -216,6 +219,7 @@ function Sandbox() {
                 onTryAgain={noop}
                 remainingResets={0}
                 distribution={[8, 5, 3, 1]}
+                played={20}
                 puzzleNumber={4}
                 gaveUp
               />

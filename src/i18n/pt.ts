@@ -55,6 +55,9 @@ export const pt: typeof en = {
 
   winDistribution: "Distribuição de vitórias",
   orMore: "ou mais",
+  played: "Joguei",
+  winRate: "Venci",
+  dnf: "Não resolvi",
 
   howToPlay: {
     heading: "Como jogar",
