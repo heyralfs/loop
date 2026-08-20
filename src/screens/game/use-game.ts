@@ -102,7 +102,14 @@ export function useGame() {
     animatingRef.current = false;
 
     if (solved) {
-      const winStats = recordWin(currentStats, seed, nextMoves - par);
+      // A win always implies a played day. Guarantee it (recordPlayed is
+      // idempotent per day) so a game that began before this feature shipped —
+      // whose first move never hit the counter — can't end up with wins > played.
+      const winStats = recordWin(
+        recordPlayed(currentStats, seed),
+        seed,
+        nextMoves - par,
+      );
       writeStats(winStats);
       setCurrentStats(winStats);
       track(nextMoves === par ? "solved-optimal" : "solved", "Puzzle solved");
