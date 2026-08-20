@@ -159,6 +159,8 @@ function SolvedResultPanel({
   // re-solve. A re-solve in 8 after a 7 still shares the 7.
   const shareMoves = bestMoves ?? moves;
 
+  const canRetry = !gaveUp && remainingResets > 0;
+
   return (
     <div className={styles.wrapper}>
       <div>
@@ -166,23 +168,21 @@ function SolvedResultPanel({
       </div>
       <div className={styles.panel} role="status">
         <p className={styles.headline}>{t.solvedHeadline(winMoves)}</p>
-        {!gaveUp && <p className={styles.subhead}>{t.solvedSubhead(par)}</p>}
+        {!gaveUp && (
+          <p className={styles.subhead}>
+            {canRetry ? t.solvedSubhead(par) : t.parWasNoResets(par)}
+          </p>
+        )}
         <BestAndStreak best={bestMoves} streak={streak} />
         <Stats distribution={distribution} played={played} />
         <div className={styles.actions}>
-          {!gaveUp && (
-            <Button
-              className={styles.button}
-              onClick={onTryAgain}
-              disabled={remainingResets <= 0}
-            >
-              {remainingResets > 0
-                ? t.tryAgain(remainingResets)
-                : t.noResetsLeft}
+          {canRetry && (
+            <Button className={styles.button} onClick={onTryAgain}>
+              {t.tryAgain(remainingResets)}
             </Button>
           )}
           <ShareResult
-            variant={gaveUp ? "FILLED" : "OUTLINED"}
+            variant={canRetry ? "OUTLINED" : "FILLED"}
             puzzleNumber={puzzleNumber}
             moves={shareMoves}
             par={par}

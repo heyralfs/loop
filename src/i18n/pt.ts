@@ -24,8 +24,8 @@ export const pt: typeof en = {
     `Você igualou o par (${par}) — o mínimo de jogadas possível.`,
   solvedHeadline: (moves) => `Resolvido em ${moves}`,
   solvedSubhead: (par) => `O par é ${par}. Consegue igualar?`,
+  parWasNoResets: (par) => `O par era ${par}. Sem tentativas restantes.`,
   tryAgain: (remaining) => `Tentar de novo (${remaining})`,
-  noResetsLeft: "Sem tentativas",
 
   reset: (remaining) => `Reiniciar (${remaining})`,
   giveUp: "Desisto",

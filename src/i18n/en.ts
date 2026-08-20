@@ -29,8 +29,8 @@ export const en = {
     `You matched par (${par}) — the fewest moves possible.`,
   solvedHeadline: (moves: number) => `Solved in ${moves}`,
   solvedSubhead: (par: number) => `Par is ${par}. Can you match it?`,
+  parWasNoResets: (par: number) => `Par was ${par}. No resets left.`,
   tryAgain: (remaining: number) => `Try again (${remaining})`,
-  noResetsLeft: "No resets left",
 
   // play area
   reset: (remaining: number) => `Reset (${remaining})`,
