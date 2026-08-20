@@ -140,6 +140,10 @@ function SolvedResultPanel({
   // to show the player how well they did.
   const winMoves = gaveUp ? (bestMoves ?? moves) : moves;
 
+  // Sharing always brags today's best — not the current (possibly worse)
+  // re-solve. A re-solve in 8 after a 7 still shares the 7.
+  const shareMoves = bestMoves ?? moves;
+
   return (
     <div className={styles.wrapper}>
       <div>
@@ -168,7 +172,7 @@ function SolvedResultPanel({
           <ShareResult
             variant={gaveUp ? "FILLED" : "OUTLINED"}
             puzzleNumber={puzzleNumber}
-            moves={winMoves}
+            moves={shareMoves}
             par={par}
             streak={streak}
           />
