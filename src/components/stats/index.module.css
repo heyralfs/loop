@@ -41,21 +41,12 @@
   min-width: 1.5rem;
   padding: 0 var(--space-sm);
   border-radius: var(--radius-sm);
-  background: color-mix(in srgb, var(--accent) 22%, var(--surface));
-  color: var(--ink);
+  background: var(--accent);
+  color: var(--on-accent);
   transition: width 320ms ease;
 }
 
 .bar[data-optimal="true"] {
-  background: color-mix(in srgb, var(--optimal) 22%, var(--surface));
-}
-
-.bar[data-highlight="true"] {
-  background: var(--accent);
-  color: var(--on-accent);
-}
-
-.bar[data-highlight="true"][data-optimal="true"] {
   background: var(--optimal);
 }
 

@@ -4,10 +4,9 @@ import styles from "./index.module.css";
 
 interface Props {
   distribution: number[];
-  highlight?: number;
 }
 
-function Stats({ distribution, highlight }: Props) {
+function Stats({ distribution }: Props) {
   const t = useTranslations();
   const max = Math.max(1, ...distribution); // avoid divide-by-zero on a fresh player
 
@@ -26,7 +25,6 @@ function Stats({ distribution, highlight }: Props) {
             <span className={styles.label}>{label(bucket)}</span>
             <div
               className={styles.bar}
-              data-highlight={bucket === highlight}
               data-optimal={bucket === 0}
               style={{ width: `${(count / max) * 100}%` }}
             >

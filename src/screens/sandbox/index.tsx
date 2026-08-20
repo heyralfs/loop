@@ -140,7 +140,7 @@ function Sandbox() {
         </Item>
 
         <Item title="Stats · distribution">
-          <Stats distribution={[8, 5, 3, 1]} highlight={1} />
+          <Stats distribution={[8, 5, 3, 1]} />
         </Item>
 
         <Item title="Countdown">

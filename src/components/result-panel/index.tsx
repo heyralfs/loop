@@ -5,7 +5,6 @@ import styles from "./index.module.css";
 import { useTranslations } from "../../i18n";
 import TargetBoard from "../target-board";
 import Stats from "../stats";
-import { overParBucket } from "../../game/stats";
 import ShareResult from "../share-result";
 
 interface Props {
@@ -109,7 +108,7 @@ function OptimalResultPanel({
         </p>
         <p className={styles.subhead}>{t.optimalSubhead(par)}</p>
         <BestAndStreak streak={streak} />
-        <Stats distribution={distribution} highlight={0} />
+        <Stats distribution={distribution} />
         <ShareResult
           puzzleNumber={puzzleNumber}
           moves={par}
@@ -153,10 +152,7 @@ function SolvedResultPanel({
         <p className={styles.headline}>{t.solvedHeadline(winMoves)}</p>
         {!gaveUp && <p className={styles.subhead}>{t.solvedSubhead(par)}</p>}
         <BestAndStreak best={bestMoves} streak={streak} />
-        <Stats
-          distribution={distribution}
-          highlight={overParBucket(winMoves - par)}
-        />
+        <Stats distribution={distribution} />
         <div className={styles.actions}>
           {!gaveUp && (
             <Button
