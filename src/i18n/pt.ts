@@ -54,6 +54,7 @@ export const pt: typeof en = {
   dismiss: "Dispensar",
 
   winDistribution: "Distribuição de vitórias",
+  orMore: "ou mais",
 
   howToPlay: {
     heading: "Como jogar",

@@ -12,8 +12,8 @@ function Stats({ distribution, highlight }: Props) {
   const max = Math.max(1, ...distribution); // avoid divide-by-zero on a fresh player
 
   const label = (bucket: number) => {
-    if (bucket === 0) return t.par;
-    if (bucket === distribution.length - 1) return `+${bucket}+`;
+    if (bucket === 0) return t.optimal;
+    if (bucket === distribution.length - 1) return `+${bucket} ${t.orMore}`;
     return `+${bucket}`;
   };
 

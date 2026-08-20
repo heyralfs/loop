@@ -68,6 +68,7 @@ export const en = {
 
   // stats
   winDistribution: "Win distribution",
+  orMore: "or more",
 
   // how to play
   howToPlay: {
