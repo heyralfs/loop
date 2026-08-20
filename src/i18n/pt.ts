@@ -77,4 +77,13 @@ export const pt: typeof en = {
       },
     ],
   },
+
+  share: {
+    button: "Compartilhar",
+    copied: "Resultado copiado",
+    optimal: (moves) => `🏆 Resolvido em ${moves} — Resultado perfeito!`,
+    solved: (moves, par) =>
+      `✅ Resolvido em ${moves} · par ${par} (+${moves - par})`,
+    cta: "Consegue igualar o par?",
+  },
 };

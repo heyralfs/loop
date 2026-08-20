@@ -5,6 +5,10 @@ import { readJSON, writeJSON } from "../game/storage";
 
 export type Language = "en" | "pt";
 
+// The shape every locale provides — for non-hook code (e.g. building share
+// text) that receives the active dictionary as an argument.
+export type Translations = typeof en;
+
 const KEY = "loop:language";
 
 const DICTIONARIES = { en, pt };

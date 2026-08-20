@@ -6,6 +6,7 @@ import { useTranslations } from "../../i18n";
 import TargetBoard from "../target-board";
 import Stats from "../stats";
 import { overParBucket } from "../../game/stats";
+import ShareResult from "../share-result";
 
 interface Props {
   matrix: Matrix;
@@ -17,6 +18,7 @@ interface Props {
   onTryAgain: () => void;
   remainingResets: number;
   gaveUp?: boolean;
+  puzzleNumber: number;
 }
 
 function ResultPanel({
@@ -29,6 +31,7 @@ function ResultPanel({
   onTryAgain,
   remainingResets,
   gaveUp,
+  puzzleNumber,
 }: Props) {
   if (gaveUp && bestMoves === null) {
     return <GaveUpResultPanel matrix={matrix} distribution={distribution} />;
@@ -43,6 +46,7 @@ function ResultPanel({
         par={par}
         streak={streak}
         distribution={distribution}
+        puzzleNumber={puzzleNumber}
       />
     );
   }
@@ -58,6 +62,7 @@ function ResultPanel({
       onTryAgain={onTryAgain}
       remainingResets={remainingResets}
       gaveUp={gaveUp}
+      puzzleNumber={puzzleNumber}
     />
   );
 }
@@ -89,7 +94,8 @@ function OptimalResultPanel({
   par,
   streak,
   distribution,
-}: Pick<Props, "matrix" | "par" | "streak" | "distribution">) {
+  puzzleNumber,
+}: Pick<Props, "matrix" | "par" | "streak" | "distribution" | "puzzleNumber">) {
   const t = useTranslations();
 
   return (
@@ -104,6 +110,12 @@ function OptimalResultPanel({
         <p className={styles.subhead}>{t.optimalSubhead(par)}</p>
         <BestAndStreak streak={streak} />
         <Stats distribution={distribution} highlight={0} />
+        <ShareResult
+          puzzleNumber={puzzleNumber}
+          moves={par}
+          par={par}
+          streak={streak}
+        />
       </div>
     </div>
   );
@@ -118,7 +130,8 @@ function SolvedResultPanel({
   distribution,
   onTryAgain,
   remainingResets,
-  gaveUp,
+  gaveUp = false,
+  puzzleNumber,
 }: Props) {
   const t = useTranslations();
 
@@ -140,15 +153,26 @@ function SolvedResultPanel({
           distribution={distribution}
           highlight={overParBucket(winMoves - par)}
         />
-        {!gaveUp && (
-          <Button
-            className={styles.button}
-            onClick={onTryAgain}
-            disabled={remainingResets <= 0}
-          >
-            {remainingResets > 0 ? t.tryAgain(remainingResets) : t.noResetsLeft}
-          </Button>
-        )}
+        <div className={styles.actions}>
+          {!gaveUp && (
+            <Button
+              className={styles.button}
+              onClick={onTryAgain}
+              disabled={remainingResets <= 0}
+            >
+              {remainingResets > 0
+                ? t.tryAgain(remainingResets)
+                : t.noResetsLeft}
+            </Button>
+          )}
+          <ShareResult
+            variant={gaveUp ? "FILLED" : "OUTLINED"}
+            puzzleNumber={puzzleNumber}
+            moves={winMoves}
+            par={par}
+            streak={streak}
+          />
+        </div>
       </div>
     </div>
   );

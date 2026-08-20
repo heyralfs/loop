@@ -92,4 +92,15 @@ export const en = {
       },
     ],
   },
+
+  // share (button labels + the shared/copied text; "Loop #n" and the URL
+  // aren't translated). Reuses dayStreak for the streak line.
+  share: {
+    button: "Share result",
+    copied: "Result copied",
+    optimal: (moves: number) => `🏆 Solved in ${moves} — Optimal result!`,
+    solved: (moves: number, par: number) =>
+      `✅ Solved in ${moves} · par ${par} (+${moves - par})`,
+    cta: "Can you match par?",
+  },
 };

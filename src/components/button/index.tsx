@@ -2,9 +2,11 @@ import type { ButtonHTMLAttributes } from "react";
 import styles from "./index.module.css";
 import { play } from "../../audio/sounds";
 
+export type ButtonVariant = "FILLED" | "OUTLINED" | "TONAL";
+
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   pressed?: boolean;
-  variant?: "FILLED" | "OUTLINED" | "TONAL";
+  variant?: ButtonVariant;
 }
 
 function Button({

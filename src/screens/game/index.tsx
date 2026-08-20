@@ -72,6 +72,7 @@ function GameScreen() {
               streak={currentStats.currentStreak}
               distribution={currentStats.distribution}
               gaveUp={gaveUp}
+              puzzleNumber={puzzleNumber}
             />
             <Countdown onCountdownEnd={() => location.reload()} />
           </>

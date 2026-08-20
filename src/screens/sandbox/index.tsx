@@ -15,6 +15,7 @@ import MuteToggle from "../../components/mute-toggle";
 import ThemeToggle from "../../components/theme-toggle";
 import HowToPlay from "../../components/how-to-play";
 import LanguageSwitcher from "../../components/language-switcher";
+import ShareResult from "../../components/share-result";
 
 // prettier-ignore
 const SOLVED: Matrix = [
@@ -154,6 +155,15 @@ function Sandbox() {
           <HowToPlayDemo />
         </Item>
 
+        <Item title="Share result">
+          <div className={styles.column}>
+            {/* Optimal */}
+            <ShareResult puzzleNumber={1} moves={6} par={6} streak={4} />
+            {/* Solved */}
+            <ShareResult puzzleNumber={2} moves={9} par={6} streak={2} />
+          </div>
+        </Item>
+
         <Item title="Result panel">
           <div className={styles.column}>
             <div>
@@ -166,6 +176,7 @@ function Sandbox() {
                 onTryAgain={noop}
                 remainingResets={5}
                 distribution={[8, 5, 3, 1]}
+                puzzleNumber={1}
               />
             </div>
             <div>
@@ -178,6 +189,7 @@ function Sandbox() {
                 onTryAgain={noop}
                 remainingResets={3}
                 distribution={[8, 5, 3, 1]}
+                puzzleNumber={2}
               />
             </div>
             <div>
@@ -190,6 +202,7 @@ function Sandbox() {
                 onTryAgain={noop}
                 remainingResets={5}
                 distribution={[8, 5, 3, 1]}
+                puzzleNumber={3}
                 gaveUp
               />
             </div>
@@ -203,6 +216,7 @@ function Sandbox() {
                 onTryAgain={noop}
                 remainingResets={0}
                 distribution={[8, 5, 3, 1]}
+                puzzleNumber={4}
                 gaveUp
               />
             </div>
