@@ -138,6 +138,10 @@ export function useGame() {
 
     commit({ matrix: target, moves, gaveUp: true, bestMoves, resets });
 
+    const playedStats = recordPlayed(currentStats, seed);
+    writeStats(playedStats);
+    setCurrentStats(playedStats);
+
     if (bestMoves === null) {
       track("gave-up", "Gave up");
     } else {
