@@ -44,9 +44,7 @@ function ResultPanel({
     );
   }
 
-  const atPar = moves === par; // par is the optimum, so moves >= par always.
-
-  if (atPar) {
+  if (!gaveUp && moves === par) {
     return (
       <OptimalResultPanel
         matrix={matrix}
