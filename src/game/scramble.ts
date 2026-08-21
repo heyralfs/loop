@@ -1,5 +1,5 @@
 import { move, OPERATORS, DIRECTIONS } from "./operators";
-import { findShortestPath } from "./path";
+import { distancesFrom, encode } from "./path";
 import type { Direction, Matrix, Operator } from "./types";
 
 const SCRAMBLE_STEPS = 20;
@@ -32,7 +32,14 @@ function scrambleOnce(initial: Matrix, random: () => number): Matrix {
   return matrix;
 }
 
-export function scramble(initial: Matrix, random: () => number): Matrix {
+export function scramble(
+  initial: Matrix,
+  random: () => number,
+  // Distances from `initial` to every board. Defaults to computing them, but
+  // callers that already have the map (e.g. to also derive par) can pass it in
+  // so the whole puzzle costs a single BFS.
+  distances: Map<number, number> = distancesFrom(initial),
+): Matrix {
   let best = initial;
   let bestDistance = -1;
 
@@ -41,7 +48,7 @@ export function scramble(initial: Matrix, random: () => number): Matrix {
   // always terminates and always returns a valid board.
   for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
     const matrix = scrambleOnce(initial, random);
-    const distance = findShortestPath(matrix, initial)?.length ?? 0;
+    const distance = distances.get(encode(matrix)) ?? 0;
 
     if (distance >= MIN_DISTANCE) {
       return matrix;
