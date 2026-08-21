@@ -8,3 +8,15 @@
 .tile[data-value="1"] {
   background: var(--tile-filled);
 }
+
+.tile[data-value="2"] {
+  background: var(--tile-filled);
+  display: grid;
+  place-items: center;
+  color: var(--tile-empty);
+}
+
+.star {
+  width: 70%;
+  height: 70%;
+}

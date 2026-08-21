@@ -1,5 +1,5 @@
 // A single cell of the board.
-export type Cell = 0 | 1;
+export type Cell = 0 | 1 | 2;
 
 // The board, flattened row-major: index = 4 * row + col (length 16).
 export type Matrix = Cell[];

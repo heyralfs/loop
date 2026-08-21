@@ -72,6 +72,10 @@ export const pt: typeof en = {
         body: "As setas deslocam uma única linha (◀ ▶) ou coluna (▲ ▼). A peça que sai por uma borda reaparece no lado oposto.",
       },
       {
+        title: "Atenção à estrela.",
+        body: "Em alguns dias surge uma peça marcada (★) — leve-a também até seu lugar no alvo, como as demais.",
+      },
+      {
         title: "Alcance o par.",
         body: "O par é o menor número de jogadas possível. Iguale-o para um resultado {optimal}.",
       },

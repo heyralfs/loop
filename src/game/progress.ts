@@ -31,7 +31,7 @@ export function isValidProgress(obj: unknown): obj is Progress {
     typeof progress.resets === "number" &&
     Array.isArray(progress.matrix) &&
     progress.matrix.length === 16 &&
-    progress.matrix.every((cell) => cell === 0 || cell === 1)
+    progress.matrix.every((cell) => cell === 0 || cell === 1 || cell === 2)
   );
 }
 

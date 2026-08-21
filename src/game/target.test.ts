@@ -47,4 +47,22 @@ describe("createTarget", () => {
       createTarget(createRandom("2026-07-04")),
     );
   });
+
+  it("stays simple (and draws no extra random) when complexity is off", () => {
+    // Probability 0 must reproduce the plain simple target exactly — it may not
+    // consume a random draw, or historical puzzles would shift.
+    const values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+    expect(createTarget(sequence(values), 0)).toEqual(
+      createTarget(sequence(values)),
+    );
+  });
+
+  it("can place a 2 among the filled cells when complexity is on", () => {
+    const target = createTarget(createRandom("2026-07-04"), 1); // always complex
+    const twos = target.filter((cell) => cell === 2).length;
+    const filled = target.filter((cell) => cell !== 0).length;
+    expect(twos).toBe(1);
+    expect(filled).toBe(8); // still 8 filled cells — one of them the 2
+    expect(target).toHaveLength(16);
+  });
 });

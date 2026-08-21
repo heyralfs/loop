@@ -1,5 +1,7 @@
 import type { Matrix } from "./types";
 
+const CELL_LABELS = ["empty", "filled", "filled with star"];
+
 // A spoken description of the board for screen readers, e.g.
 // "4 by 4 grid. Row 1: filled, empty, filled, empty. Row 2: …".
 export function describeBoard(matrix: Matrix): string {
@@ -8,7 +10,7 @@ export function describeBoard(matrix: Matrix): string {
   for (let row = 0; row < size; row++) {
     const cells: string[] = [];
     for (let col = 0; col < size; col++) {
-      cells.push(matrix[row * size + col] === 1 ? "filled" : "empty");
+      cells.push(CELL_LABELS[matrix[row * size + col]]);
     }
     rows.push(`Row ${row + 1}: ${cells.join(", ")}`);
   }

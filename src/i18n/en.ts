@@ -87,6 +87,10 @@ export const en = {
         body: "The arrows slide a single row (◀ ▶) or column (▲ ▼). Whatever tile falls off one edge reappears on the opposite side.",
       },
       {
+        title: "Mind the star.",
+        body: "Some days a marked tile (★) joins in — slide it onto its spot on the target too, just like the others.",
+      },
+      {
         title: "Match par.",
         body: "Par is the fewest moves possible. Match it for an {optimal} solve.",
       },
