@@ -16,6 +16,7 @@ export async function animateMove(
   operator: Operator,
   direction: Direction,
   solved: boolean,
+  atPar: boolean,
   commit: () => void,
 ) {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -98,8 +99,14 @@ export async function animateMove(
         tile.animate(
           [
             { transform: `${base}scale(1)` },
-            { transform: `${base}scale(1.2)` },
-            { transform: `${base}scale(1)` },
+            {
+              transform: `${base}scale(1.2)`,
+              ...(atPar ? { backgroundColor: "var(--optimal)" } : {}),
+            },
+            {
+              transform: `${base}scale(1)`,
+              ...(atPar ? { backgroundColor: "var(--optimal)" } : {}),
+            },
           ],
           {
             duration: 1000,

@@ -10,6 +10,7 @@ type BoardHandle = {
     operator: Operator,
     direction: Direction,
     solved: boolean,
+    atPar: boolean,
     commit: () => void,
   ) => Promise<void>;
   animateFlip: (commit: () => void) => Promise<void>;
@@ -30,8 +31,17 @@ function Board({ matrix, label, ref }: Props) {
         operator: Operator,
         direction: Direction,
         solved,
+        atPar,
         commit: () => void,
-      ) => animateMove(tileRefs.current, operator, direction, solved, commit),
+      ) =>
+        animateMove(
+          tileRefs.current,
+          operator,
+          direction,
+          solved,
+          atPar,
+          commit,
+        ),
       animateFlip: async (commit: () => void) =>
         animateFlip(tileRefs.current, commit),
     }),

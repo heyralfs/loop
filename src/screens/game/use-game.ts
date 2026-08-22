@@ -90,15 +90,21 @@ export function useGame() {
     }
 
     animatingRef.current = true;
-    await boardRef.current?.animateMove(operator, direction, solved, () => {
-      commit({
-        matrix: next,
-        moves: nextMoves,
-        gaveUp: false,
-        bestMoves: nextBest,
-        resets,
-      });
-    });
+    await boardRef.current?.animateMove(
+      operator,
+      direction,
+      solved,
+      nextMoves === par,
+      () => {
+        commit({
+          matrix: next,
+          moves: nextMoves,
+          gaveUp: false,
+          bestMoves: nextBest,
+          resets,
+        });
+      },
+    );
 
     animatingRef.current = false;
 
@@ -129,9 +135,15 @@ export function useGame() {
       const next = move(current, operator, direction);
       setActiveMove({ operator, direction });
       play("click");
-      await boardRef.current?.animateMove(operator, direction, false, () => {
-        setMatrix(next);
-      });
+      await boardRef.current?.animateMove(
+        operator,
+        direction,
+        false,
+        false,
+        () => {
+          setMatrix(next);
+        },
+      );
       current = next;
     }
     setActiveMove(null);
