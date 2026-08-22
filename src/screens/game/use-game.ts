@@ -89,6 +89,10 @@ export function useGame() {
       setCurrentStats(played);
     }
 
+    // Show the new count right away so it isn't stuck one behind during the
+    // animation (very visible on a win).
+    setMoves(nextMoves);
+
     animatingRef.current = true;
     await boardRef.current?.animateMove(
       operator,
