@@ -15,6 +15,7 @@ export async function animateMove(
   tileRefs: Map<number, HTMLDivElement | null>,
   operator: Operator,
   direction: Direction,
+  solved: boolean,
   commit: () => void,
 ) {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -72,6 +73,46 @@ export async function animateMove(
   }
 
   await Promise.all(animations.map((animation) => animation.finished));
+
+  if (solved) {
+    const filled = [...tileRefs.values()].filter(
+      (tile): tile is HTMLDivElement =>
+        tile !== null && tile.getAttribute("data-value") !== "0",
+    );
+
+    // Shuffle (Fisher–Yates) so the tiles bounce in a fresh order each win
+    for (let i = filled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [filled[i], filled[j]] = [filled[j], filled[i]];
+    }
+
+    const bases = filled.map((tile) => {
+      const held = getComputedStyle(tile).transform;
+      return held === "none" ? "" : `${held} `;
+    });
+
+    filled.forEach((tile, order) => {
+      const base = bases[order];
+
+      animations.push(
+        tile.animate(
+          [
+            { transform: `${base}scale(1)` },
+            { transform: `${base}scale(1.2)` },
+            { transform: `${base}scale(1)` },
+          ],
+          {
+            duration: 1000,
+            easing: "ease-in-out",
+            fill: "forwards",
+            delay: order * 250,
+          },
+        ),
+      );
+    });
+
+    await Promise.all(animations.map((animation) => animation.finished));
+  }
 
   // Commit the new state and drop the held transforms in one synchronous
   // task, so the browser paints straight from the animation's end position

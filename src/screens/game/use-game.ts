@@ -90,7 +90,7 @@ export function useGame() {
     }
 
     animatingRef.current = true;
-    await boardRef.current?.animateMove(operator, direction, () => {
+    await boardRef.current?.animateMove(operator, direction, solved, () => {
       commit({
         matrix: next,
         moves: nextMoves,
@@ -99,6 +99,7 @@ export function useGame() {
         resets,
       });
     });
+
     animatingRef.current = false;
 
     if (solved) {
@@ -128,7 +129,7 @@ export function useGame() {
       const next = move(current, operator, direction);
       setActiveMove({ operator, direction });
       play("click");
-      await boardRef.current?.animateMove(operator, direction, () => {
+      await boardRef.current?.animateMove(operator, direction, false, () => {
         setMatrix(next);
       });
       current = next;
