@@ -79,6 +79,7 @@ function Sandbox() {
             <BestAndStreak best={6} streak={0} />
             <BestAndStreak best={5} streak={3} />
             <BestAndStreak streak={2} />
+            <BestAndStreak streak={1} bestStreak={16} />
           </div>
         </Item>
 
@@ -173,6 +174,7 @@ function Sandbox() {
                 par={6}
                 bestMoves={6}
                 streak={4}
+                bestStreak={12}
                 onTryAgain={noop}
                 remainingResets={5}
                 distribution={[8, 5, 3, 1]}
@@ -187,6 +189,7 @@ function Sandbox() {
                 par={6}
                 bestMoves={6}
                 streak={2}
+                bestStreak={16}
                 onTryAgain={noop}
                 remainingResets={3}
                 distribution={[8, 5, 3, 1]}
@@ -201,6 +204,7 @@ function Sandbox() {
                 par={0}
                 bestMoves={null}
                 streak={0}
+                bestStreak={5}
                 onTryAgain={noop}
                 remainingResets={5}
                 distribution={[8, 5, 3, 1]}
@@ -216,6 +220,7 @@ function Sandbox() {
                 par={6}
                 bestMoves={8}
                 streak={3}
+                bestStreak={20}
                 onTryAgain={noop}
                 remainingResets={0}
                 distribution={[8, 5, 3, 1]}

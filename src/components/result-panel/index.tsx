@@ -13,6 +13,7 @@ interface Props {
   par: number;
   bestMoves: number | null;
   streak: number;
+  bestStreak: number;
   distribution: number[];
   played: number;
   onTryAgain: () => void;
@@ -27,6 +28,7 @@ function ResultPanel({
   par,
   bestMoves,
   streak,
+  bestStreak,
   distribution,
   played,
   onTryAgain,
@@ -50,6 +52,7 @@ function ResultPanel({
         matrix={matrix}
         par={par}
         streak={streak}
+        bestStreak={bestStreak}
         distribution={distribution}
         played={played}
         puzzleNumber={puzzleNumber}
@@ -64,6 +67,7 @@ function ResultPanel({
       par={par}
       bestMoves={bestMoves}
       streak={streak}
+      bestStreak={bestStreak}
       distribution={distribution}
       played={played}
       onTryAgain={onTryAgain}
@@ -101,12 +105,19 @@ function OptimalResultPanel({
   matrix,
   par,
   streak,
+  bestStreak,
   distribution,
   played,
   puzzleNumber,
 }: Pick<
   Props,
-  "matrix" | "par" | "streak" | "distribution" | "played" | "puzzleNumber"
+  | "matrix"
+  | "par"
+  | "streak"
+  | "bestStreak"
+  | "distribution"
+  | "played"
+  | "puzzleNumber"
 >) {
   const t = useTranslations();
 
@@ -120,7 +131,7 @@ function OptimalResultPanel({
           {t.optimalHeadline}
         </p>
         <p className={styles.subhead}>{t.optimalSubhead(par)}</p>
-        <BestAndStreak streak={streak} />
+        <BestAndStreak streak={streak} bestStreak={bestStreak} />
         <Stats distribution={distribution} played={played} />
         <ShareResult
           puzzleNumber={puzzleNumber}
@@ -139,6 +150,7 @@ function SolvedResultPanel({
   par,
   bestMoves,
   streak,
+  bestStreak,
   distribution,
   played,
   onTryAgain,
@@ -171,7 +183,7 @@ function SolvedResultPanel({
             {canRetry ? t.solvedSubhead(par) : t.parWasNoResets(par)}
           </p>
         )}
-        <BestAndStreak best={bestMoves} streak={streak} />
+        <BestAndStreak best={bestMoves} streak={streak} bestStreak={bestStreak} />
         <Stats distribution={distribution} played={played} />
         <div className={styles.actions}>
           {canRetry && (

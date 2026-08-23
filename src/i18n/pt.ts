@@ -12,6 +12,7 @@ export const pt: typeof en = {
   bestToday: (best) => `Melhor de hoje ${best}`,
   dayStreak: (streak) =>
     `🔥 ${streak} ${streak === 1 ? "dia seguido" : "dias seguidos"}`,
+  bestStreak: (days) => `🏆 Melhor sequência: ${days}`,
 
   optimal: "Perfeito",
 

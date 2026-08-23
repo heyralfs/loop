@@ -70,6 +70,7 @@ function GameScreen() {
               remainingResets={remainingResets}
               par={par}
               streak={currentStats.currentStreak}
+              bestStreak={currentStats.bestStreak}
               distribution={currentStats.distribution}
               played={currentStats.played}
               gaveUp={gaveUp}

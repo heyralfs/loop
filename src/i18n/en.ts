@@ -15,6 +15,7 @@ export const en = {
   // best & streak
   bestToday: (best: number) => `Best today ${best}`,
   dayStreak: (streak: number) => `🔥 ${streak}-day streak`,
+  bestStreak: (days: number) => `🏆 Best streak: ${days}`,
 
   optimal: "Optimal",
 
