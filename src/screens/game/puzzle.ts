@@ -12,8 +12,8 @@ export const puzzleNumber = daysBetween(DAY_ONE, seed) + 1;
 
 const random = createRandom(seed);
 
-// Roughly a third of days get a complex target (a 2 among the 1s).
-const COMPLEX_TARGET_PROBABILITY = 0.3;
+// Roughly one complex day a week (a 2 among the 1s).
+const COMPLEX_TARGET_PROBABILITY = 0.2;
 
 export const target = createTarget(random, COMPLEX_TARGET_PROBABILITY);
 
