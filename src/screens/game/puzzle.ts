@@ -12,18 +12,10 @@ export const puzzleNumber = daysBetween(DAY_ONE, seed) + 1;
 
 const random = createRandom(seed);
 
-// Complex targets (with a 2) only begin on this date, so a puzzle already played
-// today — or one a player is mid-game on when they refresh — keeps its original
-// simple board. Keep this on/after the deploy date: any earlier day would stay
-// simple anyway, and no already-played day must ever flip to complex.
-const COMPLEX_TARGET_START = "2026-08-22";
-
+// Roughly a third of days get a complex target (a 2 among the 1s).
 const COMPLEX_TARGET_PROBABILITY = 0.3;
 
-const complexProbability =
-  seed >= COMPLEX_TARGET_START ? COMPLEX_TARGET_PROBABILITY : 0;
-
-export const target = createTarget(random, complexProbability);
+export const target = createTarget(random, COMPLEX_TARGET_PROBABILITY);
 
 // One BFS from the target answers everything: which scrambles are far enough,
 // and par (the scramble's own distance back to the target).
