@@ -74,6 +74,9 @@ export const en = {
   winRate: "Win rate",
   dnf: "DNF",
 
+  // footer
+  madeBy: "Made by",
+
   // how to play
   howToPlay: {
     heading: "How to play",

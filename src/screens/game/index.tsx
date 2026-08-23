@@ -36,31 +36,17 @@ function GameScreen() {
     handleReset,
   } = useGame();
 
+  const gameOver = gaveUp || solved;
+
   return (
-    <Layout puzzleNumber={puzzleNumber} openGuide={() => setShowGuide(true)}>
+    <Layout
+      puzzleNumber={puzzleNumber}
+      openGuide={() => setShowGuide(true)}
+      showFooter={gameOver}
+    >
       <HowToPlay open={showGuide} onClose={dismissGuide} />
-
       <div className={styles.wrapper}>
-        {!gaveUp && !solved && (
-          <>
-            <TargetBoard matrix={target} />
-            <PlayArea
-              activeMove={activeMove}
-              boardRef={boardRef}
-              matrix={matrix}
-              moves={moves}
-              remainingResets={remainingResets}
-              par={par}
-              currentStreak={currentStats.currentStreak}
-              bestMoves={bestMoves}
-              handleMove={handleMove}
-              handleReset={handleReset}
-              handleGiveUp={handleGiveUp}
-            />
-          </>
-        )}
-
-        {(gaveUp || solved) && (
+        {gameOver ? (
           <>
             <ResultPanel
               matrix={matrix}
@@ -77,6 +63,23 @@ function GameScreen() {
               puzzleNumber={puzzleNumber}
             />
             <Countdown onCountdownEnd={() => location.reload()} />
+          </>
+        ) : (
+          <>
+            <TargetBoard matrix={target} />
+            <PlayArea
+              activeMove={activeMove}
+              boardRef={boardRef}
+              matrix={matrix}
+              moves={moves}
+              remainingResets={remainingResets}
+              par={par}
+              currentStreak={currentStats.currentStreak}
+              bestMoves={bestMoves}
+              handleMove={handleMove}
+              handleReset={handleReset}
+              handleGiveUp={handleGiveUp}
+            />
           </>
         )}
       </div>

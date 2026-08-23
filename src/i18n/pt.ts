@@ -60,6 +60,8 @@ export const pt: typeof en = {
   winRate: "Venci",
   dnf: "Não resolvi",
 
+  madeBy: "Feito por",
+
   howToPlay: {
     heading: "Como jogar",
     cta: "Entendi — jogar",
