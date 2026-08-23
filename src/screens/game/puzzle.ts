@@ -18,7 +18,7 @@ const random = createRandom(seed);
 // simple anyway, and no already-played day must ever flip to complex.
 const COMPLEX_TARGET_START = "2026-08-22";
 
-const COMPLEX_TARGET_PROBABILITY = 0.2;
+const COMPLEX_TARGET_PROBABILITY = 0.3;
 
 const complexProbability =
   seed >= COMPLEX_TARGET_START ? COMPLEX_TARGET_PROBABILITY : 0;
