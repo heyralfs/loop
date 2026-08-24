@@ -46,7 +46,7 @@ describe("isValidProgress", () => {
       false,
     ); // wrong length
     expect(
-      isValidProgress({ ...valid, matrix: [...new Array(15).fill(0), 2] }),
-    ).toBe(false); // length 16 but a non-0/1 cell
+      isValidProgress({ ...valid, matrix: [...new Array(15).fill(0), 3] }),
+    ).toBe(false); // length 16 but an out-of-range cell (0/1/2 are valid)
   });
 });

@@ -1,4 +1,5 @@
 import { track } from "../../analytics";
+import type { Matrix } from "../../game/types";
 import type { Translations } from "../../i18n";
 
 const URL = "https://heyralfs.github.io/loop/";
@@ -8,16 +9,18 @@ interface ShareResultParams {
   moves: number;
   par: number;
   streak: number;
+  matrix: Matrix;
 }
 
 export function buildShareText(
-  { puzzleNumber, moves, par, streak }: ShareResultParams,
+  { puzzleNumber, moves, par, streak, matrix }: ShareResultParams,
   t: Translations,
 ): string {
   const outcome =
     moves === par ? t.share.optimal(moves) : t.share.solved(moves, par);
   return [
-    `Loop #${puzzleNumber}\n`,
+    `Loop #${puzzleNumber}`,
+    matrixToEmoji(matrix, moves === par),
     outcome,
     streak > 0 && t.dayStreak(streak),
     `\n${t.share.cta}`,
@@ -25,6 +28,25 @@ export function buildShareText(
   ]
     .filter(Boolean)
     .join("\n");
+}
+
+function matrixToEmoji(matrix: Matrix, atPar: boolean): string {
+  return matrix
+    .map((cell, index) => {
+      const eol = index % 4 === 3 ? "\n" : "";
+
+      switch (cell) {
+        case 0:
+          return "⬛" + eol;
+        case 1:
+          return (atPar ? "🟨" : "🟩") + eol;
+        case 2:
+          return "⭐️" + eol;
+        default:
+          return "❓" + eol;
+      }
+    })
+    .join("");
 }
 
 export async function shareResult(

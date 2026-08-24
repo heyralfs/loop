@@ -159,9 +159,21 @@ function Sandbox() {
         <Item title="Share result">
           <div className={styles.column}>
             {/* Optimal */}
-            <ShareResult puzzleNumber={1} moves={6} par={6} streak={4} />
+            <ShareResult
+              puzzleNumber={1}
+              moves={6}
+              par={6}
+              streak={4}
+              matrix={SOLVED}
+            />
             {/* Solved */}
-            <ShareResult puzzleNumber={2} moves={9} par={6} streak={2} />
+            <ShareResult
+              puzzleNumber={2}
+              moves={9}
+              par={6}
+              streak={2}
+              matrix={SOLVED}
+            />
           </div>
         </Item>
 

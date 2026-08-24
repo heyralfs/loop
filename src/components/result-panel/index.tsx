@@ -138,6 +138,7 @@ function OptimalResultPanel({
           moves={par}
           par={par}
           streak={streak}
+          matrix={matrix}
         />
       </div>
     </div>
@@ -183,7 +184,11 @@ function SolvedResultPanel({
             {canRetry ? t.solvedSubhead(par) : t.parWasNoResets(par)}
           </p>
         )}
-        <BestAndStreak best={bestMoves} streak={streak} bestStreak={bestStreak} />
+        <BestAndStreak
+          best={bestMoves}
+          streak={streak}
+          bestStreak={bestStreak}
+        />
         <Stats distribution={distribution} played={played} />
         <div className={styles.actions}>
           {canRetry && (
@@ -197,6 +202,7 @@ function SolvedResultPanel({
             moves={shareMoves}
             par={par}
             streak={streak}
+            matrix={matrix}
           />
         </div>
       </div>
