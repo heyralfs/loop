@@ -31,22 +31,24 @@ function GameScreen() {
     activeMove,
     currentStats,
     solved,
+    animating,
     handleMove,
     handleGiveUp,
     handleReset,
   } = useGame();
 
   const gameOver = gaveUp || solved;
+  const showResult = !animating && gameOver;
 
   return (
     <Layout
       puzzleNumber={puzzleNumber}
       openGuide={() => setShowGuide(true)}
-      showFooter={gameOver}
+      showFooter={showResult}
     >
       <HowToPlay open={showGuide} onClose={dismissGuide} />
       <div className={styles.wrapper}>
-        {gameOver ? (
+        {showResult ? (
           <>
             <ResultPanel
               matrix={matrix}

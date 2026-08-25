@@ -33,6 +33,9 @@ let firstMoveSent = false;
 export function useGame() {
   const boardRef = useRef<BoardHandle>(null);
   const animatingRef = useRef(false);
+  // Keeps the board mounted after the winning move commits (which makes `solved`
+  // true), so the win celebration can play before the result panel takes over.
+  const [animating, setAnimating] = useState(false);
 
   const [currentStats, setCurrentStats] = useState<Stats>(
     active ? stats : { ...stats, currentStreak: 0 },
@@ -94,6 +97,7 @@ export function useGame() {
     setMoves(nextMoves);
 
     animatingRef.current = true;
+    setAnimating(true); // keep the board mounted through the win celebration
     await boardRef.current?.animateMove(
       operator,
       direction,
@@ -110,8 +114,6 @@ export function useGame() {
       },
     );
 
-    animatingRef.current = false;
-
     if (solved) {
       // A win always implies a played day. Guarantee it (recordPlayed is
       // idempotent per day) so a game that began before this feature shipped —
@@ -125,6 +127,9 @@ export function useGame() {
       setCurrentStats(winStats);
       track(nextMoves === par ? "solved-optimal" : "solved", "Puzzle solved");
     }
+
+    setAnimating(false);
+    animatingRef.current = false;
   };
 
   const handleGiveUp = async () => {
@@ -201,6 +206,7 @@ export function useGame() {
     bestMoves,
     activeMove,
     solved,
+    animating,
     handleMove,
     handleGiveUp,
     handleReset,
