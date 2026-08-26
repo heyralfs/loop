@@ -9,18 +9,29 @@ import ResultPanel from "../../components/result-panel";
 import Countdown from "../../components/countdown";
 import {
   hasSeenGuide,
+  hasSeenSwipe,
   markGuideAsSeen,
   markSwipeSeen,
 } from "../../components/how-to-play/seen";
 import HowToPlay from "../../components/how-to-play";
+import SwipeAnnouncement from "../../components/swipe-announcement";
 
 function GameScreen() {
   const [showGuide, setShowGuide] = useState(() => !hasSeenGuide());
+
+  const [showSwipe, setShowSwipe] = useState(
+    () => hasSeenGuide() && !hasSeenSwipe(),
+  );
 
   const dismissGuide = () => {
     markGuideAsSeen();
     markSwipeSeen();
     setShowGuide(false);
+  };
+
+  const dismissSwipe = () => {
+    markSwipeSeen();
+    setShowSwipe(false);
   };
 
   const {
@@ -49,6 +60,7 @@ function GameScreen() {
       showFooter={showResult}
     >
       <HowToPlay open={showGuide} onClose={dismissGuide} />
+      <SwipeAnnouncement open={showSwipe} onClose={dismissSwipe} />
       <div className={styles.wrapper}>
         {showResult ? (
           <>
