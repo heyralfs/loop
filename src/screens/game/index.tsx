@@ -10,6 +10,7 @@ import Countdown from "../../components/countdown";
 import {
   hasSeenGuide,
   markGuideAsSeen,
+  markSwipeSeen,
 } from "../../components/how-to-play/seen";
 import HowToPlay from "../../components/how-to-play";
 
@@ -18,6 +19,7 @@ function GameScreen() {
 
   const dismissGuide = () => {
     markGuideAsSeen();
+    markSwipeSeen();
     setShowGuide(false);
   };
 

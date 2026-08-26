@@ -72,7 +72,7 @@ export const pt: typeof en = {
       },
       {
         title: "Desloque linhas e colunas.",
-        body: "As setas deslocam uma única linha (◀ ▶) ou coluna (▲ ▼). A peça que sai por uma borda reaparece no lado oposto.",
+        body: "Toque nas setas ou deslize uma linha (◀ ▶) ou coluna (▲ ▼) para movê-la. A peça que sai por uma borda reaparece no lado oposto.",
       },
       {
         title: "Atenção à estrela.",
@@ -96,5 +96,11 @@ export const pt: typeof en = {
     solved: (moves, par) =>
       `✅ Resolvido em ${moves} · par ${par} (+${moves - par})`,
     cta: "Consegue igualar o par?",
+  },
+
+  swipeNews: {
+    heading: "Novo: deslize para mover",
+    body: "Arraste uma linha ou coluna com o dedo para movê-la — sem precisar tocar nas setas.",
+    cta: "Entendi",
   },
 };

@@ -1,5 +1,6 @@
-import { useEffect, useRef, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import Button from "../button";
+import Modal from "../modal";
 import styles from "./index.module.css";
 import { useTranslations } from "../../i18n";
 
@@ -24,20 +25,9 @@ function renderBody(body: string, optimal: string): ReactNode {
 
 function HowToPlay({ open, onClose }: Props) {
   const t = useTranslations();
-  const dialogRef = useRef<HTMLDialogElement>(null);
-
-  useEffect(() => {
-    const dialog = dialogRef.current;
-    if (!dialog) return;
-    if (open && !dialog.open) {
-      dialog.showModal();
-    } else if (!open && dialog.open) {
-      dialog.close();
-    }
-  }, [open]);
 
   return (
-    <dialog ref={dialogRef} className={styles.dialog} onClose={onClose}>
+    <Modal open={open} onClose={onClose}>
       <div className={styles.content}>
         <h2 className={styles.title}>{t.howToPlay.heading}</h2>
         <ol className={styles.list}>
@@ -50,14 +40,11 @@ function HowToPlay({ open, onClose }: Props) {
             </li>
           ))}
         </ol>
-        <Button
-          className={styles.play}
-          onClick={() => dialogRef.current?.close()}
-        >
+        <Button className={styles.play} onClick={onClose}>
           {t.howToPlay.cta}
         </Button>
       </div>
-    </dialog>
+    </Modal>
   );
 }
 

@@ -88,7 +88,7 @@ export const en = {
       },
       {
         title: "Shift rows & columns.",
-        body: "The arrows slide a single row (◀ ▶) or column (▲ ▼). Whatever tile falls off one edge reappears on the opposite side.",
+        body: "Tap the arrows or swipe a row (◀ ▶) or column (▲ ▼) to slide it. Whatever tile falls off one edge reappears on the opposite side.",
       },
       {
         title: "Mind the star.",
@@ -114,5 +114,12 @@ export const en = {
     solved: (moves: number, par: number) =>
       `✅ Solved in ${moves} · par ${par} (+${moves - par})`,
     cta: "Can you match par?",
+  },
+
+  // one-time swipe announcement
+  swipeNews: {
+    heading: "New: swipe to move",
+    body: "Drag a row or column with your finger to slide it — no need to tap the arrows.",
+    cta: "Got it",
   },
 };
