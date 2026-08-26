@@ -1,15 +1,15 @@
-import type { Ref } from "react";
+import type { HTMLAttributes, Ref } from "react";
 import styles from "./index.module.css";
 import type { Cell } from "../../game/types";
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   value: Cell;
   ref?: Ref<HTMLDivElement>;
 }
 
-const Tile = ({ value, ref }: Props) => {
+const Tile = ({ value, ref, ...rest }: Props) => {
   return (
-    <div className={styles.tile} data-value={value} ref={ref}>
+    <div className={styles.tile} data-value={value} ref={ref} {...rest}>
       {value === 2 && (
         <svg
           className={styles.star}

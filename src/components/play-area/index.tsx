@@ -115,7 +115,12 @@ function PlayArea({
           activeMove={activeMove}
           onMove={handleMove}
         />
-        <Board ref={boardRef} matrix={matrix} label={t.yourBoard} />
+        <Board
+          ref={boardRef}
+          matrix={matrix}
+          label={t.yourBoard}
+          handleMove={handleMove}
+        />
         <ControlStrip
           className={styles.rowControls}
           operators={ROW_OPERATORS}
