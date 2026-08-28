@@ -6,7 +6,7 @@ A daily 4×4 puzzle. Shift individual rows and columns to turn the scrambled boa
 into the target — in as few moves as possible. One new puzzle for everyone, every
 day. No accounts, no backend.
 
-**▶ Play: [https://heyralfs.github.io/loop/](https://heyralfs.github.io/loop/?ref=github)**
+**▶ Play: [https://playloop.today/](https://playloop.today/?ref=github)**
 
 ## How to play
 
