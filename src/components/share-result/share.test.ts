@@ -1,10 +1,8 @@
 import { describe, it, expect } from "vitest";
-import { buildShareText } from "./share";
+import { buildShareText, URL } from "./share";
 import { en } from "../../i18n/en";
 import { pt } from "../../i18n/pt";
 import type { Matrix } from "../../game/types";
-
-const URL = "https://heyralfs.github.io/loop/";
 
 // 8 empty, 7 ones, 1 two — exercises every emoji in the grid.
 // prettier-ignore

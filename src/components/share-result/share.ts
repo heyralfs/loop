@@ -2,7 +2,7 @@ import { track } from "../../analytics";
 import type { Matrix } from "../../game/types";
 import type { Translations } from "../../i18n";
 
-const URL = "https://heyralfs.github.io/loop/";
+export const URL = "https://playloop.today/";
 
 interface ShareResultParams {
   puzzleNumber: number;

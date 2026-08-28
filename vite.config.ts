@@ -4,7 +4,7 @@ import { VitePWA } from "vite-plugin-pwa";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: "/loop/",
+  base: "/",
   plugins: [
     react(),
     VitePWA({
@@ -19,7 +19,6 @@ export default defineConfig({
         theme_color: "#0e9e8c",
         background_color: "#ece7db",
         display: "standalone",
-        // Relative to the manifest, so it resolves under the /loop/ base.
         start_url: ".",
         scope: ".",
         icons: [
