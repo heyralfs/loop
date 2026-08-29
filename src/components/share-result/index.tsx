@@ -3,7 +3,6 @@ import { buildShareText, shareResult } from "./share";
 import styles from "./index.module.css";
 import { useEffect, useState } from "react";
 import { useTranslations } from "../../i18n";
-import type { Matrix } from "../../game/types";
 
 interface Props {
   moves: number;
@@ -11,26 +10,15 @@ interface Props {
   puzzleNumber: number;
   streak: number;
   variant?: ButtonVariant;
-  matrix: Matrix;
 }
 
-function ShareResult({
-  moves,
-  par,
-  puzzleNumber,
-  streak,
-  variant,
-  matrix,
-}: Props) {
+function ShareResult({ moves, par, puzzleNumber, streak, variant }: Props) {
   const t = useTranslations();
   const [copied, setCopied] = useState(false);
 
   const handleClick = async () => {
     if (copied) return;
-    const text = buildShareText(
-      { moves, par, puzzleNumber, streak, matrix },
-      t,
-    );
+    const text = buildShareText({ moves, par, puzzleNumber, streak }, t);
     const result = await shareResult(text);
     if (result === "copied") {
       setCopied(true);

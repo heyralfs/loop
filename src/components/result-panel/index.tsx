@@ -138,7 +138,6 @@ function OptimalResultPanel({
           moves={par}
           par={par}
           streak={streak}
-          matrix={matrix}
         />
       </div>
     </div>
@@ -202,7 +201,6 @@ function SolvedResultPanel({
             moves={shareMoves}
             par={par}
             streak={streak}
-            matrix={matrix}
           />
         </div>
       </div>

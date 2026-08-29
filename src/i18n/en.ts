@@ -111,10 +111,9 @@ export const en = {
   share: {
     button: "Share result",
     copied: "Result copied",
-    optimal: (moves: number) => `🏆 Solved in ${moves} — Optimal result!`,
+    optimal: "🏆 Solved at par",
     solved: (moves: number, par: number) =>
-      `✅ Solved in ${moves} · par ${par} (+${moves - par})`,
-    cta: "Can you match par?",
+      `✅ Solved in ${moves} (+${moves - par})`,
   },
 
   // one-time swipe announcement

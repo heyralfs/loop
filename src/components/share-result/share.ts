@@ -1,52 +1,27 @@
 import { track } from "../../analytics";
-import type { Matrix } from "../../game/types";
 import type { Translations } from "../../i18n";
 
-export const URL = "https://playloop.today/";
+export const URL = "playloop.today";
 
 interface ShareResultParams {
   puzzleNumber: number;
   moves: number;
   par: number;
   streak: number;
-  matrix: Matrix;
 }
 
 export function buildShareText(
-  { puzzleNumber, moves, par, streak, matrix }: ShareResultParams,
+  { puzzleNumber, moves, par, streak }: ShareResultParams,
   t: Translations,
 ): string {
-  const outcome =
-    moves === par ? t.share.optimal(moves) : t.share.solved(moves, par);
+  const result = moves === par ? t.share.optimal : t.share.solved(moves, par);
   return [
-    `Loop #${puzzleNumber}`,
-    matrixToEmoji(matrix, moves === par),
-    outcome,
+    `Loop #${puzzleNumber} • ${URL}`,
+    result,
     streak > 0 && t.dayStreak(streak),
-    `\n${t.share.cta}`,
-    URL,
   ]
     .filter(Boolean)
     .join("\n");
-}
-
-function matrixToEmoji(matrix: Matrix, atPar: boolean): string {
-  return matrix
-    .map((cell, index) => {
-      const eol = index % 4 === 3 ? "\n" : "";
-
-      switch (cell) {
-        case 0:
-          return "⬛" + eol;
-        case 1:
-          return (atPar ? "🟨" : "🟩") + eol;
-        case 2:
-          return "⭐️" + eol;
-        default:
-          return "❓" + eol;
-      }
-    })
-    .join("");
 }
 
 export async function shareResult(
