@@ -66,6 +66,7 @@ export const en = {
   installPrompt: "Download and play offline",
   install: "Install",
   dismiss: "Dismiss",
+  close: "Close",
 
   // stats
   winDistribution: "Win distribution",
@@ -121,5 +122,19 @@ export const en = {
     heading: "New: swipe to move",
     body: "Drag a row or column with your finger to slide it — no need to tap the arrows.",
     cta: "Got it",
+  },
+
+  // support the game (donation modal). "Buy Me a Coffee" and "PIX" are brand
+  // names, left untranslated.
+  support: {
+    prompt: "Enjoying Loop? Support me",
+    cta: "here",
+    heading: "Support the Game",
+    withPix: "With PIX",
+    pixQrAlt: "PIX QR code",
+    copyPix: "Copy PIX code",
+    copied: "Copied!",
+    or: "or",
+    buyMeACoffee: "Buy Me a Coffee",
   },
 };

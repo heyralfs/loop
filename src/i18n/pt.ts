@@ -53,6 +53,7 @@ export const pt: typeof en = {
   installPrompt: "Baixe e jogue offline",
   install: "Instalar",
   dismiss: "Dispensar",
+  close: "Fechar",
 
   winDistribution: "Distribuição de vitórias",
   orMore: "ou mais",
@@ -102,5 +103,17 @@ export const pt: typeof en = {
     heading: "Novo: deslize para mover",
     body: "Arraste uma linha ou coluna com o dedo para movê-la — sem precisar tocar nas setas.",
     cta: "Entendi",
+  },
+
+  support: {
+    prompt: "Curtindo o Loop? Me apoie",
+    cta: "aqui",
+    heading: "Apoie o jogo",
+    withPix: "Com PIX",
+    pixQrAlt: "QR Code do PIX",
+    copyPix: "PIX copia e cola",
+    copied: "Copiado!",
+    or: "ou",
+    buyMeACoffee: "Buy Me a Coffee",
   },
 };

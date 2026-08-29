@@ -3,6 +3,7 @@ import styles from "./index.module.css";
 import Menu from "../menu";
 import InstallBanner from "../install-banner";
 import { useTranslations } from "../../i18n";
+import SupportTheGame from "../support-the-game";
 
 interface Props {
   children: ReactNode;
@@ -26,14 +27,18 @@ function Layout({ children, puzzleNumber, openGuide, showFooter }: Props) {
         <main>{children}</main>
         {showFooter && (
           <footer className={styles.footer}>
-            {t.madeBy}{" "}
-            <a
-              href="https://github.com/heyralfs"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              heyralfs
-            </a>
+            <span className={styles.madeBy}>
+              {t.madeBy}{" "}
+              <a
+                className={styles.githubLink}
+                href="https://github.com/heyralfs"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                heyralfs
+              </a>
+            </span>
+            <SupportTheGame />
           </footer>
         )}
       </div>

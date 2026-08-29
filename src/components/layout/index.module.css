@@ -20,11 +20,20 @@
   color: var(--ink-soft);
 }
 
-.footer a {
+footer span {
+  display: block;
+  line-height: 1;
+}
+
+footer span.madeBy {
+  margin-bottom: var(--space-md);
+}
+
+.githubLink {
   color: var(--accent-ink);
   text-decoration: none;
 }
 
-.footer a:hover {
+.githubLink:hover {
   text-decoration: underline;
 }
